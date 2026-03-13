@@ -37,30 +37,48 @@ export default function CreateComplaint() {
 
   // Initialize Google Map
   useEffect(() => {
+    // Check if Google Maps API is already loaded
+    if (window.google && window.google.maps) {
+      loadMap();
+      return;
+    }
+
+    // Check if script is already being loaded
+    const existingScript = document.querySelector('script[src*="maps.googleapis.com"]');
+    if (existingScript) {
+      existingScript.onload = loadMap;
+      return;
+    }
+
     const script = document.createElement('script');
     script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}`;
     script.async = true;
-    script.onload = () => {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            const { latitude, longitude } = position.coords;
-            initMap(latitude, longitude);
-            setFormData((prev) => ({
-              ...prev,
-              lat: latitude.toString(),
-              lng: longitude.toString(),
-            }));
-          },
-          () => {
-            // Default to a central location if geolocation fails
-            initMap(40.7128, -74.006);
-          }
-        );
-      }
+    script.onload = loadMap;
+    script.onerror = () => {
+      setError('Failed to load Google Maps API');
     };
-    document.body.appendChild(script);
+    document.head.appendChild(script);
   }, []);
+
+  const loadMap = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          initMap(latitude, longitude);
+          setFormData((prev) => ({
+            ...prev,
+            lat: latitude.toString(),
+            lng: longitude.toString(),
+          }));
+        },
+        () => {
+          // Default to a central location if geolocation fails
+          initMap(40.7128, -74.006);
+        }
+      );
+    }
+  };
 
   const initMap = (lat, lng) => {
     if (typeof google !== 'undefined' && mapRef.current) {
