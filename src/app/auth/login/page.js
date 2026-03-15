@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import Navigation from '../../components/Navigation';
+// import Navigation from '../../components/Navigation';
 import Footer from '../../components/Footer';
 
 export default function LoginPage() {
@@ -62,7 +62,7 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-white">
-      <Navigation />
+      {/* <Navigation /> */}
       
       <main className="flex-grow flex items-center justify-center px-4 py-12 bg-gradient-to-br from-gray-50 via-white to-blue-50">
         <div className="w-full max-w-6xl">
@@ -203,8 +203,13 @@ export default function LoginPage() {
 
           </div>
         </div>
-      </main>
 
+        
+      </main>
+       {/* Back to Home Link */}
+        <Link href="/" className="mt-10 mb-10 ml-50 inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-semibold mb-6 transition-colors">
+          ← Back to Home
+        </Link>
       <Footer />
     </div>
   );

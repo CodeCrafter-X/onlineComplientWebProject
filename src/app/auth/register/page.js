@@ -297,7 +297,10 @@ export default function RegisterPage() {
           </div>
         </div>
       </main>
-
+      {/* Back to Home Link */}
+        <Link href="/" className="mt-10 mb-10 ml-50 inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-semibold mb-6 transition-colors">
+          ← Back to Home
+        </Link>
       <Footer />
     </div>
   );
