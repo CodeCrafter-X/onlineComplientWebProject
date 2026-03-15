@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Footer from '../components/Footer';
 
 export default function MyComplaints() {
   const router = useRouter();
@@ -114,6 +115,7 @@ export default function MyComplaints() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
       {/* Header */}
+      
       <header className="bg-white shadow-md sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex justify-between items-center">
@@ -309,6 +311,14 @@ export default function MyComplaints() {
           </div>
         )}
       </div>
+
+        {/* Back to Home Link */}
+        <Link href="/" className="mt-10 mb-8g inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-semibold mb-6 transition-colors">
+          ← Back to Home
+        </Link>
+
+        <Footer />
+
     </div>
   );
 }

@@ -3,6 +3,8 @@
 import { Suspense, useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
+import Navigation from '../../components/Navigation';
+import Footer from '../../components/Footer';
 
 function VerifyEmailContent() {
   const [code, setCode] = useState(['', '', '', '', '', '']);
@@ -90,7 +92,9 @@ function VerifyEmailContent() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-purple-50 flex items-center justify-center p-4">
+    <div className="min-h-screen flex flex-col bg-white">
+      <Navigation />
+      <div className="flex-grow flex items-center justify-center p-4 bg-gradient-to-br from-purple-50 via-white to-purple-50">
       {/* Background decoration */}
       <div className="absolute top-0 left-0 w-96 h-96 bg-purple-200 rounded-full opacity-10 -z-10"></div>
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-200 rounded-full opacity-10 -z-10"></div>
@@ -206,6 +210,8 @@ function VerifyEmailContent() {
           </Link>
         </div>
       </div>
+      </div>
+      <Footer />
     </div>
   );
 }

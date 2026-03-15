@@ -2,6 +2,9 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import Navigation from '../../components/Navigation';
+import Footer from '../../components/Footer';
 
 export default function CreateComplaint() {
   const router = useRouter();
@@ -24,15 +27,12 @@ export default function CreateComplaint() {
   });
 
   const categories = [
-    'Road Damage',
-    'Pothole',
-    'Street Light',
-    'Garbage',
-    'Water Issue',
-    'Electricity',
-    'Public Property Damage',
-    'Traffic Issue',
-    'Other'
+    'Waste Management',
+    'Street Lighting',
+    'Drainage Systems',
+    'Roads & Repairs',
+    'General Support',
+  
   ];
 
   // Initialize Google Map
@@ -204,8 +204,13 @@ export default function CreateComplaint() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 py-12 px-4 sm:px-6 lg:px-8">
+    <>
+      {/* <Navigation /> */}
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
+        {/* Back to Home Button */}
+        
+
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
@@ -418,7 +423,18 @@ export default function CreateComplaint() {
             <li>✓ Include any relevant details that might help authorities</li>
           </ul>
         </div>
+
+
+        {/* Back to Home Link */}
+        <Link href="/" className="mt-10 inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-semibold mb-6 transition-colors">
+          ← Back to Home
+        </Link>
+
+
+
       </div>
     </div>
+    <Footer />
+    </>
   );
 }

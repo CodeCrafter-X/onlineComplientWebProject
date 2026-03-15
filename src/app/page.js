@@ -2,12 +2,11 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Navigation from './components/Navigation';
+import Footer from './components/Footer';
 
 export default function Home() {
-  const [activeNav, setActiveNav] = useState('home');
   const [isUser, setIsUser] = useState(false);
-  const [userRole, setUserRole] = useState(null);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Check authentication status
   useEffect(() => {
@@ -15,9 +14,7 @@ export default function Home() {
       try {
         const response = await fetch('/api/token-check');
         if (response.ok) {
-          const data = await response.json();
           setIsUser(true);
-          setUserRole(data.role);
         }
       } catch (error) {
         setIsUser(false);
@@ -26,131 +23,19 @@ export default function Home() {
     checkAuth();
   }, []);
 
-  const scrollToSection = (id) => {
-    setActiveNav(id);
-    setMobileMenuOpen(false);
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  const navItems = [
-    { name: 'Home', id: 'home' },
-    { name: 'About Us', id: 'about' },
-    { name: 'Services', id: 'services' },
-    { name: 'Complaint', id: 'complaint' },
-    { name: 'Contact', id: 'contact' }
-  ];
-
   return (
     <div className="min-h-screen bg-white font-sans">
-      {/* Modern Header & Navigation */}
-      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 py-3 md:py-4">
-          <div className="flex justify-between items-center">
-            {/* Logo & Branding */}
-            <Link href="/" className="flex items-center gap-2 md:gap-3 hover:opacity-80 transition-opacity">
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow">
-                <span className="text-white text-lg font-bold">PS</span>
-              </div>
-              <div className="text-left">
-                <h1 className="text-base md:text-lg font-bold text-gray-900 leading-tight">Pradeshiya Sabha</h1>
-                <p className="text-xs text-gray-500 font-medium">Addalachenai</p>
-              </div>
-            </Link>
-
-            {/* Navigation Links - Desktop */}
-            <nav className="hidden lg:flex items-center gap-1">
-              {navItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  className={`px-3 py-2 rounded-lg font-medium text-sm transition-all duration-300 relative ${
-                    activeNav === item.id
-                      ? 'text-blue-600 font-semibold'
-                      : 'text-gray-600 hover:text-gray-900'
-                  }`}
-                >
-                  {item.name}
-                  {activeNav === item.id && (
-                    <div className="absolute bottom-0 left-3 right-3 h-0.5 bg-blue-600 rounded-full"></div>
-                  )}
-                </button>
-              ))}
-            </nav>
-
-            {/* Auth Section */}
-            <div className="flex items-center gap-2 md:gap-4">
-              {!isUser ? (
-                <div className="flex items-center gap-2 md:gap-3">
-                  <Link
-                    href="/auth/login"
-                    className="px-4 md:px-6 py-2 md:py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all duration-300 shadow-md hover:shadow-lg active:scale-95 text-sm md:text-base"
-                  >
-                    Sign in
-                  </Link>
-                  <Link
-                    href="/auth/register"
-                    className="hidden md:block px-6 py-2.5 border-2 border-blue-600 text-blue-600 hover:bg-blue-50 font-semibold rounded-lg transition-all duration-300 text-sm"
-                  >
-                    Register
-                  </Link>
-                </div>
-              ) : (
-                <div className="flex items-center gap-2 md:gap-3">
-                  <Link
-                    href={userRole === 'admin' ? '/admin' : '/account'}
-                    className="px-4 md:px-6 py-2 md:py-2.5 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-all duration-300 text-sm md:text-base"
-                  >
-                    {userRole === 'admin' ? 'Dashboard' : 'Profile'}
-                  </Link>
-                </div>
-              )}
-
-              {/* Mobile Menu Toggle */}
-              <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="lg:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors"
-              >
-                <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-              </button>
-            </div>
-          </div>
-
-          {/* Mobile Menu */}
-          {mobileMenuOpen && (
-            <nav className="lg:hidden mt-4 py-4 border-t border-gray-200">
-              {navItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  className="block w-full text-left px-4 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors"
-                >
-                  {item.name}
-                </button>
-              ))}
-              {!isUser && (
-                <Link
-                  href="/auth/register"
-                  className="block w-full text-left px-4 py-2 text-blue-600 font-semibold hover:bg-blue-50 rounded-lg transition-colors mt-2"
-                >
-                  Register
-                </Link>
-              )}
-            </nav>
-          )}
-        </div>
-      </header>
+      <Navigation />
 
       {/* Hero Section */}
       <section 
         id="home"
         className="bg-cover bg-center bg-no-repeat text-white py-24 md:py-40 px-4 md:px-6 relative min-h-screen flex items-center"
         style={{
-          backgroundImage: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          backgroundImage: 'linear-gradient(135deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%), url("/images/home.png")',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed'
         }}
       >
         {/* Decorative Background Elements */}
@@ -160,10 +45,10 @@ export default function Home() {
         </div>
         
         <div className="max-w-7xl mx-auto relative z-10 w-full">
-          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-            {/* Left Content */}
-            <div className="text-white">
-              <div className="inline-block px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full mb-6 border border-white/30">
+          <div className="flex items-center justify-center">
+            {/* Center Content */}
+            <div className="text-white text-center max-w-2xl">
+              <div className="inline-block px-4 py-2 bg-blue-500/40 backdrop-blur-sm rounded-full mb-6 border border-blue-300/50">
                 <p className="text-sm font-semibold">Welcome to Pradeshiya Sabha</p>
               </div>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
@@ -174,7 +59,7 @@ export default function Home() {
               </p>
               
               {!isUser ? (
-                <div className="flex flex-col sm:flex-row gap-4">
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Link
                     href="/complaint/create"
                     className="bg-white text-blue-600 hover:bg-blue-50 px-8 py-3.5 rounded-lg font-bold transition-all duration-300 shadow-lg hover:shadow-xl text-center"
@@ -189,7 +74,7 @@ export default function Home() {
                   </Link>
                 </div>
               ) : (
-                <div className="flex flex-col sm:flex-row gap-4">
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Link
                     href="/complaint/create"
                     className="bg-white text-blue-600 hover:bg-blue-50 px-8 py-3.5 rounded-lg font-bold transition-all duration-300 shadow-lg hover:shadow-xl text-center"
@@ -204,18 +89,6 @@ export default function Home() {
                   </Link>
                 </div>
               )}
-            </div>
-
-            {/* Right Image */}
-            <div className="hidden md:block relative">
-              <div className="relative w-full h-96 md:h-full rounded-2xl overflow-hidden shadow-2xl">
-                <img 
-                  src="/images/hero-community-service.jpg" 
-                  alt="Community Service" 
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/40 to-transparent"></div>
-              </div>
             </div>
           </div>
         </div>
@@ -310,7 +183,8 @@ export default function Home() {
           </div>
 
           {/* Services Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8 place-items-stretch">
+            {/* 5 Service Items - Responsive Layout */}
             {/* Waste Management */}
             <div className="group relative bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-blue-200">
               <div className="relative h-48 bg-gradient-to-br from-green-400 to-green-500 overflow-hidden">
@@ -387,26 +261,6 @@ export default function Home() {
                 <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3">Roads & Repairs</h3>
                 <p className="text-gray-600 leading-relaxed">
                   Report damaged roads, potholes, and construction issues. We maintain safe and accessible roads for all community members.
-                </p>
-              </div>
-            </div>
-
-            {/* Water Supply */}
-            <div className="group relative bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-blue-200">
-              <div className="relative h-48 bg-gradient-to-br from-cyan-400 to-cyan-500 overflow-hidden">
-                <img 
-                  src="/images/service-water-supply.jpg" 
-                  alt="Water Supply Issues" 
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                />
-              </div>
-              <div className="p-6 md:p-8">
-                <div className="mb-3">
-                  <span className="text-3xl">🚰</span>
-                </div>
-                <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3">Water Supply</h3>
-                <p className="text-gray-600 leading-relaxed">
-                  Manage water supply systems and report issues affecting distribution. Ensure reliable access to clean water for all residents.
                 </p>
               </div>
             </div>
@@ -543,17 +397,17 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 md:py-32 px-4 md:px-6 bg-gray-900 text-white">
+      <section id="contact" className="py-20 md:py-32 px-4 md:px-6 bg-gray-200 text-white">
         <div className="max-w-7xl mx-auto">
           {/* Section Header */}
           <div className="text-center mb-12 md:mb-16">
             <div className="inline-block px-4 py-2 bg-blue-900 rounded-full mb-4 border border-blue-700">
               <p className="text-blue-300 text-sm font-semibold">Get in Touch</p>
             </div>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+            <h2 className="text-3xl text-black md:text-4xl lg:text-5xl font-bold mb-4">
               Contact Us
             </h2>
-            <p className="text-gray-300 text-lg max-w-2xl mx-auto">
+            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
               Have questions or need assistance? We're here to help. Reach out through any of these channels.
             </p>
           </div>
@@ -644,155 +498,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-gray-300 py-12 md:py-16 px-4 md:px-6">
-        <div className="max-w-7xl mx-auto">
-          {/* Footer Content */}
-          <div className="grid md:grid-cols-4 gap-8 mb-8 md:mb-12">
-            {/* Brand Section */}
-            <div className="col-span-full md:col-span-1">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl flex items-center justify-center">
-                  <span className="text-white text-lg font-bold">PS</span>
-                </div>
-                <div>
-                  <h4 className="font-bold text-white">Pradeshiya Sabha</h4>
-                  <p className="text-xs text-gray-500">Addalachenai</p>
-                </div>
-              </div>
-              <p className="text-sm text-gray-400 leading-relaxed">
-                Serving the community with transparency, efficiency, and dedication to progress.
-              </p>
-            </div>
-
-            {/* Quick Links */}
-            <div>
-              <h4 className="font-bold text-white mb-4 text-lg">Quick Links</h4>
-              <ul className="space-y-2">
-                <li>
-                  <button
-                    onClick={() => scrollToSection('home')}
-                    className="text-sm text-gray-400 hover:text-white transition-colors"
-                  >
-                    Home
-                  </button>
-                </li>
-                <li>
-                  <button
-                    onClick={() => scrollToSection('about')}
-                    className="text-sm text-gray-400 hover:text-white transition-colors"
-                  >
-                    About Us
-                  </button>
-                </li>
-                <li>
-                  <button
-                    onClick={() => scrollToSection('services')}
-                    className="text-sm text-gray-400 hover:text-white transition-colors"
-                  >
-                    Services
-                  </button>
-                </li>
-                <li>
-                  <button
-                    onClick={() => scrollToSection('complaint')}
-                    className="text-sm text-gray-400 hover:text-white transition-colors"
-                  >
-                    Complaints
-                  </button>
-                </li>
-                <li>
-                  <button
-                    onClick={() => scrollToSection('contact')}
-                    className="text-sm text-gray-400 hover:text-white transition-colors"
-                  >
-                    Contact
-                  </button>
-                </li>
-              </ul>
-            </div>
-
-            {/* Services */}
-            <div>
-              <h4 className="font-bold text-white mb-4 text-lg">Services</h4>
-              <ul className="space-y-2">
-                <li>
-                  <Link href="/complaint/create" className="text-sm text-gray-400 hover:text-white transition-colors">
-                    File Complaint
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/complaint" className="text-sm text-gray-400 hover:text-white transition-colors">
-                    Track Status
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/auth/register" className="text-sm text-gray-400 hover:text-white transition-colors">
-                    Register
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/auth/login" className="text-sm text-gray-400 hover:text-white transition-colors">
-                    Login
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            {/* Contact & Support */}
-            <div>
-              <h4 className="font-bold text-white mb-4 text-lg">Support</h4>
-              <ul className="space-y-3">
-                <li className="text-sm">
-                  <p className="text-gray-400">📞 Phone</p>
-                  <p className="text-white font-medium">+94 XXX XXX XXXX</p>
-                </li>
-                <li className="text-sm">
-                  <p className="text-gray-400">📧 Email</p>
-                  <p className="text-white font-medium break-all">info@pradeshyasabha.lk</p>
-                </li>
-                <li className="text-sm">
-                  <p className="text-gray-400">⏰ Available</p>
-                  <p className="text-white font-medium">24/7 Support</p>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Divider */}
-          <div className="border-t border-gray-800 py-8 md:py-10">
-            {/* Footer Bottom */}
-            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-              <div className="text-sm text-gray-500 text-center md:text-left">
-                <p>&copy; 2024 Pradeshiya Sabha Addalachenai. All rights reserved.</p>
-              </div>
-
-              {/* Social Links */}
-              <div className="flex gap-6">
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm font-medium">
-                  Facebook
-                </a>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm font-medium">
-                  Twitter
-                </a>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm font-medium">
-                  WhatsApp
-                </a>
-              </div>
-
-              {/* Footer Links */}
-              <div className="flex gap-4 text-sm">
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                  Privacy Policy
-                </a>
-                <span className="text-gray-700">|</span>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                  Terms of Service
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

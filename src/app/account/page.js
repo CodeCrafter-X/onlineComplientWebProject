@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Navigation from '../components/Navigation';
+import Footer from '../components/Footer';
 
 export default function UserDashboard() {
   const router = useRouter();
@@ -10,7 +12,6 @@ export default function UserDashboard() {
   const [user, setUser] = useState(null);
   const [complaints, setComplaints] = useState([]);
   const [filteredComplaints, setFilteredComplaints] = useState([]);
-  const [selectedComplaint, setSelectedComplaint] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [filterStatus, setFilterStatus] = useState('all');
@@ -113,66 +114,75 @@ export default function UserDashboard() {
 
   // Home Section
   const HomeSection = () => (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-      {/* View Profile Card */}
-      <div
-        onClick={() => setActiveSection('profile')}
-        className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl p-8 text-white shadow-xl cursor-pointer hover:shadow-2xl hover:scale-105 transition-all duration-300"
-      >
-        <div className="flex flex-col items-center text-center">
-          <div className="text-6xl mb-4">👤</div>
-          <h3 className="text-2xl font-bold mb-2">My Profile</h3>
-          <p className="text-blue-100 text-sm mb-6">View and manage your account</p>
-          <button className="w-full bg-white text-blue-600 hover:bg-blue-50 font-bold py-3 px-4 rounded-lg transition-colors">
-            View Profile →
-          </button>
-        </div>
+    <div>
+      <div className="mb-8">
+        <Link href="/" className="text-blue-600 hover:text-blue-700 font-semibold mb-4 inline-flex items-center gap-2">
+          ← Back to Home
+        </Link>
       </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {/* View Profile Card */}
+        <div
+          onClick={() => setActiveSection('profile')}
+          className="group bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl p-8 text-white shadow-xl cursor-pointer hover:shadow-2xl hover:scale-105 transition-all duration-300"
+        >
+          <div className="flex flex-col items-center text-center">
+            <div className="text-6xl mb-4 group-hover:scale-110 transition-transform">👤</div>
+            <h3 className="text-2xl font-bold mb-3">My Profile</h3>
+            <p className="text-blue-100 text-sm mb-6">View and manage your account settings</p>
+            <button className="w-full bg-yellow-400 text-blue-700 hover:bg-yellow-300 font-bold py-3 px-6 rounded-xl transition-all shadow-lg hover:shadow-xl">
+              View Profile →
+            </button>
+          </div>
+        </div>
 
-      {/* My Complaints Card */}
-      <div
-        onClick={() => setActiveSection('complaints')}
-        className="bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl p-8 text-white shadow-xl cursor-pointer hover:shadow-2xl hover:scale-105 transition-all duration-300"
-      >
-        <div className="flex flex-col items-center text-center">
-          <div className="text-6xl mb-4">📋</div>
-          <h3 className="text-2xl font-bold mb-2">My Complaints</h3>
-          <p className="text-purple-100 text-sm mb-6">
-            Total: <span className="font-bold text-lg">{stats.total}</span>
-          </p>
-          <div className="w-full space-y-2">
-            <button className="w-full bg-white text-purple-600 hover:bg-purple-50 font-bold py-3 px-4 rounded-lg transition-colors">
+        {/* My Complaints Card */}
+        <div
+          onClick={() => setActiveSection('complaints')}
+          className="group bg-gradient-to-br from-emerald-600 to-emerald-700 rounded-2xl p-8 text-white shadow-xl cursor-pointer hover:shadow-2xl hover:scale-105 transition-all duration-300"
+        >
+          <div className="flex flex-col items-center text-center">
+            <div className="text-6xl mb-4 group-hover:scale-110 transition-transform">📋</div>
+            <h3 className="text-2xl font-bold mb-3">My Complaints</h3>
+            <p className="text-emerald-100 text-sm mb-6">
+              Total: <span className="font-bold text-lg">{stats.total}</span>
+            </p>
+            <button className="w-full bg-yellow-400 text-emerald-700 hover:bg-yellow-300 font-bold py-3 px-6 rounded-xl transition-all shadow-lg hover:shadow-xl">
               View Complaints →
             </button>
-            <div className="grid grid-cols-3 gap-2 text-xs">
-              <div className="bg-yellow-400 py-1 rounded">⏳ {stats.pending}</div>
-              <div className="bg-green-400 py-1 rounded">✅ {stats.approved}</div>
-              <div className="bg-red-400 py-1 rounded">❌ {stats.rejected}</div>
+          </div>
+        </div>
+
+        {/* Create Complaint Card */}
+        <Link href="/complaint/create">
+          <div className="group bg-gradient-to-br from-indigo-600 to-indigo-700 rounded-2xl p-8 text-white shadow-xl cursor-pointer hover:shadow-2xl hover:scale-105 transition-all duration-300 h-full">
+            <div className="flex flex-col items-center text-center justify-center h-full">
+              <div className="text-6xl mb-4 group-hover:scale-110 transition-transform">➕</div>
+              <h3 className="text-2xl font-bold mb-3">Create Complaint</h3>
+              <p className="text-indigo-100 text-sm mb-6">File a new complaint today</p>
+              <button className="w-full bg-yellow-400 text-indigo-700 hover:bg-yellow-300 font-bold py-3 px-6 rounded-xl transition-all shadow-lg hover:shadow-xl">
+                Create New →
+              </button>
             </div>
           </div>
-        </div>
+        </Link>
       </div>
-
-      {/* Create Complaint Card */}
-      <Link href="/complaint/create">
-        <div className="bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl p-8 text-white shadow-xl cursor-pointer hover:shadow-2xl hover:scale-105 transition-all duration-300">
-          <div className="flex flex-col items-center text-center h-full justify-center">
-            <div className="text-6xl mb-4">➕</div>
-            <h3 className="text-2xl font-bold mb-2">Create Complaint</h3>
-            <p className="text-orange-100 text-sm mb-6">File a new complaint today</p>
-            <button className="w-full bg-white text-orange-600 hover:bg-orange-50 font-bold py-3 px-4 rounded-lg transition-colors">
-              Create New →
-            </button>
-          </div>
-        </div>
-      </Link>
     </div>
   );
 
   // Profile Section
   const ProfileSection = () => (
     <div className="space-y-6">
-      <div className="bg-white rounded-2xl shadow-lg p-8">
+      <div className="mb-8">
+        <button
+          onClick={() => setActiveSection('home')}
+          className="text-blue-600 hover:text-blue-700 font-semibold inline-flex items-center gap-2 mb-4"
+        >
+          ← Back to Dashboard
+        </button>
+      </div>
+      
+      <div className="bg-white rounded-2xl shadow-lg p-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
           <div className="md:col-span-1 flex justify-center">
             <div className="w-32 h-32 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center text-white text-6xl shadow-lg">
@@ -233,12 +243,12 @@ export default function UserDashboard() {
       <div className="flex gap-4">
         <button
           onClick={() => setActiveSection('home')}
-          className="flex-1 px-6 py-3 bg-gray-600 hover:bg-gray-700 text-white font-bold rounded-lg transition-colors"
+          className="flex-1 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition-all shadow-lg hover:shadow-xl"
         >
-          ← Back to Home
+          ← Back to Dashboard
         </button>
         <Link href="/complaint/create" className="flex-1">
-          <button className="w-full px-6 py-3 bg-orange-600 hover:bg-orange-700 text-white font-bold rounded-lg transition-colors">
+          <button className="w-full px-6 py-3 bg-orange-600 hover:bg-orange-700 text-white font-bold rounded-xl transition-all shadow-lg hover:shadow-xl">
             + New Complaint
           </button>
         </Link>
@@ -249,35 +259,45 @@ export default function UserDashboard() {
   // Complaints Section
   const ComplaintsSection = () => (
     <div className="space-y-6">
+      <div className="mb-8">
+        <button
+          onClick={() => setActiveSection('home')}
+          className="text-blue-600 hover:text-blue-700 font-semibold inline-flex items-center gap-2 mb-4"
+        >
+          ← Back to Dashboard
+        </button>
+      </div>
+
       {/* Statistics */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl p-6 text-white shadow-lg">
-          <p className="text-blue-100 text-sm font-semibold">Total</p>
-          <p className="text-3xl font-bold mt-2">{stats.total}</p>
+        <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl p-8 text-white shadow-lg">
+          <p className="text-blue-100 text-sm font-semibold uppercase">Total</p>
+          <p className="text-4xl font-bold mt-3">{stats.total}</p>
         </div>
-        <div className="bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-xl p-6 text-white shadow-lg">
-          <p className="text-yellow-100 text-sm font-semibold">Pending</p>
-          <p className="text-3xl font-bold mt-2">{stats.pending}</p>
+        <div className="bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-2xl p-8 text-white shadow-lg">
+          <p className="text-yellow-100 text-sm font-semibold uppercase">Pending</p>
+          <p className="text-4xl font-bold mt-3">{stats.pending}</p>
         </div>
-        <div className="bg-gradient-to-br from-green-500 to-green-600 rounded-xl p-6 text-white shadow-lg">
-          <p className="text-green-100 text-sm font-semibold">Approved</p>
-          <p className="text-3xl font-bold mt-2">{stats.approved}</p>
+        <div className="bg-gradient-to-br from-green-500 to-green-600 rounded-2xl p-8 text-white shadow-lg">
+          <p className="text-green-100 text-sm font-semibold uppercase">Approved</p>
+          <p className="text-4xl font-bold mt-3">{stats.approved}</p>
         </div>
-        <div className="bg-gradient-to-br from-red-500 to-red-600 rounded-xl p-6 text-white shadow-lg">
-          <p className="text-red-100 text-sm font-semibold">Rejected</p>
-          <p className="text-3xl font-bold mt-2">{stats.rejected}</p>
+        <div className="bg-gradient-to-br from-red-500 to-red-600 rounded-2xl p-8 text-white shadow-lg">
+          <p className="text-red-100 text-sm font-semibold uppercase">Rejected</p>
+          <p className="text-4xl font-bold mt-3">{stats.rejected}</p>
         </div>
       </div>
 
       {/* Filter */}
-      <div className="bg-white rounded-xl shadow-md p-6">
+      <div className="bg-white rounded-2xl shadow-lg p-8">
+        <h3 className="text-lg font-bold text-gray-900 mb-6">Filter & Search</h3>
         <div className="flex gap-4 items-end flex-wrap">
           <div className="flex-1 min-w-[200px]">
-            <label className="block text-gray-700 text-sm font-semibold mb-2">Filter by Status</label>
+            <label className="block text-gray-700 text-sm font-semibold mb-3">Filter by Status</label>
             <select
               value={filterStatus}
               onChange={(e) => setFilterStatus(e.target.value)}
-              className="w-full px-4 py-2 rounded-lg border-2 border-gray-200 focus:outline-none focus:border-blue-500 transition-colors"
+              className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:outline-none focus:border-blue-500 transition-colors font-medium"
             >
               <option value="all">All Statuses</option>
               <option value="pending">Pending</option>
@@ -286,23 +306,23 @@ export default function UserDashboard() {
             </select>
           </div>
           <Link href="/complaint/create">
-            <button className="px-6 py-2 bg-orange-600 hover:bg-orange-700 text-white font-bold rounded-lg transition-colors whitespace-nowrap">
+            <button className="px-8 py-3 bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 text-white font-bold rounded-xl transition-all shadow-lg hover:shadow-xl whitespace-nowrap">
               + New Complaint
             </button>
           </Link>
         </div>
       </div>
 
-      {/* Complaints List */}
       {loading ? (
         <div className="text-center py-12">
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-blue-200 border-t-blue-600 mb-4"></div>
           <p className="text-gray-600 text-lg">Loading complaints...</p>
         </div>
       ) : filteredComplaints.length === 0 ? (
-        <div className="bg-white rounded-xl shadow-md p-12 text-center">
-          <p className="text-gray-600 text-lg mb-6">No complaints found</p>
+        <div className="bg-white rounded-2xl shadow-lg p-12 text-center">
+          <p className="text-gray-600 text-lg mb-6 font-semibold">No complaints found</p>
           <Link href="/complaint/create">
-            <button className="px-6 py-3 bg-orange-600 hover:bg-orange-700 text-white font-bold rounded-lg transition-colors">
+            <button className="px-8 py-4 bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 text-white font-bold rounded-xl transition-all shadow-lg hover:shadow-xl">
               + File Your First Complaint
             </button>
           </Link>
@@ -310,98 +330,89 @@ export default function UserDashboard() {
       ) : (
         <div className="space-y-4">
           {filteredComplaints.map((complaint) => (
-            <div
-              key={complaint._id}
-              onClick={() => setSelectedComplaint(complaint._id)}
-              className="bg-white rounded-xl shadow-md hover:shadow-lg hover:scale-[1.01] transition-all cursor-pointer overflow-hidden"
-            >
-              <div className="p-6">
-                <div className="grid grid-cols-1 md:grid-cols-5 gap-4 items-center">
-                  {/* Title */}
-                  <div className="md:col-span-2">
-                    <p className="text-gray-500 text-xs font-semibold uppercase tracking-wide mb-1">
-                      Title
-                    </p>
-                    <p className="text-gray-900 font-bold text-lg line-clamp-2">
-                      {complaint.title}
-                    </p>
-                    <p className="text-gray-500 text-xs mt-2">
-                      ID: {complaint._id.toString().slice(-8)}
-                    </p>
-                  </div>
+            <Link key={complaint._id || complaint.id} href={`/complaint/${complaint._id || complaint.id}`}>
+              <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl hover:scale-[1.01] transition-all cursor-pointer overflow-hidden border-l-4 border-blue-600">
+                <div className="p-6">
+                  <div className="grid grid-cols-1 md:grid-cols-5 gap-4 items-center">
+                    {/* Title */}
+                    <div className="md:col-span-2">
+                      <p className="text-gray-500 text-xs font-semibold uppercase tracking-wide mb-1">
+                        Title
+                      </p>
+                      <p className="text-gray-900 font-bold text-lg line-clamp-2">
+                        {complaint.title}
+                      </p>
+                      <p className="text-gray-500 text-xs mt-2">
+                        ID: {(complaint._id || complaint.id || '').toString().slice(-8)}
+                      </p>
+                    </div>
 
-                  {/* Category */}
-                  <div>
-                    <p className="text-gray-500 text-xs font-semibold uppercase tracking-wide mb-1">
-                      Category
-                    </p>
-                    <p className="text-gray-900 font-semibold">
-                      {complaint.category}
-                    </p>
-                  </div>
+                    {/* Category */}
+                    <div>
+                      <p className="text-gray-500 text-xs font-semibold uppercase tracking-wide mb-1">
+                        Category
+                      </p>
+                      <p className="text-gray-900 font-semibold">
+                        {complaint.category}
+                      </p>
+                    </div>
 
-                  {/* Status */}
-                  <div>
-                    <p className="text-gray-500 text-xs font-semibold uppercase tracking-wide mb-1">
-                      Status
-                    </p>
-                    <span
-                      className={`inline-block px-3 py-1 rounded-full font-bold text-sm border ${getStatusColor(
-                        complaint.status
-                      )}`}
-                    >
-                      {getStatusIcon(complaint.status)} {complaint.status}
-                    </span>
-                  </div>
+                    {/* Status */}
+                    <div>
+                      <p className="text-gray-500 text-xs font-semibold uppercase tracking-wide mb-1">
+                        Status
+                      </p>
+                      <span
+                        className={`inline-block px-3 py-1 rounded-full font-bold text-sm border ${getStatusColor(
+                          complaint.status
+                        )}`}
+                      >
+                        {getStatusIcon(complaint.status)} {complaint.status}
+                      </span>
+                    </div>
 
-                  {/* Date & Action */}
-                  <div className="text-right">
-                    <p className="text-gray-500 text-xs font-semibold uppercase tracking-wide mb-1">
-                      Created
-                    </p>
-                    <p className="text-gray-900 font-semibold mb-4">
-                      {new Date(complaint.createdAt).toLocaleDateString()}
-                    </p>
-                    <Link href={`/complaint/${complaint._id}`}>
-                      <button className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-lg font-semibold transition-colors text-sm">
+                    {/* Date & Action */}
+                    <div className="text-right">
+                      <p className="text-gray-500 text-xs font-semibold uppercase tracking-wide mb-1">
+                        Created
+                      </p>
+                      <p className="text-gray-900 font-semibold mb-4">
+                        {complaint.createdAt ? new Date(complaint.createdAt).toLocaleDateString() : 'N/A'}
+                      </p>
+                      <button className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-4 py-2 rounded-lg font-bold transition-all shadow-lg hover:shadow-xl text-sm">
                         View →
                       </button>
-                    </Link>
+                    </div>
+                  </div>
+
+                  {/* Quick Preview */}
+                  <div className="mt-4 pt-4 border-t border-gray-100">
+                    <p className="text-gray-600 text-sm line-clamp-2">
+                      {complaint.description}
+                    </p>
                   </div>
                 </div>
-
-                {/* Quick Preview */}
-                <div className="mt-4 pt-4 border-t border-gray-100">
-                  <p className="text-gray-600 text-sm line-clamp-2">
-                    {complaint.description}
-                  </p>
-                </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       )}
-
-      <button
-        onClick={() => setActiveSection('home')}
-        className="w-full px-6 py-3 bg-gray-600 hover:bg-gray-700 text-white font-bold rounded-lg transition-colors"
-      >
-        ← Back to Home
-      </button>
     </div>
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex flex-col">
+      {/* <Navigation /> */}
+
       {/* Header */}
-      <header className="bg-white shadow-md sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <header className="bg-white shadow-md">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">My Dashboard</h1>
-              <p className="text-gray-600 text-sm mt-1">
+              <h1 className="text-4xl font-bold text-gray-900">My Dashboard</h1>
+              <p className="text-gray-600 text-sm mt-2">
                 {activeSection === 'home'
-                  ? 'Welcome to your dashboard'
+                  ? 'Welcome back, ' + (user?.username || 'User') + '!'
                   : activeSection === 'profile'
                   ? 'Your Profile'
                   : 'My Complaints'}
@@ -409,17 +420,17 @@ export default function UserDashboard() {
             </div>
             <button
               onClick={handleLogout}
-              className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors font-semibold"
+              className="px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-xl transition-all font-bold shadow-lg hover:shadow-xl"
             >
-              Logout
+              🚪 Logout
             </button>
           </div>
         </div>
       </header>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
         {error && (
-          <div className="mb-6 bg-red-50 border-l-4 border-red-500 rounded-lg p-6 text-red-700">
+          <div className="mb-6 bg-red-100 border-l-4 border-red-500 text-red-700 p-6 rounded-lg font-semibold">
             {error}
           </div>
         )}
@@ -427,7 +438,9 @@ export default function UserDashboard() {
         {activeSection === 'home' && <HomeSection />}
         {activeSection === 'profile' && <ProfileSection />}
         {activeSection === 'complaints' && <ComplaintsSection />}
-      </div>
+      </main>
+
+      <Footer />
     </div>
   );
 }
