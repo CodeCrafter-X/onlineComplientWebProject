@@ -165,7 +165,13 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8">
             {/* Waste Management */}
             <div className="group relative bg-white rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 animate-slide-up" style={{ animationDelay: '0.1s' }}>
-              <div className="relative h-32 bg-gradient-to-br from-green-600 to-green-700 overflow-hidden"></div>
+              <div className="relative h-32 bg-gradient-to-br from-green-600 to-green-700 overflow-hidden">
+                <img 
+                  src="/images/service-waste-management.jpg" 
+                  alt="Waste Management" 
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                />
+              </div>
               <div className="p-6">
                 <h3 className="text-lg font-bold text-gray-900 mb-2">Waste Management</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">
@@ -176,7 +182,13 @@ export default function Home() {
 
             {/* Street Lighting */}
             <div className="group relative bg-white rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 animate-slide-up" style={{ animationDelay: '0.2s' }}>
-              <div className="relative h-32 bg-gradient-to-br from-yellow-500 to-yellow-600 overflow-hidden"></div>
+              <div className="relative h-32 bg-gradient-to-br from-yellow-500 to-yellow-600 overflow-hidden">
+                <img 
+                  src="/images/service-street-lights.jpg" 
+                  alt="Street Lighting" 
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                />
+              </div>
               <div className="p-6">
                 <h3 className="text-lg font-bold text-gray-900 mb-2">Street Lighting</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">
@@ -187,7 +199,13 @@ export default function Home() {
 
             {/* Drainage Systems */}
             <div className="group relative bg-white rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 animate-slide-up" style={{ animationDelay: '0.3s' }}>
-              <div className="relative h-32 bg-gradient-to-br from-blue-600 to-blue-700 overflow-hidden"></div>
+              <div className="relative h-32 bg-gradient-to-br from-blue-600 to-blue-700 overflow-hidden">
+                <img 
+                  src="/images/service-drainage-maintenance.jpg" 
+                  alt="Drainage Systems" 
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                />
+              </div>
               <div className="p-6">
                 <h3 className="text-lg font-bold text-gray-900 mb-2">Drainage Systems</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">
@@ -198,7 +216,13 @@ export default function Home() {
 
             {/* Roads & Repairs */}
             <div className="group relative bg-white rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 animate-slide-up" style={{ animationDelay: '0.4s' }}>
-              <div className="relative h-32 bg-gradient-to-br from-gray-600 to-gray-700 overflow-hidden"></div>
+              <div className="relative h-32 bg-gradient-to-br from-gray-600 to-gray-700 overflow-hidden">
+                <img 
+                  src="/images/service-road-maintenance.jpg" 
+                  alt="Roads & Repairs" 
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                />
+              </div>
               <div className="p-6">
                 <h3 className="text-lg font-bold text-gray-900 mb-2">Roads & Repairs</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">
@@ -209,7 +233,13 @@ export default function Home() {
 
             {/* General Support */}
             <div className="group relative bg-white rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 animate-slide-up" style={{ animationDelay: '0.5s' }}>
-              <div className="relative h-32 bg-gradient-to-br from-purple-600 to-purple-700 overflow-hidden"></div>
+              <div className="relative h-32 bg-gradient-to-br from-purple-600 to-purple-700 overflow-hidden">
+                <img 
+                  src="/images/service-general-support.jpg" 
+                  alt="General Support" 
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                />
+              </div>
               <div className="p-6">
                 <h3 className="text-lg font-bold text-gray-900 mb-2">General Support</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">
@@ -224,86 +254,6 @@ export default function Home() {
             <Link
               href="/complaint/create"
               className="inline-block px-8 md:px-10 py-3 md:py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-all duration-300 text-base md:text-lg transform hover:scale-105 active:scale-95"
-            >
-              Report an Issue Now
-            </Link>
-          </div>
-        </div>
-      </section>
-                </div>
-                <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3">Street Lighting</h3>
-                <p className="text-gray-600 leading-relaxed">
-                  Repairs and maintenance of street lights ensuring safe, well-lit roads for pedestrians and vehicles at night.
-                </p>
-              </div>
-            </div>
-
-            {/* Drainage Issues */}
-            <div className="group relative bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-blue-200 animate-slide-up" style={{ animationDelay: '0.3s' }}>
-              <div className="relative h-48 bg-gradient-to-br from-blue-400 to-blue-500 overflow-hidden">
-                <img 
-                  src="/images/service-drainage-maintenance.jpg" 
-                  alt="Drainage Issues" 
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                />
-              </div>
-              <div className="p-6 md:p-8">
-                <div className="mb-3 inline-block transform group-hover:scale-125 transition-transform duration-300">
-                  <span className="text-3xl">💧</span>
-                </div>
-                <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3">Drainage Systems</h3>
-                <p className="text-gray-600 leading-relaxed">
-                  Attend to drainage problems including blockages and water overflow. Regular maintenance prevents flooding and environmental issues.
-                </p>
-              </div>
-            </div>
-
-            {/* Road & Construction */}
-            <div className="group relative bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-blue-200 animate-slide-up" style={{ animationDelay: '0.4s' }}>
-              <div className="relative h-48 bg-gradient-to-br from-gray-500 to-gray-600 overflow-hidden">
-                <img 
-                  src="/images/service-road-maintenance.jpg" 
-                  alt="Road and Construction Issues" 
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                />
-              </div>
-              <div className="p-6 md:p-8">
-                <div className="mb-3 inline-block transform group-hover:scale-125 transition-transform duration-300">
-                  <span className="text-3xl">🛣️</span>
-                </div>
-                <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3">Roads & Repairs</h3>
-                <p className="text-gray-600 leading-relaxed">
-                  Report damaged roads, potholes, and construction issues. We maintain safe and accessible roads for all community members.
-                </p>
-              </div>
-            </div>
-
-            {/* General Complaints */}
-            <div className="group relative bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-blue-200 animate-slide-up" style={{ animationDelay: '0.5s' }}>
-              <div className="relative h-48 bg-gradient-to-br from-purple-400 to-purple-500 overflow-hidden">
-                <img 
-                  src="/images/service-general-support.jpg" 
-                  alt="General Complaints" 
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                />
-              </div>
-              <div className="p-6 md:p-8">
-                <div className="mb-3 inline-block transform group-hover:scale-125 transition-transform duration-300">
-                  <span className="text-3xl">💬</span>
-                </div>
-                <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3">General Support</h3>
-                <p className="text-gray-600 leading-relaxed">
-                  Have other concerns? Submit general complaints and suggestions to help us improve services and better serve the community.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* CTA Button */}
-          <div className="text-center mt-12 md:mt-16 animate-fade-in-down" style={{ animationDelay: '0.6s' }}>
-            <Link
-              href="/complaint/create"
-              className="inline-block px-8 md:px-10 py-3 md:py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-lg hover:shadow-lg transition-all duration-300 text-base md:text-lg transform hover:scale-105 active:scale-95"
             >
               Report an Issue Now
             </Link>
