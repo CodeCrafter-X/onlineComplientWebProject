@@ -30,32 +30,15 @@ export default function ManageUsersPage() {
         return;
       }
 
-      // For now, fetch complaints to show user stats
-      const complaintsRes = await fetch('/api/complaint/getAll', {
+      // Fetch all registered citizen users
+      const usersRes = await fetch('/api/admin/users', {
         credentials: 'include',
       });
 
-      if (complaintsRes.ok) {
-        const complaintData = await complaintsRes.json();
-        // Extract unique users from complaints
-        const uniqueUsers = {};
-        complaintData.forEach((complaint) => {
-          if (complaint.userId && !uniqueUsers[complaint.userId]) {
-            uniqueUsers[complaint.userId] = {
-              _id: complaint.userId,
-              username: complaint.username || 'Unknown User',
-              email: complaint.userEmail || 'N/A',
-              complaints: 1,
-              createdAt: complaint.createdAt,
-            };
-          } else if (complaint.userId) {
-            uniqueUsers[complaint.userId].complaints += 1;
-          }
-        });
-
-        const usersList = Object.values(uniqueUsers);
-        setUsers(usersList);
-        setFilteredUsers(usersList);
+      if (usersRes.ok) {
+        const userData = await usersRes.json();
+        setUsers(userData.users || []);
+        setFilteredUsers(userData.users || []);
       } else {
         // Fallback: show empty users list
         setUsers([]);
