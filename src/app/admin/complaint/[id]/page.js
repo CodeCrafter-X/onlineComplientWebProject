@@ -101,23 +101,26 @@ export default function ComplaintDetail() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center">
-        <div className="text-white text-2xl">Loading complaint details...</div>
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="inline-block animate-spin rounded-full h-16 w-16 border-4 border-blue-200 border-t-blue-600 mb-4"></div>
+          <p className="text-gray-600 text-lg font-semibold">Loading complaint details...</p>
+        </div>
       </div>
     );
   }
 
   if (error || !complaint) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
         <div className="max-w-4xl mx-auto px-4 py-20">
-          <div className="bg-red-500/20 border border-red-500/50 rounded-lg p-8 text-center">
-            <p className="text-red-200 text-lg">{error || 'Complaint not found'}</p>
+          <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-8 rounded-lg shadow-lg">
+            <p className="font-semibold text-lg">{error || 'Complaint not found'}</p>
             <Link
-              href="/admin"
-              className="mt-4 inline-block px-6 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors"
+              href="/admin/complaint"
+              className="mt-6 inline-block px-8 py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg transition-all shadow-lg hover:shadow-xl"
             >
-              Back to Dashboard
+              ← Back to Complaints
             </Link>
           </div>
         </div>
@@ -126,31 +129,31 @@ export default function ComplaintDetail() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
       {/* Header */}
-      <header className="bg-white/10 backdrop-blur-md border-b border-white/20 sticky top-0 z-50">
-        <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
-          <h1 className="text-2xl font-bold text-white">Complaint Detail</h1>
+      <header className="sticky top-0 z-50 bg-white shadow-lg border-b-2 border-blue-100">
+        <div className="max-w-4xl mx-auto px-4 py-6 flex items-center justify-between">
+          <h1 className="text-3xl font-bold text-gray-900">Complaint Details</h1>
           <Link
-            href="/admin"
-            className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors"
+            href="/admin/complaint"
+            className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-all shadow-md hover:shadow-lg"
           >
-            ← Back to Dashboard
+            ← Back
           </Link>
         </div>
       </header>
 
       <div className="max-w-4xl mx-auto px-4 py-8 space-y-6">
         {/* Main Info Card */}
-        <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-8">
+        <div className="bg-white rounded-2xl shadow-lg p-8 border-t-4 border-blue-600">
           <div className="mb-6">
-            <div className="flex items-center justify-between mb-6">
-              <div>
-                <h2 className="text-3xl font-bold text-white mb-2">{complaint.title}</h2>
-                <p className="text-gray-400">ID: {complaint._id.toString()}</p>
+            <div className="flex items-start justify-between gap-4 mb-6">
+              <div className="flex-1">
+                <h2 className="text-4xl font-bold text-gray-900 mb-2">{complaint.title}</h2>
+                <p className="text-gray-500 font-medium">ID: {complaint._id.toString().slice(-12).toUpperCase()}</p>
               </div>
               <span
-                className={`inline-block px-4 py-2 rounded-full font-bold text-lg border ${getStatusColor(
+                className={`inline-block px-6 py-2 rounded-full font-bold text-lg border-2 whitespace-nowrap ${getStatusColor(
                   complaint.status
                 )}`}
               >
@@ -158,28 +161,27 @@ export default function ComplaintDetail() {
               </span>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 pt-6 border-t border-white/20">
-              <div>
-                <p className="text-gray-400 text-sm mb-1">CATEGORY</p>
-                <p className="text-white font-semibold">{complaint.category}</p>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 pt-6 border-t-2 border-gray-200">
+              <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-4">
+                <p className="text-gray-600 text-xs font-bold uppercase mb-2">Category</p>
+                <p className="text-gray-900 font-bold text-lg">{complaint.category}</p>
               </div>
-              <div>
-                <p className="text-gray-400 text-sm mb-1">CREATED</p>
-                <p className="text-white font-semibold">
-                  {new Date(complaint.createdAt).toLocaleDateString()} at{' '}
-                  {new Date(complaint.createdAt).toLocaleTimeString()}
+              <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-4">
+                <p className="text-gray-600 text-xs font-bold uppercase mb-2">Created</p>
+                <p className="text-gray-900 font-bold">
+                  {new Date(complaint.createdAt).toLocaleDateString()}
                 </p>
               </div>
-              <div>
-                <p className="text-gray-400 text-sm mb-1">LAST UPDATED</p>
-                <p className="text-white font-semibold">
+              <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-4">
+                <p className="text-gray-600 text-xs font-bold uppercase mb-2">Updated</p>
+                <p className="text-gray-900 font-bold">
                   {new Date(complaint.updatedAt).toLocaleDateString()}
                 </p>
               </div>
-              <div>
-                <p className="text-gray-400 text-sm mb-1">FILED BY</p>
-                <p className="text-white font-semibold">
-                  {complaint.user?.username || 'Unknown'}
+              <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-4">
+                <p className="text-gray-600 text-xs font-bold uppercase mb-2">Filed By</p>
+                <p className="text-gray-900 font-bold">
+                  {complaint.user?.username || 'User'}
                 </p>
               </div>
             </div>
@@ -187,59 +189,68 @@ export default function ComplaintDetail() {
         </div>
 
         {/* Description Card */}
-        <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-8">
-          <h3 className="text-xl font-bold text-white mb-4">Description</h3>
-          <p className="text-gray-100 leading-relaxed text-lg">{complaint.description}</p>
+        <div className="bg-white rounded-2xl shadow-lg p-8">
+          <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+            <span className="text-blue-600">📝</span> Description
+          </h3>
+          <p className="text-gray-700 leading-relaxed text-lg">{complaint.description}</p>
         </div>
 
         {/* Location Card */}
-        <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-8">
-          <h3 className="text-xl font-bold text-white mb-4">Location</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="bg-white rounded-2xl shadow-lg p-8">
+          <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+            <span className="text-blue-600">📍</span> Location Info
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             <div>
-              <p className="text-gray-400 text-sm mb-2">ADDRESS</p>
-              <p className="text-white font-semibold text-lg">
+              <p className="text-gray-500 text-sm font-bold uppercase mb-2">Address</p>
+              <p className="text-gray-900 font-semibold text-lg bg-gray-50 rounded-lg p-4">
                 {complaint.address || 'Not provided'}
               </p>
             </div>
             <div>
-              <p className="text-gray-400 text-sm mb-2">COORDINATES</p>
-              <div className="bg-white/5 rounded-lg p-4">
-                <p className="text-white font-mono">
-                  Lat: <span className="text-blue-400">{complaint.location.lat}</span>
+              <p className="text-gray-500 text-sm font-bold uppercase mb-2">Coordinates</p>
+              <div className="bg-blue-50 border-2 border-blue-200 rounded-lg p-4">
+                <p className="text-gray-900 font-mono font-bold">
+                  Lat: <span className="text-blue-600">{complaint.location.lat}</span>
                 </p>
-                <p className="text-white font-mono">
-                  Lng: <span className="text-blue-400">{complaint.location.lng}</span>
+                <p className="text-gray-900 font-mono font-bold">
+                  Lng: <span className="text-blue-600">{complaint.location.lng}</span>
                 </p>
               </div>
             </div>
           </div>
 
           {/* Google Map */}
-          <div className="mt-6">
+          <div className="rounded-xl overflow-hidden shadow-md">
             <iframe
               width="100%"
               height="400"
               frameBorder="0"
               src={`https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&q=${complaint.location.lat},${complaint.location.lng}`}
-              className="rounded-lg"
+              className="border-0"
             />
           </div>
         </div>
 
         {/* Images Card */}
         {complaint.images && complaint.images.length > 0 && (
-          <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-8">
-            <h3 className="text-xl font-bold text-white mb-6">Attached Images</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="bg-white rounded-2xl shadow-lg p-8">
+            <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+              <span className="text-blue-600">🖼️</span> Attached Images
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {complaint.images.map((image, index) => (
                 <div key={index} className="group">
-                  <img
-                    src={image}
-                    alt={`Complaint image ${index + 1}`}
-                    className="w-full h-64 object-cover rounded-lg shadow-lg group-hover:opacity-80 transition-opacity cursor-pointer"
-                    onClick={() => window.open(image, '_blank')}
-                  />
+                  <div className="relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-all">
+                    <img
+                      src={image}
+                      alt={`Complaint image ${index + 1}`}
+                      className="w-full h-64 object-cover group-hover:scale-105 transition-transform cursor-pointer"
+                      onClick={() => window.open(image, '_blank')}
+                    />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all"></div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -248,48 +259,52 @@ export default function ComplaintDetail() {
 
         {/* User Info Card */}
         {complaint.user && (
-          <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-8">
-            <h3 className="text-xl font-bold text-white mb-4">User Information</h3>
+          <div className="bg-white rounded-2xl shadow-lg p-8">
+            <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+              <span className="text-blue-600">👤</span> User Information
+            </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <p className="text-gray-400 text-sm mb-2">USERNAME</p>
-                <p className="text-white font-semibold text-lg">{complaint.user.username}</p>
+              <div className="border-b-2 border-gray-200 pb-4">
+                <p className="text-gray-500 text-sm font-bold uppercase mb-2">Username</p>
+                <p className="text-gray-900 font-bold text-lg">{complaint.user.username}</p>
               </div>
-              <div>
-                <p className="text-gray-400 text-sm mb-2">EMAIL</p>
-                <p className="text-white font-semibold text-lg">{complaint.user.email}</p>
+              <div className="border-b-2 border-gray-200 pb-4">
+                <p className="text-gray-500 text-sm font-bold uppercase mb-2">Email</p>
+                <p className="text-gray-900 font-bold text-lg break-all">{complaint.user.email}</p>
               </div>
             </div>
           </div>
         )}
 
         {/* Status Update Card */}
-        <div className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-500/50 rounded-xl p-8">
-          <h3 className="text-xl font-bold text-white mb-6">Update Complaint Status</h3>
-          <div className="flex gap-4 flex-wrap">
+        <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl shadow-lg p-8 border-2 border-blue-200">
+          <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+            <span className="text-blue-600">⚙️</span> Update Status
+          </h3>
+          <div className="flex gap-4 flex-wrap mb-6">
             {['pending', 'approved', 'rejected'].map((status) => (
               <button
                 key={status}
                 onClick={() => setSelectedStatus(status)}
-                className={`px-6 py-3 rounded-lg font-semibold transition-all ${
+                className={`px-6 py-3 rounded-lg font-bold transition-all ${
                   selectedStatus === status
-                    ? 'bg-blue-500 text-white border-2 border-blue-300'
-                    : 'bg-white/10 text-gray-300 border-2 border-white/20 hover:border-white/40'
+                    ? 'bg-blue-600 text-white shadow-lg scale-105'
+                    : 'bg-white text-gray-700 border-2 border-gray-300 hover:border-blue-400 hover:shadow-md'
                 }`}
               >
-                {getStatusIcon(status)} {status.toUpperCase()}
+                {getStatusIcon(status)} {status.charAt(0).toUpperCase() + status.slice(1)}
               </button>
             ))}
           </div>
 
           {selectedStatus !== complaint.status && (
-            <div className="mt-6">
+            <div>
               <button
                 onClick={handleStatusUpdate}
                 disabled={updating}
-                className="w-full px-4 py-3 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold rounded-lg transition-all disabled:opacity-50"
+                className="w-full px-4 py-4 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold rounded-lg transition-all shadow-lg hover:shadow-xl disabled:opacity-50 text-lg"
               >
-                {updating ? 'Updating...' : 'Confirm Status Update'}
+                {updating ? '⏳ Updating...' : '✓ Confirm Status Update'}
               </button>
             </div>
           )}
