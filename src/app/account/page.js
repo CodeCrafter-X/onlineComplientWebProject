@@ -209,7 +209,7 @@ export default function UserDashboard() {
             <div className="grid grid-cols-2 gap-6 mt-6">
               <div>
                 <p className="text-gray-500 text-xs font-semibold uppercase tracking-wider mb-1">Account Type</p>
-                <p className="text-gray-900 font-semibold">Citizen</p>
+                <p className="text-gray-900 font-semibold">{user?.role ? user.role.charAt(0).toUpperCase() + user.role.slice(1) : 'Citizen'}</p>
               </div>
               <div>
                 <p className="text-gray-500 text-xs font-semibold uppercase tracking-wider mb-1">Status</p>

@@ -17,7 +17,7 @@ export default function Navigation() {
         if (response.ok) {
           const data = await response.json();
           setIsUser(true);
-          setUserRole(data.role);
+          setUserRole(data.user.role);
         }
       } catch (error) {
         setIsUser(false);
