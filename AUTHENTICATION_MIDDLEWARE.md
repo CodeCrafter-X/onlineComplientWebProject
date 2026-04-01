@@ -28,7 +28,6 @@ The middleware automatically protects routes based on authentication status:
 - `/` (Home)
 - `/auth/login`
 - `/auth/register`
-- `/auth/forgot-password`
 - `/auth/verify-email`
 
 **Redirect Behavior:**

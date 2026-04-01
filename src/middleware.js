@@ -16,7 +16,7 @@ export async function middleware(request) {
   }
 
   // Public routes - no protection
-  const publicRoutes = ["/", "/auth/login", "/auth/register", "/auth/forgot-password", "/auth/verify-email"];
+  const publicRoutes = ["/", "/auth/login", "/auth/register", "/auth/verify-email"];
 
   if (publicRoutes.includes(pathname)) {
     return NextResponse.next();

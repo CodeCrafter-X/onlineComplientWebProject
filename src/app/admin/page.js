@@ -90,7 +90,7 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+    <div className="min-h-screen bg-gray-50">
       {/* <Navigation /> */}
 
       <main className="flex-grow pt-8 pb-12 px-4 sm:px-6 lg:px-8">
@@ -99,112 +99,140 @@ export default function AdminDashboard() {
           <div className="mb-12">
             <div className="flex justify-between items-start mb-8">
               <div>
-                <h1 className="text-5xl font-bold text-gray-900 mb-2">Admin Dashboard</h1>
-                <p className="text-lg text-gray-600">Welcome back, {adminUser?.username || 'Admin'}!</p>
+                <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight mb-2">Admin Dashboard</h1>
+                <p className="text-gray-500 text-sm font-medium">Welcome back, {adminUser?.username || 'Admin'}!</p>
               </div>
               <button
                 onClick={handleLogout}
-                className="px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                className="px-6 py-2.5 bg-red-600 hover:bg-gray-200 text-gray-700 font-semibold rounded-lg transition-all text-sm border border-gray-300 hover:border-gray-400"
               >
-                🚪 Logout
+                Logout
               </button>
             </div>
 
             {error && (
-              <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-6 rounded-lg mb-8">
-                <p className="font-semibold">{error}</p>
+              <div className="bg-red-50 border border-red-200 text-red-700 p-4 rounded-lg mb-8">
+                <p className="font-medium text-sm">{error}</p>
               </div>
             )}
 
             {/* Stats Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {/* Total Complaints */}
-              <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow p-8 border-t-4 border-blue-600">
+              <div className="bg-white rounded-xl border border-gray-200 p-6 hover:border-gray-300 transition-all">
                 <div className="flex items-center justify-between mb-4">
-                  <p className="text-gray-600 text-sm font-semibold uppercase tracking-wider">Total Complaints</p>
-                  <div className="text-3xl">📋</div>
+                  <p className="text-gray-500 text-xs font-semibold uppercase tracking-wide">Total Complaints</p>
+                  <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                  </div>
                 </div>
-                <p className="text-4xl font-bold text-gray-900">{stats.total}</p>
-                <p className="text-gray-500 text-xs mt-3">All submitted complaints</p>
+                <p className="text-3xl font-bold text-gray-900">{stats.total}</p>
+                <p className="text-gray-500 text-xs mt-3">All submitted</p>
               </div>
 
               {/* Pending */}
-              <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow p-8 border-t-4 border-yellow-500">
+              <div className="bg-white rounded-xl border border-gray-200 p-6 hover:border-gray-300 transition-all">
                 <div className="flex items-center justify-between mb-4">
-                  <p className="text-gray-600 text-sm font-semibold uppercase tracking-wider">Pending</p>
-                  <div className="text-3xl">⏳</div>
+                  <p className="text-gray-500 text-xs font-semibold uppercase tracking-wide">Pending</p>
+                  <div className="w-8 h-8 bg-amber-100 rounded-lg flex items-center justify-center">
+                    <svg className="w-4 h-4 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
                 </div>
-                <p className="text-4xl font-bold text-yellow-600">{stats.pending}</p>
+                <p className="text-3xl font-bold text-amber-600">{stats.pending}</p>
                 <p className="text-gray-500 text-xs mt-3">Awaiting review</p>
               </div>
 
               {/* Approved */}
-              <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow p-8 border-t-4 border-green-500">
+              <div className="bg-white rounded-xl border border-gray-200 p-6 hover:border-gray-300 transition-all">
                 <div className="flex items-center justify-between mb-4">
-                  <p className="text-gray-600 text-sm font-semibold uppercase tracking-wider">Approved</p>
-                  <div className="text-3xl">✅</div>
+                  <p className="text-gray-500 text-xs font-semibold uppercase tracking-wide">Approved</p>
+                  <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
+                    <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
                 </div>
-                <p className="text-4xl font-bold text-green-600">{stats.approved}</p>
-                <p className="text-gray-500 text-xs mt-3">Accepted complaints</p>
+                <p className="text-3xl font-bold text-green-600">{stats.approved}</p>
+                <p className="text-gray-500 text-xs mt-3">Accepted</p>
               </div>
 
               {/* Rejected */}
-              <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow p-8 border-t-4 border-red-500">
+              <div className="bg-white rounded-xl border border-gray-200 p-6 hover:border-gray-300 transition-all">
                 <div className="flex items-center justify-between mb-4">
-                  <p className="text-gray-600 text-sm font-semibold uppercase tracking-wider">Rejected</p>
-                  <div className="text-3xl">❌</div>
+                  <p className="text-gray-500 text-xs font-semibold uppercase tracking-wide">Rejected</p>
+                  <div className="w-8 h-8 bg-red-100 rounded-lg flex items-center justify-center">
+                    <svg className="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </div>
                 </div>
-                <p className="text-4xl font-bold text-red-600">{stats.rejected}</p>
-                <p className="text-gray-500 text-xs mt-3">Declined complaints</p>
+                <p className="text-3xl font-bold text-red-600">{stats.rejected}</p>
+                <p className="text-gray-500 text-xs mt-3">Declined</p>
               </div>
             </div>
           </div>
 
           {/* Admin Cards Section */}
           <div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-8">Quick Actions</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <h2 className="text-lg font-bold text-gray-900 mb-6 uppercase tracking-wide text-gray-700">Quick Actions</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               
               {/* Admin Profile Card */}
               <Link href="/admin/profile">
-                <div className="group bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl p-8 text-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 cursor-pointer h-full">
-                  <div className="flex flex-col items-center text-center">
-                    <div className="text-6xl mb-4 group-hover:scale-110 transition-transform">👤</div>
-                    <h3 className="text-2xl font-bold mb-3">Admin Profile</h3>
-                    <p className="text-blue-100 text-sm mb-6 line-clamp-2">Access and manage your admin account settings</p>
-                    <div className="w-full bg-white text-blue-700 hover:bg-yellow-300 font-bold py-3 px-6 rounded-xl transition-all text-center shadow-lg hover:shadow-xl">
-                      View Profile →
+                <div className="group bg-white rounded-xl border border-gray-200 hover:border-gray-300 p-6 cursor-pointer transition-all hover:shadow-md h-full">
+                  <div className="flex flex-col h-full">
+                    <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                      <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                      </svg>
                     </div>
+                    <h3 className="text-lg font-bold text-gray-900 mb-2">Admin Profile</h3>
+                    <p className="text-gray-600 text-sm mb-6 flex-grow">Manage your account settings</p>
+                    <button className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors text-sm">
+                      View Profile
+                    </button>
                   </div>
                 </div>
               </Link>
 
               {/* Manage Complaints Card */}
               <Link href="/admin/complaint">
-                <div className="group bg-gradient-to-br from-emerald-600 to-emerald-700 rounded-2xl p-8 text-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 cursor-pointer h-full">
-                  <div className="flex flex-col items-center text-center">
-                    <div className="text-6xl mb-4 group-hover:scale-110 transition-transform">📋</div>
-                    <h3 className="text-2xl font-bold mb-3">Manage Complaints</h3>
-                    <p className="text-emerald-100 text-sm mb-6">
-                      Review and manage all <span className="font-bold text-lg">{stats.total}</span> complaints
-                    </p>
-                    <div className="w-full bg-yellow-400 text-emerald-700 hover:bg-yellow-300 font-bold py-3 px-6 rounded-xl transition-all text-center shadow-lg hover:shadow-xl">
-                      Manage →
+                <div className="group bg-white rounded-xl border border-gray-200 hover:border-gray-300 p-6 cursor-pointer transition-all hover:shadow-md h-full">
+                  <div className="flex flex-col h-full">
+                    <div className="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center mb-4">
+                      <svg className="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                      </svg>
                     </div>
+                    <h3 className="text-lg font-bold text-gray-900 mb-2">Manage Complaints</h3>
+                    <p className="text-gray-600 text-sm mb-6 flex-grow">
+                      Review all <span className="font-bold">{stats.total}</span> complaints
+                    </p>
+                    <button className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-lg transition-colors text-sm">
+                      Manage
+                    </button>
                   </div>
                 </div>
               </Link>
 
               {/* Manage Users Card */}
               <Link href="/admin/users">
-                <div className="group bg-gradient-to-br from-indigo-600 to-indigo-700 rounded-2xl p-8 text-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 cursor-pointer h-full">
-                  <div className="flex flex-col items-center text-center">
-                    <div className="text-6xl mb-4 group-hover:scale-110 transition-transform">👥</div>
-                    <h3 className="text-2xl font-bold mb-3">Registered Users</h3>
-                    <p className="text-indigo-100 text-sm mb-6">View all registered citizens in the system</p>
-                    <div className="w-full bg-yellow-400 text-indigo-700 hover:bg-yellow-300 font-bold py-3 px-6 rounded-xl transition-all text-center shadow-lg hover:shadow-xl">
-                      View Users →
+                <div className="group bg-white rounded-xl border border-gray-200 hover:border-gray-300 p-6 cursor-pointer transition-all hover:shadow-md h-full">
+                  <div className="flex flex-col h-full">
+                    <div className="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center mb-4">
+                      <svg className="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 12H9m4 0a7 7 0 11-14 0 7 7 0 0114 0z" />
+                      </svg>
                     </div>
+                    <h3 className="text-lg font-bold text-gray-900 mb-2">Registered Users</h3>
+                    <p className="text-gray-600 text-sm mb-6 flex-grow">View all citizens</p>
+                    <button className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg transition-colors text-sm">
+                      View Users
+                    </button>
                   </div>
                 </div>
               </Link>
@@ -213,15 +241,15 @@ export default function AdminDashboard() {
           </div>
 
           {/* Recent Statistics Info */}
-          <div className="mt-12 bg-gradient-to-r from-blue-50 to-purple-50 border-2 border-blue-200 rounded-2xl p-8">
-            <h3 className="text-xl font-bold text-gray-900 mb-6">Dashboard Summary</h3>
+          <div className="mt-12 bg-white rounded-xl border border-gray-200 p-8">
+            <h3 className="text-lg font-bold text-gray-900 mb-6 uppercase tracking-wide text-gray-700">Dashboard Summary</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="bg-white rounded-xl p-6 shadow-sm">
-                <p className="text-gray-600 text-sm font-semibold uppercase mb-2">Approval Rate</p>
-                <p className="text-4xl font-bold text-blue-600">
+              <div className="bg-gradient-to-br from-blue-50 to-blue-100/50 rounded-lg p-6 border border-blue-100">
+                <p className="text-gray-600 text-xs font-semibold uppercase tracking-wide mb-2">Approval Rate</p>
+                <p className="text-3xl font-bold text-blue-600">
                   {stats.total > 0 ? Math.round((stats.approved / stats.total) * 100) : 0}%
                 </p>
-                <div className="w-full bg-gray-200 rounded-full h-2 mt-4">
+                <div className="w-full bg-blue-200 rounded-full h-2 mt-4">
                   <div
                     className="bg-blue-600 h-2 rounded-full transition-all duration-500"
                     style={{
@@ -231,14 +259,14 @@ export default function AdminDashboard() {
                 </div>
               </div>
 
-              <div className="bg-white rounded-xl p-6 shadow-sm">
-                <p className="text-gray-600 text-sm font-semibold uppercase mb-2">Pending Rate</p>
-                <p className="text-4xl font-bold text-yellow-600">
+              <div className="bg-gradient-to-br from-amber-50 to-amber-100/50 rounded-lg p-6 border border-amber-100">
+                <p className="text-gray-600 text-xs font-semibold uppercase tracking-wide mb-2">Pending Rate</p>
+                <p className="text-3xl font-bold text-amber-600">
                   {stats.total > 0 ? Math.round((stats.pending / stats.total) * 100) : 0}%
                 </p>
-                <div className="w-full bg-gray-200 rounded-full h-2 mt-4">
+                <div className="w-full bg-amber-200 rounded-full h-2 mt-4">
                   <div
-                    className="bg-yellow-500 h-2 rounded-full transition-all duration-500"
+                    className="bg-amber-600 h-2 rounded-full transition-all duration-500"
                     style={{
                       width: `${stats.total > 0 ? Math.round((stats.pending / stats.total) * 100) : 0}%`,
                     }}
@@ -246,10 +274,10 @@ export default function AdminDashboard() {
                 </div>
               </div>
 
-              <div className="bg-white rounded-xl p-6 shadow-sm">
-                <p className="text-gray-600 text-sm font-semibold uppercase mb-2">Admin Info</p>
+              <div className="bg-gradient-to-br from-gray-50 to-gray-100/50 rounded-lg p-6 border border-gray-200">
+                <p className="text-gray-600 text-xs font-semibold uppercase tracking-wide mb-2">Admin Info</p>
                 <p className="text-lg font-bold text-gray-900">{adminUser?.username}</p>
-                <p className="text-sm text-gray-500 mt-2">{adminUser?.email}</p>
+                <p className="text-xs text-gray-500 mt-2">{adminUser?.email}</p>
               </div>
             </div>
           </div>

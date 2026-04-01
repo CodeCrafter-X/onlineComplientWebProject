@@ -8,7 +8,6 @@ Based on the workspace structure, these pages exist:
 
 - ✅ `/auth/login` - Login page
 - ✅ `/auth/register` - Registration page
-- ✅ `/auth/forgot-password` - Password reset
 - ✅ `/auth/verify-email` - Email verification
 
 ### User Pages

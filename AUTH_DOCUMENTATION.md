@@ -10,7 +10,6 @@ This document explains the complete authentication system for the Public Complai
 
 - **`/auth/login`** - User login page
 - **`/auth/register`** - User registration page
-- **`/auth/forgot-password`** - Password reset request page
 - **`/auth/verify-email`** - Email verification page
 
 ### Protected Pages
@@ -85,14 +84,7 @@ This document explains the complete authentication system for the Public Complai
 - Click "Sign In"
 - Auto-redirects to home page (**`/`**)
 
-#### 3. **Reset Forgotten Password**
-
-- Click "Forgot password?" link on login page
-- Enter your email
-- Click "Send Reset Link"
-- Follow instructions in email
-
-#### 4. **Access Account Settings**
+#### 3. **Access Account Settings**
 
 - Navigate to `/account`
 - View profile information
@@ -264,7 +256,6 @@ Token Valid & Role Verified?
 
 - ✅ Email & password input
 - ✅ Show/hide password toggle
-- ✅ "Forgot password?" link
 - ✅ Register link
 - ✅ Error messages
 - ✅ Loading state
@@ -280,13 +271,6 @@ Token Valid & Role Verified?
 - ✅ Success messages
 - ✅ Links to login page
 - ✅ Form validation
-
-### Forgot Password Page
-
-- ✅ Email input
-- ✅ Send reset link
-- ✅ Resend functionality with timer
-- ✅ Success state display
 
 ### Verify Email Page
 

@@ -11,7 +11,6 @@
 │ ✓ POST /api/auth/login    - Login API                        │
 │ ✓ GET  /auth/register     - Registration page                │
 │ ✓ POST /api/auth/register - Register API                     │
-│ ✓ GET  /auth/forgot-password - Password reset page           │
 │ ✓ POST /api/auth/logout   - Logout API                       │
 └─────────────────────────────────────────────────────────────┘
 

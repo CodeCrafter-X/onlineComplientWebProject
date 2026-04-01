@@ -109,12 +109,7 @@ export default function LoginPage() {
 
                   {/* Password Field */}
                   <div className="space-y-2">
-                    <div className="flex justify-between items-center">
-                      <label className="block text-sm font-semibold text-gray-700">Password</label>
-                      <Link href="/auth/forgot-password" className="text-xs text-blue-600 hover:text-blue-700 font-medium transition-colors">
-                        Forgot password?
-                      </Link>
-                    </div>
+                    <label className="block text-sm font-semibold text-gray-700">Password</label>
                     <div className="relative">
                       <input
                         type={showPassword ? 'text' : 'password'}

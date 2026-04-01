@@ -66,7 +66,6 @@ Public Routes (No Protection)
 ├── /
 ├── /auth/login
 ├── /auth/register
-├── /auth/forgot-password
 └── /auth/verify-email
 
 Protected Routes

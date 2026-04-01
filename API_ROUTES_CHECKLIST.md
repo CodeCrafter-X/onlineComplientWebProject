@@ -60,7 +60,6 @@ These routes should NOT require authentication:
 - [ ] `POST /api/auth/login` - User login ✅
 - [ ] `POST /api/auth/register` - User registration ✅
 - [ ] `POST /api/auth/logout` - User logout ✅
-- [ ] `POST /api/auth/forgot-password` - Reset password
 - [ ] `POST /api/auth/verify-email` - Email verification
 - [ ] `GET /api/test-db` - Database test
 - [ ] `POST /api/token-check` - Token verification
