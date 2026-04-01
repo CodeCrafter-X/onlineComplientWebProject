@@ -30,6 +30,11 @@ export default function AdminDashboard() {
       const authRes = await fetch('/api/token-check', {
         credentials: 'include',
       });
+      
+      if (!authRes.ok) {
+        throw new Error(`Auth check failed: ${authRes.status}`);
+      }
+      
       const authData = await authRes.json();
 
       if (!authData.isAuthenticated || authData.user?.role !== 'admin') {
@@ -40,27 +45,30 @@ export default function AdminDashboard() {
       setAdminUser(authData.user);
 
       // Fetch complaints
-      const complaintsRes = await fetch('/api/complaint/getAll', {
+      const complaintsRes = await fetch('/api/complaint/getAll?page=1&limit=100', {
         credentials: 'include',
       });
 
-      if (complaintsRes.ok) {
-        const complaintData = await complaintsRes.json();
-        setComplaints(complaintData);
-        
-        // Calculate stats
-        setStats({
-          total: complaintData.length,
-          pending: complaintData.filter((c) => c.status === 'pending').length,
-          approved: complaintData.filter((c) => c.status === 'approved').length,
-          rejected: complaintData.filter((c) => c.status === 'rejected').length,
-        });
+      if (!complaintsRes.ok) {
+        throw new Error(`Failed to fetch complaints: ${complaintsRes.status}`);
       }
+
+      const complaintData = await complaintsRes.json();
+      const complaintsArray = complaintData.complaints || [];
+      setComplaints(complaintsArray);
+      
+      // Calculate stats
+      setStats({
+        total: complaintData.total || 0,
+        pending: complaintsArray.filter((c) => c.status === 'pending').length,
+        approved: complaintsArray.filter((c) => c.status === 'approved').length,
+        rejected: complaintsArray.filter((c) => c.status === 'rejected').length,
+      });
 
       setUsers([]);
     } catch (err) {
-      setError('Error loading data');
-      console.error(err);
+      setError(`Error loading data: ${err.message}`);
+      console.error('Admin dashboard error:', err);
     } finally {
       setLoading(false);
     }

@@ -15,12 +15,21 @@ export default function ManageComplaintsPage() {
   const [filterStatus, setFilterStatus] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState('recent');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [totalComplaints, setTotalComplaints] = useState(0);
+  const itemsPerPage = 10;
 
   useEffect(() => {
     checkAuthAndFetchData();
   }, []);
 
-  const checkAuthAndFetchData = async () => {
+  useEffect(() => {
+    // When filters change, reset to page 1
+    setCurrentPage(1);
+  }, [filterStatus, searchTerm, sortBy]);
+
+  const checkAuthAndFetchData = async (page = 1) => {
     try {
       const authRes = await fetch('/api/token-check', {
         credentials: 'include',
@@ -32,14 +41,17 @@ export default function ManageComplaintsPage() {
         return;
       }
 
-      const complaintsRes = await fetch('/api/complaint/getAll', {
+      const complaintsRes = await fetch(`/api/complaint/getAll?page=${page}&limit=${itemsPerPage}`, {
         credentials: 'include',
       });
 
       if (complaintsRes.ok) {
         const complaintData = await complaintsRes.json();
-        setComplaints(complaintData);
-        setFilteredComplaints(complaintData);
+        setComplaints(complaintData.complaints || []);
+        setFilteredComplaints(complaintData.complaints || []);
+        setTotalComplaints(complaintData.total || 0);
+        setTotalPages(complaintData.totalPages || 1);
+        setCurrentPage(page);
       }
     } catch (err) {
       setError('Error loading complaints');
@@ -104,6 +116,11 @@ export default function ManageComplaintsPage() {
     }
   };
 
+  const handlePageChange = (newPage) => {
+    setLoading(true);
+    checkAuthAndFetchData(newPage);
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center">
@@ -140,7 +157,7 @@ export default function ManageComplaintsPage() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
             <div className="bg-white rounded-2xl shadow-lg p-8 border-t-4 border-blue-600">
               <p className="text-gray-600 text-sm font-semibold uppercase mb-2">Total</p>
-              <p className="text-4xl font-bold text-blue-600">{complaints.length}</p>
+              <p className="text-4xl font-bold text-blue-600">{totalComplaints}</p>
             </div>
             <div className="bg-white rounded-2xl shadow-lg p-8 border-t-4 border-yellow-500">
               <p className="text-gray-600 text-sm font-semibold uppercase mb-2">Pending</p>
@@ -246,6 +263,51 @@ export default function ManageComplaintsPage() {
               ))
             )}
           </div>
+
+          {/* Pagination Controls */}
+          {totalPages > 1 && (
+            <div className="bg-white rounded-2xl shadow-lg p-6 mb-8">
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                <p className="text-gray-600 font-semibold">
+                  Page {currentPage} of {totalPages} ({totalComplaints} total complaints)
+                </p>
+                <div className="flex gap-2 flex-wrap justify-center sm:justify-end">
+                  <button
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    disabled={currentPage === 1}
+                    className="px-4 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-all"
+                  >
+                    ← Previous
+                  </button>
+                  
+                  {/* Page Numbers */}
+                  <div className="flex gap-1">
+                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                      <button
+                        key={page}
+                        onClick={() => handlePageChange(page)}
+                        className={`px-3 py-2 rounded-lg font-bold transition-all ${
+                          currentPage === page
+                            ? 'bg-blue-600 text-white shadow-lg'
+                            : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                        }`}
+                      >
+                        {page}
+                      </button>
+                    ))}
+                  </div>
+
+                  <button
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                    className="px-4 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-all"
+                  >
+                    Next →
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* Back Button */}
           <div>

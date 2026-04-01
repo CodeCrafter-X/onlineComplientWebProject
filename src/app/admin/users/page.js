@@ -13,12 +13,21 @@ export default function ManageUsersPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [totalUsers, setTotalUsers] = useState(0);
+  const itemsPerPage = 10;
 
   useEffect(() => {
     checkAuthAndFetchData();
   }, []);
 
-  const checkAuthAndFetchData = async () => {
+  useEffect(() => {
+    // When search term changes, reset to page 1
+    setCurrentPage(1);
+  }, [searchTerm]);
+
+  const checkAuthAndFetchData = async (page = 1) => {
     try {
       const authRes = await fetch('/api/token-check', {
         credentials: 'include',
@@ -30,8 +39,8 @@ export default function ManageUsersPage() {
         return;
       }
 
-      // Fetch all registered citizen users
-      const usersRes = await fetch('/api/admin/users', {
+      // Fetch paginated citizen users
+      const usersRes = await fetch(`/api/admin/users?page=${page}&limit=${itemsPerPage}`, {
         credentials: 'include',
       });
 
@@ -39,10 +48,15 @@ export default function ManageUsersPage() {
         const userData = await usersRes.json();
         setUsers(userData.users || []);
         setFilteredUsers(userData.users || []);
+        setTotalUsers(userData.total || 0);
+        setTotalPages(userData.totalPages || 1);
+        setCurrentPage(page);
       } else {
         // Fallback: show empty users list
         setUsers([]);
         setFilteredUsers([]);
+        setTotalUsers(0);
+        setTotalPages(1);
       }
     } catch (err) {
       setError('Error loading users');
@@ -70,6 +84,11 @@ export default function ManageUsersPage() {
     }
 
     setFilteredUsers(filtered);
+  };
+
+  const handlePageChange = (newPage) => {
+    setLoading(true);
+    checkAuthAndFetchData(newPage);
   };
 
   if (loading) {
@@ -108,17 +127,15 @@ export default function ManageUsersPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             <div className="bg-white rounded-2xl shadow-lg p-8 border-t-4 border-blue-600">
               <p className="text-gray-600 text-sm font-semibold uppercase mb-2">Total Users</p>
-              <p className="text-4xl font-bold text-blue-600">{users.length}</p>
+              <p className="text-4xl font-bold text-blue-600">{totalUsers}</p>
             </div>
             <div className="bg-white rounded-2xl shadow-lg p-8 border-t-4 border-green-600">
-              <p className="text-gray-600 text-sm font-semibold uppercase mb-2">Active Today</p>
-              <p className="text-4xl font-bold text-green-600">{users.length}</p>
+              <p className="text-gray-600 text-sm font-semibold uppercase mb-2">Showing on Page</p>
+              <p className="text-4xl font-bold text-green-600">{filteredUsers.length}</p>
             </div>
             <div className="bg-white rounded-2xl shadow-lg p-8 border-t-4 border-purple-600">
-              <p className="text-gray-600 text-sm font-semibold uppercase mb-2">Total Complaints</p>
-              <p className="text-4xl font-bold text-purple-600">
-                {users.reduce((sum, u) => sum + (u.complaints || 0), 0)}
-              </p>
+              <p className="text-gray-600 text-sm font-semibold uppercase mb-2">Total Pages</p>
+              <p className="text-4xl font-bold text-purple-600">{totalPages}</p>
             </div>
           </div>
 
@@ -135,7 +152,7 @@ export default function ManageUsersPage() {
           </div>
 
           {/* Users Table */}
-          <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+          <div className="bg-white rounded-2xl shadow-lg overflow-hidden mb-8">
             {filteredUsers.length === 0 ? (
               <div className="p-12 text-center">
                 <p className="text-gray-600 text-xl mb-2">No users found</p>
@@ -148,7 +165,7 @@ export default function ManageUsersPage() {
                     <tr>
                       <th className="px-8 py-6 text-left text-sm font-bold text-gray-900">Username</th>
                       <th className="px-8 py-6 text-left text-sm font-bold text-gray-900">Email</th>
-                      <th className="px-8 py-6 text-left text-sm font-bold text-gray-900">Complaints Filed</th>
+                      <th className="px-8 py-6 text-left text-sm font-bold text-gray-900">NIC</th>
                       <th className="px-8 py-6 text-left text-sm font-bold text-gray-900">Member Since</th>
                       <th className="px-8 py-6 text-left text-sm font-bold text-gray-900">Status</th>
                     </tr>
@@ -168,11 +185,7 @@ export default function ManageUsersPage() {
                           <p className="text-gray-600 font-medium">{user.email}</p>
                         </td>
                         <td className="px-8 py-6">
-                          <div className="flex items-center gap-2">
-                            <span className="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-bold">
-                              {user.complaints || 0}
-                            </span>
-                          </div>
+                          <p className="text-gray-600 font-medium">{user.nic || 'N/A'}</p>
                         </td>
                         <td className="px-8 py-6">
                           <p className="text-gray-600 font-medium">
@@ -192,35 +205,53 @@ export default function ManageUsersPage() {
             )}
           </div>
 
-          {/* Additional Stats */}
-          {users.length > 0 && (
-            <div className="mt-8 bg-gradient-to-r from-blue-50 to-purple-50 border-2 border-blue-200 rounded-2xl p-8">
-              <h3 className="text-xl font-bold text-gray-900 mb-6">User Insights</h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="bg-white rounded-xl p-6">
-                  <p className="text-gray-600 text-sm font-semibold uppercase mb-2">Average Complaints per User</p>
-                  <p className="text-3xl font-bold text-blue-600">
-                    {users.length > 0 ? (users.reduce((sum, u) => sum + (u.complaints || 0), 0) / users.length).toFixed(1) : 0}
-                  </p>
-                </div>
-                <div className="bg-white rounded-xl p-6">
-                  <p className="text-gray-600 text-sm font-semibold uppercase mb-2">Most Active User</p>
-                  <p className="text-3xl font-bold text-purple-600">
-                    {users.length > 0 ? Math.max(...users.map(u => u.complaints || 0)) : 0}
-                  </p>
-                </div>
-                <div className="bg-white rounded-xl p-6">
-                  <p className="text-gray-600 text-sm font-semibold uppercase mb-2">User Engagement</p>
-                  <p className="text-3xl font-bold text-green-600">
-                    {users.length > 0 ? Math.round((users.filter(u => (u.complaints || 0) > 0).length / users.length) * 100) : 0}%
-                  </p>
+          {/* Pagination Controls */}
+          {totalPages > 1 && (
+            <div className="bg-white rounded-2xl shadow-lg p-6 mb-8">
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                <p className="text-gray-600 font-semibold">
+                  Page {currentPage} of {totalPages} ({totalUsers} total users)
+                </p>
+                <div className="flex gap-2 flex-wrap justify-center sm:justify-end">
+                  <button
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    disabled={currentPage === 1}
+                    className="px-4 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-all"
+                  >
+                    ← Previous
+                  </button>
+                  
+                  {/* Page Numbers */}
+                  <div className="flex gap-1">
+                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                      <button
+                        key={page}
+                        onClick={() => handlePageChange(page)}
+                        className={`px-3 py-2 rounded-lg font-bold transition-all ${
+                          currentPage === page
+                            ? 'bg-blue-600 text-white shadow-lg'
+                            : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                        }`}
+                      >
+                        {page}
+                      </button>
+                    ))}
+                  </div>
+
+                  <button
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                    className="px-4 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-all"
+                  >
+                    Next →
+                  </button>
                 </div>
               </div>
             </div>
           )}
 
           {/* Back Button */}
-          <div className="mt-8">
+          <div>
             <Link href="/admin" className="inline-block px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
               ← Back to Dashboard
             </Link>
