@@ -24,6 +24,12 @@ export default function MyComplaints() {
       const authRes = await fetch('/api/token-check', {
         credentials: 'include',
       });
+
+      if (!authRes.ok) {
+        router.push('/auth/login');
+        return;
+      }
+
       const authData = await authRes.json();
 
       if (!authData.isAuthenticated) {
@@ -37,6 +43,10 @@ export default function MyComplaints() {
       });
 
       if (!res.ok) {
+        if (res.status === 401) {
+          router.push('/auth/login');
+          return;
+        }
         setError('Failed to fetch your complaints');
         return;
       }

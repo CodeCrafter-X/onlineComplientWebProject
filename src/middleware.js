@@ -46,19 +46,8 @@ export async function middleware(request) {
     return NextResponse.next();
   }
 
-  // Complaint creation and modification - only authenticated users
-  if (pathname.startsWith("/complaint/create")) {
-    if (!user) {
-      // Not authenticated - redirect to login
-      return NextResponse.redirect(
-        new URL("/auth/login?redirect=/complaint/create", request.url)
-      );
-    }
-    return NextResponse.next();
-  }
-
-  // Viewing individual complaints - authenticated users only
-  if (pathname.match(/^\/complaint\/\d+/) || pathname.match(/^\/complaint\/\[id\]/)) {
+  // All complaint routes - only authenticated users
+  if (pathname.startsWith("/complaint")) {
     if (!user) {
       // Not authenticated - redirect to login
       return NextResponse.redirect(
