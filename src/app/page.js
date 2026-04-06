@@ -32,7 +32,7 @@ export default function Home() {
         id="home"
         className="bg-cover bg-center bg-no-repeat text-white py-24 md:py-40 px-4 md:px-6 relative min-h-screen flex items-center"
         style={{
-          backgroundImage: 'linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 100%), url("/images/home.png")',
+          backgroundImage: 'linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 100%), url("/images/home.jpeg")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundAttachment: 'fixed'
@@ -43,7 +43,7 @@ export default function Home() {
             {/* Center Content */}
             <div className="text-white text-center max-w-3xl">
               <div className="inline-block px-6 py-2 bg-blue-600 rounded-full mb-6 border border-blue-400 animate-slide-in-left" style={{ animationDelay: '0.1s' }}>
-                <p className="text-sm font-semibold">Welcome to Pradeshiya Sabha</p>
+                <p className="text-sm font-semibold">Welcome to  Pradesha Shaba - Addalaichenai.</p>
               </div>
               <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold mb-6 leading-tight animate-fade-in-down" style={{ animationDelay: '0.2s' }}>
                 Your Voice Matters

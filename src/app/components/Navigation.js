@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Navigation() {
   const [activeNav, setActiveNav] = useState('home');
@@ -49,11 +50,17 @@ export default function Navigation() {
         <div className="flex justify-between items-center">
           {/* Logo & Branding */}
           <Link href="/" className="flex items-center gap-2 md:gap-3 hover:opacity-80 transition-opacity">
-            <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow">
-              <span className="text-white text-lg font-bold">PS</span>
-            </div>
+          
+                <Image
+                  src="/images/logo.jpeg"  
+                  alt="Logo"
+                  width={32}
+                  height={30}
+                />
+            
+            
             <div className="text-left">
-              <h1 className="text-base md:text-lg font-bold text-gray-900 leading-tight">Pradeshiya Sabha</h1>
+              <h1 className="text-base md:text-lg font-bold text-gray-900 leading-tight">Pradesha Shaba</h1>
               <p className="text-xs text-gray-500 font-medium">Addalachenai</p>
             </div>
           </Link>

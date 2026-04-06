@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import Navigation from '../../components/Navigation';
+// import Navigation from '../../components/Navigation';
 import Footer from '../../components/Footer';
 
 export default function RegisterPage() {
@@ -82,7 +82,7 @@ export default function RegisterPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-white">
-      <Navigation />
+      {/* <Navigation /> */}
       
       <main className="flex-grow flex items-center justify-center px-4 py-12 bg-gradient-to-br from-gray-50 via-white to-green-50">
         <div className="w-full max-w-6xl">
