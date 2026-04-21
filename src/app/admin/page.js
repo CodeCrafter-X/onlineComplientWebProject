@@ -3,8 +3,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-// import Navigation from '../components/Navigation';
-import Footer from '../components/Footer';
 
 export default function AdminDashboard() {
   const router = useRouter();
@@ -292,8 +290,6 @@ export default function AdminDashboard() {
 
         </div>
       </main>
-
-      <Footer />
     </div>
   );
 }

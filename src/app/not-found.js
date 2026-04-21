@@ -1,14 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import Navigation from "./components/Navigation";
-import Footer from "./components/Footer";
 
 export default function NotFound() {
   return (
     <div className="min-h-screen flex flex-col bg-white">
-      {/* Header */}
-      <Navigation />
-
       {/* Main Content */}
       <main className="flex-grow flex items-center justify-center px-4 py-12 md:py-20 bg-gradient-to-b from-blue-50 to-white">
         <div className="w-full max-w-7xl">
@@ -67,9 +62,6 @@ export default function NotFound() {
           </div>
         </div>
       </main>
-
-      {/* Footer */}
-      <Footer />
     </div>
   );
 }

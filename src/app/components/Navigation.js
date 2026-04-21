@@ -2,19 +2,24 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 
 export default function Navigation() {
+  const router = useRouter();
   const [activeNav, setActiveNav] = useState('home');
   const [isUser, setIsUser] = useState(false);
   const [userRole, setUserRole] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   // Check authentication status
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await fetch('/api/token-check');
+        const response = await fetch('/api/token-check', {
+          credentials: 'include',
+        });
         if (response.ok) {
           const data = await response.json();
           setIsUser(true);
@@ -33,6 +38,30 @@ export default function Navigation() {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      // If element doesn't exist on current page, navigate to home page with hash
+      router.push(`/#${id}`);
+    }
+  };
+
+  const handleLogout = async () => {
+    setIsLoggingOut(true);
+    try {
+      const response = await fetch('/api/auth/logout', {
+        method: 'POST',
+        credentials: 'include',
+      });
+
+      if (response.ok) {
+        setIsUser(false);
+        setUserRole(null);
+        setMobileMenuOpen(false);
+        router.push('/');
+      }
+    } catch (error) {
+      console.error('Logout error:', error);
+    } finally {
+      setIsLoggingOut(false);
     }
   };
 
@@ -110,6 +139,13 @@ export default function Navigation() {
                 >
                   {userRole === 'admin' ? 'Dashboard' : 'Profile'}
                 </Link>
+                <button
+                  onClick={handleLogout}
+                  disabled={isLoggingOut}
+                  className="px-4 md:px-6 py-2 md:py-2.5 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-all duration-300 text-sm md:text-base disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isLoggingOut ? 'Logging out...' : 'Logout'}
+                </button>
               </div>
             )}
 

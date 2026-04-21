@@ -23,6 +23,20 @@ export default function Home() {
     checkAuth();
   }, []);
 
+  // Handle hash navigation
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash) {
+      const id = hash.replace('#', '');
+      const element = document.getElementById(id);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    }
+  }, []);
+
   return (
     <div className="min-h-screen bg-white font-sans">
       <Navigation />

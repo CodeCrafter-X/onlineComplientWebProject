@@ -4,7 +4,6 @@ import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Navigation from '../../components/Navigation';
-import Footer from '../../components/Footer';
 
 export default function CreateComplaint() {
   const router = useRouter();
@@ -15,6 +14,8 @@ export default function CreateComplaint() {
   const [mapLoaded, setMapLoaded] = useState(false);
   const [selectedImages, setSelectedImages] = useState([]);
   const [previewUrls, setPreviewUrls] = useState([]);
+  const [isAuthenticated, setIsAuthenticated] = useState(null);
+  const [authChecking, setAuthChecking] = useState(true);
 
   const [formData, setFormData] = useState({
     title: '',
@@ -35,8 +36,50 @@ export default function CreateComplaint() {
   
   ];
 
-  // Initialize Google Map
+  // Check authentication on component mount
   useEffect(() => {
+    const checkAuthentication = async () => {
+      try {
+        const response = await fetch('/api/token-check', {
+          method: 'GET',
+          credentials: 'include',
+        });
+
+        if (!response.ok) {
+          setIsAuthenticated(false);
+          // Redirect to login after a brief delay
+          setTimeout(() => {
+            router.push('/auth/login?redirect=/complaint/create');
+          }, 500);
+          return;
+        }
+
+        const data = await response.json();
+        if (data.isAuthenticated) {
+          setIsAuthenticated(true);
+          setAuthChecking(false);
+        } else {
+          setIsAuthenticated(false);
+          setTimeout(() => {
+            router.push('/auth/login?redirect=/complaint/create');
+          }, 500);
+        }
+      } catch (err) {
+        console.error('Auth check failed:', err);
+        setIsAuthenticated(false);
+        setTimeout(() => {
+          router.push('/auth/login?redirect=/complaint/create');
+        }, 500);
+      }
+    };
+
+    checkAuthentication();
+  }, [router]);
+
+  // Initialize Google Map only after authentication is verified
+  useEffect(() => {
+    if (!isAuthenticated) return;
+
     // Check if Google Maps API is already loaded
     if (window.google && window.google.maps) {
       loadMap();
@@ -58,7 +101,7 @@ export default function CreateComplaint() {
       setError('Failed to load Google Maps API');
     };
     document.head.appendChild(script);
-  }, []);
+  }, [isAuthenticated]);
 
   const loadMap = () => {
     // Always initialize with Addalechenai, Sri Lanka
@@ -199,8 +242,32 @@ export default function CreateComplaint() {
   return (
     <>
       {/* <Navigation /> */}
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 py-8 px-3 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
+        {/* Auth Checking Loading State */}
+        {authChecking && (
+          <div className="flex items-center justify-center min-h-screen">
+            <div className="text-center">
+              <div className="inline-block">
+                <div className="w-12 h-12 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin"></div>
+              </div>
+              <p className="mt-4 text-gray-600 font-semibold">Verifying your login...</p>
+            </div>
+          </div>
+        )}
+
+        {/* Not Authenticated Message */}
+        {!authChecking && !isAuthenticated && (
+          <div className="flex items-center justify-center min-h-screen">
+            <div className="text-center">
+              <p className="text-gray-600 font-semibold">Redirecting to login...</p>
+            </div>
+          </div>
+        )}
+
+        {/* Form Content - Only show if authenticated */}
+        {!authChecking && isAuthenticated && (
+          <>
         {/* Back to Home Button */}
         
 
@@ -216,7 +283,7 @@ export default function CreateComplaint() {
 
         {/* Main Form Container */}
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-          <form onSubmit={handleSubmit} className="p-8 sm:p-12">
+          <form onSubmit={handleSubmit} className="p-6 sm:p-8 md:p-12">
             {/* Error Message */}
             {error && (
               <div className="mb-8 p-4 bg-red-50 border-l-4 border-red-500 rounded-lg">
@@ -233,7 +300,7 @@ export default function CreateComplaint() {
 
             {/* Title Field */}
             <div className="mb-8">
-              <label className="block text-sm font-semibold text-gray-900 mb-3">
+              <label className="block text-sm sm:text-base font-semibold text-gray-900 mb-3">
                 Complaint Title <span className="text-red-500">*</span>
               </label>
               <input
@@ -242,22 +309,24 @@ export default function CreateComplaint() {
                 value={formData.title}
                 onChange={handleInputChange}
                 placeholder="e.g., Deep pothole on Main Street"
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 transition-colors"
+                className="w-full px-4 py-3 sm:py-4 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 transition-colors text-gray-900 text-base sm:text-lg placeholder-gray-500 font-medium focus:ring-2 focus:ring-blue-200"
                 required
+                style={{ fontSize: '16px' }}
               />
             </div>
 
             {/* Category Field */}
             <div className="mb-8">
-              <label className="block text-sm font-semibold text-gray-900 mb-3">
+              <label className="block text-sm sm:text-base font-semibold text-gray-900 mb-3">
                 Category <span className="text-red-500">*</span>
               </label>
               <select
                 name="category"
                 value={formData.category}
                 onChange={handleInputChange}
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 transition-colors"
+                className="w-full px-4 py-3 sm:py-4 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 transition-colors text-gray-900 text-base sm:text-lg font-medium focus:ring-2 focus:ring-blue-200"
                 required
+                style={{ fontSize: '16px' }}
               >
                 <option value="">Select a category</option>
                 {categories.map((cat) => (
@@ -270,7 +339,7 @@ export default function CreateComplaint() {
 
             {/* Description Field */}
             <div className="mb-8">
-              <label className="block text-sm font-semibold text-gray-900 mb-3">
+              <label className="block text-sm sm:text-base font-semibold text-gray-900 mb-3">
                 Description <span className="text-red-500">*</span>
               </label>
               <textarea
@@ -279,14 +348,15 @@ export default function CreateComplaint() {
                 onChange={handleInputChange}
                 placeholder="Provide detailed information about the complaint..."
                 rows="5"
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 transition-colors resize-none"
+                className="w-full px-4 py-3 sm:py-4 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 transition-colors resize-none text-gray-900 text-base sm:text-lg placeholder-gray-500 font-medium focus:ring-2 focus:ring-blue-200"
                 required
+                style={{ fontSize: '16px' }}
               />
             </div>
 
             {/* Address Field */}
             <div className="mb-8">
-              <label className="block text-sm font-semibold text-gray-900 mb-3">
+              <label className="block text-sm sm:text-base font-semibold text-gray-900 mb-3">
                 Address
               </label>
               <input
@@ -295,13 +365,14 @@ export default function CreateComplaint() {
                 value={formData.address}
                 onChange={handleInputChange}
                 placeholder="Street, area, city"
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 transition-colors"
+                className="w-full px-4 py-3 sm:py-4 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 transition-colors text-gray-900 text-base sm:text-lg placeholder-gray-500 font-medium focus:ring-2 focus:ring-blue-200"
+                style={{ fontSize: '16px' }}
               />
             </div>
 
             {/* Location Section */}
             <div className="mb-8">
-              <label className="block text-sm font-semibold text-gray-900 mb-3">
+              <label className="block text-sm sm:text-base font-semibold text-gray-900 mb-3">
                 Location <span className="text-red-500">*</span>
               </label>
               <p className="text-sm text-gray-600 mb-4">Click on the map to select location or drag the marker</p>
@@ -321,7 +392,7 @@ export default function CreateComplaint() {
 
             {/* Image Upload Section */}
             <div className="mb-8">
-              <label className="block text-sm font-semibold text-gray-900 mb-3">
+              <label className="block text-sm sm:text-base font-semibold text-gray-900 mb-3">
                 Upload Images
               </label>
               <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-blue-500 transition-colors cursor-pointer">
@@ -423,11 +494,11 @@ export default function CreateComplaint() {
           ← Back to Home
         </Link>
 
-
+          </>
+        )}
 
       </div>
     </div>
-    <Footer />
     </>
   );
 }

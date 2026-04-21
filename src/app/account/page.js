@@ -122,9 +122,9 @@ export default function UserDashboard() {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* View Profile Card */}
-        <div
+        <button
           onClick={() => setActiveSection('profile')}
-          className="group bg-white rounded-xl border border-gray-200 hover:border-gray-300 p-6 cursor-pointer transition-all duration-300 hover:shadow-md"
+          className="group bg-white rounded-xl border border-gray-200 hover:border-gray-300 p-6 cursor-pointer transition-all duration-300 hover:shadow-md text-left"
         >
           <div className="flex flex-col h-full">
             <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
@@ -134,16 +134,16 @@ export default function UserDashboard() {
             </div>
             <h3 className="text-lg font-bold text-gray-900 mb-2">My Profile</h3>
             <p className="text-gray-600 text-sm mb-6 flex-grow">View and manage your account settings</p>
-            <button className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors text-sm">
+            <span className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors text-sm inline-block">
               View Profile
-            </button>
+            </span>
           </div>
-        </div>
+        </button>
 
         {/* My Complaints Card */}
-        <div
+        <button
           onClick={() => setActiveSection('complaints')}
-          className="group bg-white rounded-xl border border-gray-200 hover:border-gray-300 p-6 cursor-pointer transition-all duration-300 hover:shadow-md"
+          className="group bg-white rounded-xl border border-gray-200 hover:border-gray-300 p-6 cursor-pointer transition-all duration-300 hover:shadow-md text-left"
         >
           <div className="flex flex-col h-full">
             <div className="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center mb-4">
@@ -155,11 +155,11 @@ export default function UserDashboard() {
             <p className="text-gray-600 text-sm mb-6 flex-grow">
               Total: <span className="font-bold text-gray-900">{stats.total}</span>
             </p>
-            <button className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-lg transition-colors text-sm">
+            <span className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-lg transition-colors text-sm inline-block">
               View Complaints
-            </button>
+            </span>
           </div>
-        </div>
+        </button>
 
         {/* Create Complaint Card */}
         <Link href="/complaint/create">

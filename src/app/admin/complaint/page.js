@@ -4,8 +4,6 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
-import Footer from '../../components/Footer';
-
 export default function ManageComplaintsPage() {
   const router = useRouter();
   const [complaints, setComplaints] = useState([]);
@@ -317,8 +315,6 @@ export default function ManageComplaintsPage() {
           </div>
         </div>
       </main>
-
-      <Footer />
     </div>
   );
 }
