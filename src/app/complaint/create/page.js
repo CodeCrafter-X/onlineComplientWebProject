@@ -61,23 +61,16 @@ export default function CreateComplaint() {
   }, []);
 
   const loadMap = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          initMap(latitude, longitude);
-          setFormData((prev) => ({
-            ...prev,
-            lat: latitude.toString(),
-            lng: longitude.toString(),
-          }));
-        },
-        () => {
-          // Default to a central location if geolocation fails
-          initMap(40.7128, -74.006);
-        }
-      );
-    }
+    // Always initialize with Addalechenai, Sri Lanka
+    const addalechenaLat = 7.2518336239080154;
+    const addalechenaiLng = 81.85421409721363;
+    
+    initMap(addalechenaLat, addalechenaiLng);
+    setFormData((prev) => ({
+      ...prev,
+      lat: addalechenaLat.toString(),
+      lng: addalechenaiLng.toString(),
+    }));
   };
 
   const initMap = (lat, lng) => {
