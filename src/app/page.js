@@ -217,58 +217,163 @@ export default function Home() {
       </section>
 
       {/* About Us - Vision & Mission Section */}
-      <section id="about" className="py-20 md:py-32 px-4 md:px-6 bg-white">
+      <section id="about" className="py-20 md:py-32 px-4 md:px-6 bg-gradient-to-b from-white to-gray-50">
         <div className="max-w-7xl mx-auto">
           {/* Section Header */}
-          <div className="text-center mb-12 md:mb-16 animate-fade-in-down">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 animate-fade-in-down" style={{ animationDelay: '0.1s' }}>
-              Our Vision & Mission
+          <div className="text-center mb-16 md:mb-20 animate-fade-in-down">
+            <div className="inline-block mb-4 px-4 py-2 bg-blue-100 rounded-full">
+              <span className="text-blue-600 font-semibold text-sm">WHO WE ARE</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-6 animate-fade-in-down leading-tight" style={{ animationDelay: '0.1s' }}>
+              Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Vision & Mission</span>
             </h2>
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto animate-fade-in-down" style={{ animationDelay: '0.2s' }}>
-              Committed to transforming our community through transparent governance and active citizen engagement.
+            <p className="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto animate-fade-in-down font-medium" style={{ animationDelay: '0.2s' }}>
+              Committed to transforming our community through transparent governance and active citizen engagement for sustainable development.
             </p>
           </div>
 
           {/* Vision & Mission Cards */}
-          <div className="grid md:grid-cols-2 gap-8 mb-12">
+          <div className="grid md:grid-cols-2 gap-8 mb-16 md:mb-20">
             {/* Vision Card */}
-            <div className="group relative bg-gradient-to-br from-blue-50 to-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-blue-100 animate-slide-in-left">
-              <div className="relative p-8 md:p-10">
-                <div className="mb-6">
-                  <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">Vision</h3>
+            <div className="group relative bg-gradient-to-br from-blue-50 via-white to-blue-50 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-blue-200 hover:border-blue-400 animate-slide-in-left p-0">
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-400/0 to-blue-400/0 group-hover:from-blue-400/5 group-hover:to-blue-400/10 transition-all duration-300"></div>
+              
+              <div className="relative p-8 md:p-12">
+                {/* Icon */}
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                  </svg>
                 </div>
-                <p className="text-gray-700 leading-relaxed text-lg">
+                
+                <h3 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">Vision</h3>
+                <p className="text-gray-700 leading-relaxed text-lg md:text-base font-medium mb-6 min-h-24">
                   Build a clean, green, and developed community with better services and quality of life through transparency, participation, and innovation. We empower citizens to shape their future.
                 </p>
+                
+                {/* Highlight Points */}
+                <div className="space-y-3 pt-6 border-t border-blue-200">
+                  <div className="flex items-center text-gray-700">
+                    <span className="text-blue-600 font-bold mr-3">•</span>
+                    <span className="text-sm font-medium">Sustainable development</span>
+                  </div>
+                  <div className="flex items-center text-gray-700">
+                    <span className="text-blue-600 font-bold mr-3">•</span>
+                    <span className="text-sm font-medium">Community empowerment</span>
+                  </div>
+                  <div className="flex items-center text-gray-700">
+                    <span className="text-blue-600 font-bold mr-3">•</span>
+                    <span className="text-sm font-medium">Enhanced quality of life</span>
+                  </div>
+                </div>
               </div>
             </div>
 
             {/* Mission Card */}
-            <div className="group relative bg-gradient-to-br from-green-50 to-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-green-100 animate-slide-in-right">
-              <div className="relative p-8 md:p-10">
-                <div className="mb-6">
-                  <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">Mission</h3>
+            <div className="group relative bg-gradient-to-br from-emerald-50 via-white to-emerald-50 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-emerald-200 hover:border-emerald-400 animate-slide-in-right p-0">
+              <div className="absolute inset-0 bg-gradient-to-br from-emerald-400/0 to-emerald-400/0 group-hover:from-emerald-400/5 group-hover:to-emerald-400/10 transition-all duration-300"></div>
+              
+              <div className="relative p-8 md:p-12">
+                {/* Icon */}
+                <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
                 </div>
-                <p className="text-gray-700 leading-relaxed text-lg">
+                
+                <h3 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">Mission</h3>
+                <p className="text-gray-700 leading-relaxed text-lg md:text-base font-medium mb-6 min-h-24">
                   Provide efficient services, protect the environment, and promote community participation for a healthy and prosperous life. We resolve citizen complaints promptly and improve public services continuously.
                 </p>
+                
+                {/* Highlight Points */}
+                <div className="space-y-3 pt-6 border-t border-emerald-200">
+                  <div className="flex items-center text-gray-700">
+                    <span className="text-emerald-600 font-bold mr-3">•</span>
+                    <span className="text-sm font-medium">Efficient service delivery</span>
+                  </div>
+                  <div className="flex items-center text-gray-700">
+                    <span className="text-emerald-600 font-bold mr-3">•</span>
+                    <span className="text-sm font-medium">Environmental protection</span>
+                  </div>
+                  <div className="flex items-center text-gray-700">
+                    <span className="text-emerald-600 font-bold mr-3">•</span>
+                    <span className="text-sm font-medium">Citizen participation</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
           {/* Core Values */}
-          <div className="bg-gray-900 text-white rounded-2xl p-8 md:p-12 animate-scale-in">
-            <h3 className="text-2xl md:text-3xl font-bold mb-8 text-center">Our Core Values</h3>
+          <div className="mt-16 md:mt-20">
+            <div className="text-center mb-12 md:mb-16 animate-fade-in-down" style={{ animationDelay: '0.3s' }}>
+              <h3 className="text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 mb-4">Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">Core Values</span></h3>
+              <p className="text-gray-600 text-lg max-w-2xl mx-auto font-medium">Principles that guide our decisions and actions every day</p>
+            </div>
+
             <div className="grid md:grid-cols-4 gap-6">
               {[
-                { title: 'Transparency', desc: 'Open and honest communication' },
-                { title: 'Accountability', desc: 'Responsible decision making' },
-                { title: 'Participation', desc: 'Community involvement' },
-                { title: 'Sustainability', desc: 'Long-term growth' }
+                { 
+                  title: 'Transparency', 
+                  desc: 'Open and honest communication with citizens',
+                  icon: (
+                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  ),
+                  gradient: 'from-blue-500 to-blue-600'
+                },
+                { 
+                  title: 'Accountability', 
+                  desc: 'Responsible decision making and actions',
+                  icon: (
+                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  ),
+                  gradient: 'from-emerald-500 to-emerald-600'
+                },
+                { 
+                  title: 'Participation', 
+                  desc: 'Active community involvement and feedback',
+                  icon: (
+                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 10H9m6 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  ),
+                  gradient: 'from-purple-500 to-purple-600'
+                },
+                { 
+                  title: 'Sustainability', 
+                  desc: 'Long-term growth and environmental care',
+                  icon: (
+                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  ),
+                  gradient: 'from-amber-500 to-amber-600'
+                }
               ].map((value, idx) => (
-                <div key={idx} className="text-center animate-float-up" style={{ animationDelay: `${idx * 0.1}s` }}>
-                  <h4 className="font-bold mb-2 text-lg">{value.title}</h4>
-                  <p className="text-gray-300 text-sm">{value.desc}</p>
+                <div 
+                  key={idx} 
+                  className="group relative bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200 hover:border-gray-300 p-8 animate-fade-in-up"
+                  style={{ animationDelay: `${0.4 + idx * 0.1}s` }}
+                >
+                  <div className="relative z-10">
+                    {/* Icon Container */}
+                    <div className={`w-14 h-14 bg-gradient-to-br ${value.gradient} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                      {value.icon}
+                    </div>
+                    
+                    {/* Content */}
+                    <h4 className="font-black text-gray-900 mb-3 text-lg">{value.title}</h4>
+                    <p className="text-gray-600 text-sm leading-relaxed font-medium">{value.desc}</p>
+                  </div>
+                  
+                  {/* Hover Background */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-gray-100 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
                 </div>
               ))}
             </div>
