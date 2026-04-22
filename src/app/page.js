@@ -5,139 +5,37 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
+import { useAuthCheck } from '@/lib/hooks';
+import { SERVICES, ROUTES, API_ENDPOINTS, TIMING } from '@/lib/constants';
 
 export default function Home() {
   const router = useRouter();
-  const [isUser, setIsUser] = useState(false);
+  const { isAuthenticated } = useAuthCheck();
   const [selectedService, setSelectedService] = useState(null);
-  const [isCheckingAuth, setIsCheckingAuth] = useState(false);
 
-  // Check authentication status
-  useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const response = await fetch('/api/token-check');
-        if (response.ok) {
-          setIsUser(true);
-        }
-      } catch (error) {
-        setIsUser(false);
-      }
-    };
-    checkAuth();
-  }, []);
-
-  // Services data
-  const services = [
-    {
-      id: 'waste-management',
-      title: 'Waste Management',
-      category: 'Waste Management',
-      image: '/images/service-waste-management.jpg',
-      gradient: 'from-green-600 to-green-700',
-      description: 'Daily waste collection and proper disposal systems for community',
-      fullDescription: 'Our comprehensive waste management system ensures proper collection, segregation, and disposal of waste materials. We handle everything from residential waste to commercial debris, maintaining clean and healthy surroundings for the entire community.',
-      services: [
-        'Daily waste collection from residential areas',
-        'Proper waste segregation and recycling',
-        'Clean-up of public spaces',
-        'Garbage bin maintenance'
-      ]
-    },
-    {
-      id: 'street-lighting',
-      title: 'Street Lighting',
-      category: 'Street Lighting',
-      image: '/images/service-street-lights.jpg',
-      gradient: 'from-yellow-500 to-yellow-600',
-      description: 'Maintenance of street lights for safe roads at night',
-      fullDescription: 'We maintain street lighting infrastructure to ensure safe and well-lit roads throughout the community. Our team conducts regular inspections, repairs, and replacements to keep all lights functional.',
-      services: [
-        'Street light installation and maintenance',
-        'Emergency repairs for non-functional lights',
-        'Regular inspections and testing',
-        '24/7 emergency response'
-      ]
-    },
-    {
-      id: 'drainage-systems',
-      title: 'Drainage Systems',
-      category: 'Drainage Systems',
-      image: '/images/service-drainage-maintenance.jpg',
-      gradient: 'from-blue-600 to-blue-700',
-      description: 'Regular drainage maintenance and blockage resolution',
-      fullDescription: 'Our drainage system maintenance ensures proper water flow and prevents flooding. We handle blockage clearing, pipe repairs, and preventive maintenance to keep drainage systems functioning efficiently.',
-      services: [
-        'Drainage cleaning and de-silting',
-        'Blockage removal and repairs',
-        'Pipe maintenance and replacement',
-        'Storm water management'
-      ]
-    },
-    {
-      id: 'roads-repairs',
-      title: 'Roads & Repairs',
-      category: 'Roads & Repairs',
-      image: '/images/service-road-maintenance.jpg',
-      gradient: 'from-gray-600 to-gray-700',
-      description: 'Repair damaged roads and maintain safe access routes',
-      fullDescription: 'We maintain and repair roads to ensure safe and smooth travel for all community members. Our team addresses potholes, cracks, and other road damage promptly.',
-      services: [
-        'Pothole repairs and road patching',
-        'Road resurfacing and asphalt laying',
-        'Road marking and signage',
-        'Bridge and culvert maintenance'
-      ]
-    },
-    {
-      id: 'general-support',
-      title: 'General Support',
-      category: 'General Support',
-      image: '/images/service-general-support.jpg',
-      gradient: 'from-purple-600 to-purple-700',
-      description: 'Submit other concerns and suggestions for improvement',
-      fullDescription: 'Beyond our core services, we are here to address any community concerns and suggestions. Submit your concerns and help us improve our services.',
-      services: [
-        'General inquiries and support',
-        'Community feedback and suggestions',
-        'Special event coordination',
-        'Emergency services coordination'
-      ]
-    }
-  ];
-
-  // Handle file complaint for specific issue
   const handleFileComplaint = async (categoryName) => {
-    setIsCheckingAuth(true);
     try {
-      const response = await fetch('/api/token-check', {
+      const response = await fetch(API_ENDPOINTS.TOKEN_CHECK, {
         method: 'GET',
         credentials: 'include',
       });
 
-      if (!response.ok) {
-        setIsCheckingAuth(false);
-        setSelectedService(null);
-        router.push(`/auth/login?redirect=/complaint/create?category=${encodeURIComponent(categoryName)}`);
-        return;
-      }
-
-      const data = await response.json();
-      if (data.isAuthenticated) {
-        router.push(`/complaint/create?category=${encodeURIComponent(categoryName)}`);
+      const redirectPath = `${ROUTES.COMPLAINT_CREATE}?category=${encodeURIComponent(categoryName)}`;
+      
+      if (response.ok && isAuthenticated) {
+        router.push(redirectPath);
       } else {
         setSelectedService(null);
-        router.push(`/auth/login?redirect=/complaint/create?category=${encodeURIComponent(categoryName)}`);
+        router.push(`${ROUTES.LOGIN}?redirect=${redirectPath}`);
       }
     } catch (error) {
       console.error('Auth check failed:', error);
       setSelectedService(null);
-      router.push(`/auth/login?redirect=/complaint/create?category=${encodeURIComponent(categoryName)}`);
+      router.push(`${ROUTES.LOGIN}?redirect=/complaint/create?category=${encodeURIComponent(categoryName)}`);
     }
-    setIsCheckingAuth(false);
   };
 
-  // Handle hash navigation
+  // Handle hash navigation for smooth scrolling
   useEffect(() => {
     const hash = window.location.hash;
     if (hash) {
@@ -146,7 +44,7 @@ export default function Home() {
       if (element) {
         setTimeout(() => {
           element.scrollIntoView({ behavior: 'smooth' });
-        }, 100);
+        }, TIMING.smoothScrollDelay);
       }
     }
   }, []);
@@ -180,7 +78,7 @@ export default function Home() {
                 Report issues affecting your community and track their resolution in real-time. We're committed to transparent service delivery and citizen satisfaction.
               </p>
               
-              {!isUser ? (
+              {!isAuthenticated ? (
                 <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-down" style={{ animationDelay: '0.4s' }}>
                   <Link
                     href="/complaint/create"
@@ -399,7 +297,7 @@ export default function Home() {
 
           {/* Services Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8">
-            {services.map((service, index) => (
+            {SERVICES.map((service, index) => (
               <button
                 key={service.id}
                 onClick={() => setSelectedService(service)}
@@ -480,10 +378,9 @@ export default function Home() {
                   onClick={() => {
                     handleFileComplaint(selectedService.category);
                   }}
-                  disabled={isCheckingAuth}
-                  className="flex-1 px-6 py-3 md:py-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed text-base md:text-lg"
+                  className="flex-1 px-6 py-3 md:py-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-105 active:scale-95 text-base md:text-lg"
                 >
-                  {isCheckingAuth ? 'Processing...' : `File a Complaint for ${selectedService.category}`}
+                  File a Complaint for {selectedService.category}
                 </button>
                 <button
                   onClick={() => setSelectedService(null)}
