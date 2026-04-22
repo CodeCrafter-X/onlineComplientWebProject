@@ -367,96 +367,136 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 md:py-32 px-4 md:px-6 bg-gray-900 text-white">
+      <section id="contact" className="py-20 md:py-32 px-4 md:px-6 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white">
         <div className="max-w-7xl mx-auto">
           {/* Section Header */}
-          <div className="text-center mb-12 md:mb-16 animate-fade-in-down">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 animate-fade-in-down" style={{ animationDelay: '0.1s' }}>
-              Contact Us
+          <div className="text-center mb-16 md:mb-20 animate-fade-in-down">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 animate-fade-in-down" style={{ animationDelay: '0.1s' }}>
+              Get In Touch
             </h2>
-            <p className="text-gray-400 text-lg max-w-2xl mx-auto animate-fade-in-down" style={{ animationDelay: '0.2s' }}>
-              Have questions or need assistance? We're here to help.
+            <p className="text-gray-400 text-lg md:text-xl max-w-3xl mx-auto animate-fade-in-down" style={{ animationDelay: '0.2s' }}>
+              Have questions or need assistance? Our team is ready to help you. Reach out to us through any of the channels below.
             </p>
           </div>
 
           {/* Contact Cards */}
-          <div className="grid md:grid-cols-4 gap-6 mb-12">
+          <div className="grid md:grid-cols-4 gap-6 mb-16">
             {/* Phone Card */}
-            <div className="group relative bg-gray-800 rounded-2xl p-6 md:p-8 border border-gray-700 hover:border-blue-500 transition-all duration-300 animate-slide-up" style={{ animationDelay: '0.1s' }}>
-              <div className="mb-6">
-                <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                  <span className="text-xl">☎️</span>
+            <div className="group relative bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 border border-gray-700 hover:border-blue-500 hover:from-gray-750 transition-all duration-300 animate-slide-up shadow-lg hover:shadow-2xl hover:shadow-blue-500/20" style={{ animationDelay: '0.1s' }}>
+              <div className="flex flex-col h-full">
+                <div className="w-14 h-14 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
                 </div>
-                <h3 className="text-xl font-bold mb-2">Phone</h3>
+                <h3 className="text-xl font-bold mb-3">Phone</h3>
+                <p className="text-gray-300 font-medium text-base mb-2">+94 (0) XXX XXX XXXX</p>
+                <p className="text-gray-500 text-sm flex-grow">Mon-Sat, 8AM-5PM</p>
+                <a href="tel:+94" className="mt-4 text-blue-400 hover:text-blue-300 font-semibold text-sm transition-colors">Call Now →</a>
               </div>
-              <p className="text-gray-300 font-medium text-sm">+94 (0) XXX XXX XXXX</p>
-              <p className="text-gray-400 text-xs mt-1">Mon-Sat, 8AM-5PM</p>
             </div>
 
             {/* Email Card */}
-            <div className="group relative bg-gray-800 rounded-2xl p-6 md:p-8 border border-gray-700 hover:border-purple-500 transition-all duration-300 animate-slide-up" style={{ animationDelay: '0.2s' }}>
-              <div className="mb-6">
-                <div className="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                  <span className="text-xl">✉️</span>
+            <div className="group relative bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 border border-gray-700 hover:border-purple-500 transition-all duration-300 animate-slide-up shadow-lg hover:shadow-2xl hover:shadow-purple-500/20" style={{ animationDelay: '0.2s' }}>
+              <div className="flex flex-col h-full">
+                <div className="w-14 h-14 bg-gradient-to-br from-purple-600 to-purple-700 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
                 </div>
-                <h3 className="text-xl font-bold mb-2">Email</h3>
+                <h3 className="text-xl font-bold mb-3">Email</h3>
+                <p className="text-gray-300 font-medium text-base mb-2 break-all">info@pradeshya.lk</p>
+                <p className="text-gray-500 text-sm flex-grow">24-hour response</p>
+                <a href="mailto:info@pradeshya.lk" className="mt-4 text-purple-400 hover:text-purple-300 font-semibold text-sm transition-colors">Send Email →</a>
               </div>
-              <p className="text-gray-300 font-medium text-sm break-all">info@pradeshyasabha.lk</p>
-              <p className="text-gray-400 text-xs mt-1">24-hour response</p>
             </div>
 
             {/* Location Card */}
-            <div className="group relative bg-gray-800 rounded-2xl p-6 md:p-8 border border-gray-700 hover:border-red-500 transition-all duration-300 animate-slide-up" style={{ animationDelay: '0.3s' }}>
-              <div className="mb-6">
-                <div className="w-12 h-12 bg-red-600 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                  <span className="text-xl">🏢</span>
+            <div className="group relative bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 border border-gray-700 hover:border-red-500 transition-all duration-300 animate-slide-up shadow-lg hover:shadow-2xl hover:shadow-red-500/20" style={{ animationDelay: '0.3s' }}>
+              <div className="flex flex-col h-full">
+                <div className="w-14 h-14 bg-gradient-to-br from-red-600 to-red-700 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
                 </div>
-                <h3 className="text-xl font-bold mb-2">Address</h3>
+                <h3 className="text-xl font-bold mb-3">Address</h3>
+                <p className="text-gray-300 font-medium text-base mb-2">Pradeshiya Sabha</p>
+                <p className="text-gray-500 text-sm flex-grow">Addalachenai, Sri Lanka</p>
+                <a href="https://maps.app.goo.gl/sQSgHAfeEwF8XmrY7" target="_blank" rel="noopener noreferrer" className="mt-4 text-red-400 hover:text-red-300 font-semibold text-sm transition-colors">View Map →</a>
               </div>
-              <p className="text-gray-300 font-medium text-sm">Pradeshiya Sabha Addalachenai</p>
-              <p className="text-gray-400 text-xs mt-1">Sri Lanka</p>
             </div>
 
             {/* Hours Card */}
-            <div className="group relative bg-gray-800 rounded-2xl p-6 md:p-8 border border-gray-700 hover:border-green-500 transition-all duration-300 animate-slide-up" style={{ animationDelay: '0.4s' }}>
-              <div className="mb-6">
-                <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                  <span className="text-xl">⏰</span>
+            <div className="group relative bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 border border-gray-700 hover:border-green-500 transition-all duration-300 animate-slide-up shadow-lg hover:shadow-2xl hover:shadow-green-500/20" style={{ animationDelay: '0.4s' }}>
+              <div className="flex flex-col h-full">
+                <div className="w-14 h-14 bg-gradient-to-br from-green-600 to-green-700 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
                 </div>
-                <h3 className="text-xl font-bold mb-2">Hours</h3>
+                <h3 className="text-xl font-bold mb-3">Hours</h3>
+                <p className="text-gray-300 font-medium text-sm mb-2">Mon-Fri: 8AM - 5PM</p>
+                <p className="text-gray-500 text-sm flex-grow">Emergency: 24/7</p>
+                <div className="mt-4 inline-block">
+                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-green-600/20 text-green-300 border border-green-600/30">
+                    <span className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
+                    Open Now
+                  </span>
+                </div>
               </div>
-              <p className="text-gray-300 font-medium text-xs">Mon-Fri: 8AM - 5PM</p>
-              <p className="text-gray-300 font-medium text-xs mt-1">Emergency: 24/7</p>
             </div>
           </div>
 
           {/* Office Location Details */}
-          <div className="bg-gray-800 rounded-2xl p-8 md:p-10 border border-gray-700">
-            <h3 className="text-2xl font-bold mb-6">Office Location & Hours</h3>
-            <div className="grid md:grid-cols-2 gap-8">
-              <div>
-                <h4 className="font-bold text-blue-400 mb-4">Main Office</h4>
-                <p className="text-gray-300 mb-4 leading-relaxed">
-                  Pradeshiya Sabha Office<br/>
-                  Addalachenai<br/>
-                  Ampara District<br/>
-                  Sri Lanka
-                </p>
-                <Link
-                  href="https://maps.google.com"
-                  target="_blank"
-                  className="inline-block text-blue-400 hover:text-blue-300 font-semibold"
-                >
-                  Get Directions →
-                </Link>
+          <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-10 md:p-14 border border-gray-700 shadow-xl">
+            <div className="grid md:grid-cols-2 gap-10 md:gap-16">
+              <div className="space-y-6">
+                <div>
+                  <h4 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600 mb-4">Main Office</h4>
+                  <div className="space-y-3">
+                    <p className="text-gray-300 text-lg leading-relaxed">
+                      <span className="font-semibold">Pradeshiya Sabha</span><br/>
+                      Addalachenai<br/>
+                      Ampara District<br/>
+                      Sri Lanka
+                    </p>
+                    <a
+                      href="https://maps.app.goo.gl/sQSgHAfeEwF8XmrY7"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center text-blue-400 hover:text-blue-300 font-semibold transition-colors group/link"
+                    >
+                      <svg className="w-5 h-5 mr-2 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                      </svg>
+                      Get Directions
+                    </a>
+                  </div>
+                </div>
               </div>
-              <div>
-                <h4 className="font-bold text-blue-400 mb-4">Working Hours</h4>
-                <div className="text-gray-300 space-y-2">
-                  <p><span className="font-semibold">Monday - Friday:</span> 8:00 AM - 5:00 PM</p>
-                  <p><span className="font-semibold">Saturday:</span> 9:00 AM - 1:00 PM</p>
-                  <p><span className="font-semibold">Sunday & Holidays:</span> Closed</p>
-                  <p className="text-xs text-gray-400 mt-4">Emergency hotline: Available 24/7</p>
+              <div className="space-y-6">
+                <div>
+                  <h4 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-green-600 mb-4">Working Hours</h4>
+                  <div className="space-y-4">
+                    <div className="flex justify-between items-center border-b border-gray-700 pb-3">
+                      <span className="text-gray-300 font-semibold">Monday - Friday</span>
+                      <span className="text-gray-400">8:00 AM - 5:00 PM</span>
+                    </div>
+                    <div className="flex justify-between items-center border-b border-gray-700 pb-3">
+                      <span className="text-gray-300 font-semibold">Saturday</span>
+                      <span className="text-gray-400">9:00 AM - 1:00 PM</span>
+                    </div>
+                    <div className="flex justify-between items-center border-b border-gray-700 pb-3">
+                      <span className="text-gray-300 font-semibold">Sunday & Holidays</span>
+                      <span className="text-red-400 font-semibold">Closed</span>
+                    </div>
+                    <div className="pt-2 mt-4 border-t border-gray-600">
+                      <p className="text-sm text-gray-400">
+                        <span className="font-semibold text-yellow-400">Emergency Hotline:</span> Available 24/7
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
