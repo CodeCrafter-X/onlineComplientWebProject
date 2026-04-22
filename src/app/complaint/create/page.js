@@ -1,12 +1,13 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Navigation from '../../components/Navigation';
 
 export default function CreateComplaint() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const mapRef = useRef(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -58,6 +59,15 @@ export default function CreateComplaint() {
         if (data.isAuthenticated) {
           setIsAuthenticated(true);
           setAuthChecking(false);
+          
+          // Auto-select category from query params
+          const categoryParam = searchParams.get('category');
+          if (categoryParam) {
+            setFormData(prev => ({
+              ...prev,
+              category: decodeURIComponent(categoryParam)
+            }));
+          }
         } else {
           setIsAuthenticated(false);
           setTimeout(() => {
@@ -74,7 +84,7 @@ export default function CreateComplaint() {
     };
 
     checkAuthentication();
-  }, [router]);
+  }, [router, searchParams]);
 
   // Initialize Google Map only after authentication is verified
   useEffect(() => {

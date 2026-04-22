@@ -2,11 +2,15 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 
 export default function Home() {
+  const router = useRouter();
   const [isUser, setIsUser] = useState(false);
+  const [selectedService, setSelectedService] = useState(null);
+  const [isCheckingAuth, setIsCheckingAuth] = useState(false);
 
   // Check authentication status
   useEffect(() => {
@@ -22,6 +26,116 @@ export default function Home() {
     };
     checkAuth();
   }, []);
+
+  // Services data
+  const services = [
+    {
+      id: 'waste-management',
+      title: 'Waste Management',
+      category: 'Waste Management',
+      image: '/images/service-waste-management.jpg',
+      gradient: 'from-green-600 to-green-700',
+      description: 'Daily waste collection and proper disposal systems for community',
+      fullDescription: 'Our comprehensive waste management system ensures proper collection, segregation, and disposal of waste materials. We handle everything from residential waste to commercial debris, maintaining clean and healthy surroundings for the entire community.',
+      services: [
+        'Daily waste collection from residential areas',
+        'Proper waste segregation and recycling',
+        'Clean-up of public spaces',
+        'Garbage bin maintenance'
+      ]
+    },
+    {
+      id: 'street-lighting',
+      title: 'Street Lighting',
+      category: 'Street Lighting',
+      image: '/images/service-street-lights.jpg',
+      gradient: 'from-yellow-500 to-yellow-600',
+      description: 'Maintenance of street lights for safe roads at night',
+      fullDescription: 'We maintain street lighting infrastructure to ensure safe and well-lit roads throughout the community. Our team conducts regular inspections, repairs, and replacements to keep all lights functional.',
+      services: [
+        'Street light installation and maintenance',
+        'Emergency repairs for non-functional lights',
+        'Regular inspections and testing',
+        '24/7 emergency response'
+      ]
+    },
+    {
+      id: 'drainage-systems',
+      title: 'Drainage Systems',
+      category: 'Drainage Systems',
+      image: '/images/service-drainage-maintenance.jpg',
+      gradient: 'from-blue-600 to-blue-700',
+      description: 'Regular drainage maintenance and blockage resolution',
+      fullDescription: 'Our drainage system maintenance ensures proper water flow and prevents flooding. We handle blockage clearing, pipe repairs, and preventive maintenance to keep drainage systems functioning efficiently.',
+      services: [
+        'Drainage cleaning and de-silting',
+        'Blockage removal and repairs',
+        'Pipe maintenance and replacement',
+        'Storm water management'
+      ]
+    },
+    {
+      id: 'roads-repairs',
+      title: 'Roads & Repairs',
+      category: 'Roads & Repairs',
+      image: '/images/service-road-maintenance.jpg',
+      gradient: 'from-gray-600 to-gray-700',
+      description: 'Repair damaged roads and maintain safe access routes',
+      fullDescription: 'We maintain and repair roads to ensure safe and smooth travel for all community members. Our team addresses potholes, cracks, and other road damage promptly.',
+      services: [
+        'Pothole repairs and road patching',
+        'Road resurfacing and asphalt laying',
+        'Road marking and signage',
+        'Bridge and culvert maintenance'
+      ]
+    },
+    {
+      id: 'general-support',
+      title: 'General Support',
+      category: 'General Support',
+      image: '/images/service-general-support.jpg',
+      gradient: 'from-purple-600 to-purple-700',
+      description: 'Submit other concerns and suggestions for improvement',
+      fullDescription: 'Beyond our core services, we are here to address any community concerns and suggestions. Submit your concerns and help us improve our services.',
+      services: [
+        'General inquiries and support',
+        'Community feedback and suggestions',
+        'Special event coordination',
+        'Emergency services coordination'
+      ]
+    }
+  ];
+
+  // Handle file complaint for specific issue
+  const handleFileComplaint = async (categoryName) => {
+    setIsCheckingAuth(true);
+    try {
+      const response = await fetch('/api/token-check', {
+        method: 'GET',
+        credentials: 'include',
+      });
+
+      if (!response.ok) {
+        setIsCheckingAuth(false);
+        setSelectedService(null);
+        router.push(`/auth/login?redirect=/complaint/create?category=${encodeURIComponent(categoryName)}`);
+        return;
+      }
+
+      const data = await response.json();
+      if (data.isAuthenticated) {
+        router.push(`/complaint/create?category=${encodeURIComponent(categoryName)}`);
+      } else {
+        setSelectedService(null);
+        router.push(`/auth/login?redirect=/complaint/create?category=${encodeURIComponent(categoryName)}`);
+      }
+    } catch (error) {
+      console.error('Auth check failed:', error);
+      setSelectedService(null);
+      router.push(`/auth/login?redirect=/complaint/create?category=${encodeURIComponent(categoryName)}`);
+    }
+    setIsCheckingAuth(false);
+  };
 
   // Handle hash navigation
   useEffect(() => {
@@ -166,114 +280,117 @@ export default function Home() {
       <section id="services" className="py-20 md:py-32 px-4 md:px-6 bg-gray-50">
         <div className="max-w-7xl mx-auto">
           {/* Section Header */}
-          <div className="text-center mb-12 md:mb-16 animate-fade-in-down">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 animate-fade-in-down" style={{ animationDelay: '0.1s' }}>
-              Services We Provide
+          <div className="text-center mb-16 md:mb-20 animate-fade-in-down">
+            <div className="inline-block mb-4 px-4 py-2 bg-blue-100 rounded-full">
+              <span className="text-blue-600 font-semibold text-sm">OUR SERVICES</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-6 animate-fade-in-down leading-tight" style={{ animationDelay: '0.1s' }}>
+              Services We <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Provide</span>
             </h2>
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto animate-fade-in-down" style={{ animationDelay: '0.2s' }}>
+            <p className="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto animate-fade-in-down font-medium" style={{ animationDelay: '0.2s' }}>
               Dedicated to maintaining the highest standards of civic management and infrastructure.
             </p>
           </div>
 
           {/* Services Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8">
-            {/* Waste Management */}
-            <div className="group relative bg-white rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 animate-slide-up" style={{ animationDelay: '0.1s' }}>
-              <div className="relative h-32 bg-gradient-to-br from-green-600 to-green-700 overflow-hidden">
-                <img 
-                  src="/images/service-waste-management.jpg" 
-                  alt="Waste Management" 
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="text-lg font-bold text-gray-900 mb-2">Waste Management</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  Daily waste collection and proper disposal systems for community.
-                </p>
-              </div>
-            </div>
-
-            {/* Street Lighting */}
-            <div className="group relative bg-white rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 animate-slide-up" style={{ animationDelay: '0.2s' }}>
-              <div className="relative h-32 bg-gradient-to-br from-yellow-500 to-yellow-600 overflow-hidden">
-                <img 
-                  src="/images/service-street-lights.jpg" 
-                  alt="Street Lighting" 
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="text-lg font-bold text-gray-900 mb-2">Street Lighting</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  Maintenance of street lights for safe roads at night.
-                </p>
-              </div>
-            </div>
-
-            {/* Drainage Systems */}
-            <div className="group relative bg-white rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 animate-slide-up" style={{ animationDelay: '0.3s' }}>
-              <div className="relative h-32 bg-gradient-to-br from-blue-600 to-blue-700 overflow-hidden">
-                <img 
-                  src="/images/service-drainage-maintenance.jpg" 
-                  alt="Drainage Systems" 
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="text-lg font-bold text-gray-900 mb-2">Drainage Systems</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  Regular drainage maintenance and blockage resolution.
-                </p>
-              </div>
-            </div>
-
-            {/* Roads & Repairs */}
-            <div className="group relative bg-white rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 animate-slide-up" style={{ animationDelay: '0.4s' }}>
-              <div className="relative h-32 bg-gradient-to-br from-gray-600 to-gray-700 overflow-hidden">
-                <img 
-                  src="/images/service-road-maintenance.jpg" 
-                  alt="Roads & Repairs" 
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="text-lg font-bold text-gray-900 mb-2">Roads & Repairs</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  Repair damaged roads and maintain safe access routes.
-                </p>
-              </div>
-            </div>
-
-            {/* General Support */}
-            <div className="group relative bg-white rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 animate-slide-up" style={{ animationDelay: '0.5s' }}>
-              <div className="relative h-32 bg-gradient-to-br from-purple-600 to-purple-700 overflow-hidden">
-                <img 
-                  src="/images/service-general-support.jpg" 
-                  alt="General Support" 
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="text-lg font-bold text-gray-900 mb-2">General Support</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  Submit other concerns and suggestions for improvement.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* CTA Button */}
-          <div className="text-center mt-12 md:mt-16 animate-fade-in-down" style={{ animationDelay: '0.6s' }}>
-            <Link
-              href="/complaint/create"
-              className="inline-block px-8 md:px-10 py-3 md:py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-all duration-300 text-base md:text-lg transform hover:scale-105 active:scale-95"
-            >
-              Report an Issue Now
-            </Link>
+            {services.map((service, index) => (
+              <button
+                key={service.id}
+                onClick={() => setSelectedService(service)}
+                className="group relative bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200 animate-slide-up hover:border-blue-400 text-left"
+                style={{ animationDelay: `${(index + 1) * 0.1}s` }}
+              >
+                <div className="relative h-40 bg-gradient-to-br overflow-hidden" style={{ backgroundImage: `linear-gradient(135deg, var(--tw-gradient-stops))` }}>
+                  <img 
+                    src={service.image} 
+                    alt={service.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                    <span className="text-white font-bold mb-3 ml-4 text-sm">Click to See Details →</span>
+                  </div>
+                </div>
+                <div className="p-6">
+                  <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">{service.title}</h3>
+                  <p className="text-gray-600 text-sm leading-relaxed">
+                    {service.description}
+                  </p>
+                </div>
+              </button>
+            ))}
           </div>
         </div>
       </section>
+
+      {/* Service Detail Modal */}
+      {selectedService && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fade-in">
+          <div className="bg-white rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl animate-slide-up">
+            {/* Close Button */}
+            <div className="sticky top-0 flex justify-between items-center p-6 md:p-8 bg-gradient-to-r from-gray-900 to-gray-800 text-white border-b border-gray-700 z-10">
+              <h2 className="text-2xl md:text-3xl font-bold">{selectedService.title}</h2>
+              <button
+                onClick={() => setSelectedService(null)}
+                className="w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors text-xl"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="p-6 md:p-8">
+              {/* Service Image */}
+              <div className="relative h-64 md:h-80 rounded-2xl overflow-hidden mb-8 shadow-lg">
+                <img 
+                  src={selectedService.image}
+                  alt={selectedService.title}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+
+              {/* Service Description */}
+              <div className="mb-8">
+                <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-4">About This Service</h3>
+                <p className="text-gray-700 text-base md:text-lg leading-relaxed">
+                  {selectedService.fullDescription}
+                </p>
+              </div>
+
+              {/* Service Details */}
+              <div className="mb-8">
+                <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-6">What We Include</h3>
+                <div className="grid md:grid-cols-2 gap-4">
+                  {selectedService.services.map((item, idx) => (
+                    <div key={idx} className="flex items-start p-4 bg-blue-50 rounded-xl border border-blue-200 hover:border-blue-400 transition-colors">
+                      <span className="text-blue-600 font-bold mr-3 mt-0.5 text-lg">✓</span>
+                      <span className="text-gray-700 font-medium">{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex gap-4 pt-6 border-t border-gray-200">
+                <button
+                  onClick={() => {
+                    handleFileComplaint(selectedService.category);
+                  }}
+                  disabled={isCheckingAuth}
+                  className="flex-1 px-6 py-3 md:py-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed text-base md:text-lg"
+                >
+                  {isCheckingAuth ? 'Processing...' : `File a Complaint for ${selectedService.category}`}
+                </button>
+                <button
+                  onClick={() => setSelectedService(null)}
+                  className="px-6 py-3 md:py-4 bg-gray-200 hover:bg-gray-300 text-gray-900 font-bold rounded-xl transition-all duration-300 text-base md:text-lg"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* How It Works Section */}
       <section id="complaint" className="py-20 md:py-32 px-4 md:px-6 bg-white">
