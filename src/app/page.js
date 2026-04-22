@@ -279,87 +279,157 @@ export default function Home() {
       <section id="complaint" className="py-20 md:py-32 px-4 md:px-6 bg-white">
         <div className="max-w-7xl mx-auto">
           {/* Section Header */}
-          <div className="text-center mb-12 md:mb-16 animate-fade-in-down">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 animate-fade-in-down" style={{ animationDelay: '0.1s' }}>
-              How to File a Complaint
+          <div className="text-center mb-16 md:mb-20 animate-fade-in-down">
+            <div className="inline-block mb-4 px-4 py-2 bg-blue-100 rounded-full">
+              <span className="text-blue-600 font-semibold text-sm">SIMPLE PROCESS</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-6 animate-fade-in-down leading-tight" style={{ animationDelay: '0.1s' }}>
+              How to File a <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Complaint</span>
             </h2>
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto animate-fade-in-down" style={{ animationDelay: '0.2s' }}>
-              Simple 4-step process to report issues and track their resolution in real-time.
+            <p className="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto animate-fade-in-down font-medium" style={{ animationDelay: '0.2s' }}>
+              Just 4 simple steps to report issues and track their resolution in real-time. Quick, secure, and transparent.
             </p>
           </div>
 
           {/* Steps */}
-          <div className="grid md:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-4 gap-6 md:gap-4 relative">
+            {/* Connection Lines */}
+            <div className="hidden md:block absolute top-20 left-0 right-0 h-1 bg-gradient-to-r from-blue-400 via-green-400 via-yellow-400 to-purple-400 rounded-full"></div>
+
             {/* Step 1 */}
-            <div className="relative text-center group animate-float-up" style={{ animationDelay: '0.1s' }}>
+            <div className="relative text-center group animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
               <div className="flex flex-col h-full">
-                <div className="bg-blue-600 text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 font-bold text-2xl group-hover:scale-110 transition-transform duration-300 shadow-lg transform group-hover:shadow-2xl">
-                  1
+                {/* Step Number Circle */}
+                <div className="relative inline-flex items-center justify-center mx-auto mb-8">
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full blur-lg opacity-0 group-hover:opacity-75 transition-opacity duration-300"></div>
+                  <div className="relative bg-gradient-to-br from-blue-500 to-blue-700 text-white w-20 h-20 rounded-full flex items-center justify-center font-black text-3xl group-hover:scale-110 transition-transform duration-300 shadow-xl group-hover:shadow-2xl group-hover:shadow-blue-500/40 border-4 border-white">
+                    <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                    </svg>
+                  </div>
                 </div>
-                <h3 className="font-bold text-gray-900 mb-2 text-lg">Create Account</h3>
-                <p className="text-gray-600 flex-grow">
-                  Register using your email or phone to access the system securely.
+                
+                <h3 className="font-black text-gray-900 mb-3 text-xl tracking-tight">Create Account</h3>
+                <p className="text-gray-600 flex-grow text-base leading-relaxed font-medium">
+                  Register using your email or phone to access the system securely and get started.
                 </p>
+                <div className="mt-6">
+                  <span className="inline-block px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-bold">Step 1</span>
+                </div>
               </div>
-              <div className="hidden md:block absolute top-8 left-[60%] w-[40%] h-0.5 bg-gradient-to-r from-blue-400 to-blue-600 transform translate-y-0"></div>
             </div>
 
             {/* Step 2 */}
-            <div className="relative text-center group animate-float-up" style={{ animationDelay: '0.2s' }}>
+            <div className="relative text-center group animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
               <div className="flex flex-col h-full">
-                <div className="bg-green-600 text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 font-bold text-2xl group-hover:scale-110 transition-transform duration-300 shadow-lg transform group-hover:shadow-2xl">
-                  2
+                {/* Step Number Circle */}
+                <div className="relative inline-flex items-center justify-center mx-auto mb-8">
+                  <div className="absolute inset-0 bg-gradient-to-br from-green-400 to-green-600 rounded-full blur-lg opacity-0 group-hover:opacity-75 transition-opacity duration-300"></div>
+                  <div className="relative bg-gradient-to-br from-green-500 to-green-700 text-white w-20 h-20 rounded-full flex items-center justify-center font-black text-3xl group-hover:scale-110 transition-transform duration-300 shadow-xl group-hover:shadow-2xl group-hover:shadow-green-500/40 border-4 border-white">
+                    <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
                 </div>
-                <h3 className="font-bold text-gray-900 mb-2 text-lg">File Complaint</h3>
-                <p className="text-gray-600 flex-grow">
-                  Submit your complaint with description, images, and location.
+
+                <h3 className="font-black text-gray-900 mb-3 text-xl tracking-tight">File Complaint</h3>
+                <p className="text-gray-600 flex-grow text-base leading-relaxed font-medium">
+                  Submit your detailed complaint with description, images, and exact location details.
                 </p>
+                <div className="mt-6">
+                  <span className="inline-block px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold">Step 2</span>
+                </div>
               </div>
-              <div className="hidden md:block absolute top-8 left-[60%] w-[40%] h-0.5 bg-gradient-to-r from-green-400 to-green-600 transform translate-y-0"></div>
             </div>
 
             {/* Step 3 */}
-            <div className="relative text-center group animate-float-up" style={{ animationDelay: '0.3s' }}>
+            <div className="relative text-center group animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
               <div className="flex flex-col h-full">
-                <div className="bg-yellow-600 text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 font-bold text-2xl group-hover:scale-110 transition-transform duration-300 shadow-lg transform group-hover:shadow-2xl">
-                  3
+                {/* Step Number Circle */}
+                <div className="relative inline-flex items-center justify-center mx-auto mb-8">
+                  <div className="absolute inset-0 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full blur-lg opacity-0 group-hover:opacity-75 transition-opacity duration-300"></div>
+                  <div className="relative bg-gradient-to-br from-yellow-500 to-yellow-700 text-white w-20 h-20 rounded-full flex items-center justify-center font-black text-3xl group-hover:scale-110 transition-transform duration-300 shadow-xl group-hover:shadow-2xl group-hover:shadow-yellow-500/40 border-4 border-white">
+                    <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  </div>
                 </div>
-                <h3 className="font-bold text-gray-900 mb-2 text-lg">Track Progress</h3>
-                <p className="text-gray-600 flex-grow">
-                  Monitor status with real-time updates and notifications.
+
+                <h3 className="font-black text-gray-900 mb-3 text-xl tracking-tight">Track Progress</h3>
+                <p className="text-gray-600 flex-grow text-base leading-relaxed font-medium">
+                  Monitor real-time status updates and receive instant notifications on your complaint.
                 </p>
+                <div className="mt-6">
+                  <span className="inline-block px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs font-bold">Step 3</span>
+                </div>
               </div>
-              <div className="hidden md:block absolute top-8 left-[60%] w-[40%] h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-600 transform translate-y-0"></div>
             </div>
 
             {/* Step 4 */}
-            <div className="relative text-center group animate-float-up" style={{ animationDelay: '0.4s' }}>
+            <div className="relative text-center group animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
               <div className="flex flex-col h-full">
-                <div className="bg-purple-600 text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 font-bold text-2xl group-hover:scale-110 transition-transform duration-300 shadow-lg transform group-hover:shadow-2xl">
-                  ✓
+                {/* Step Number Circle */}
+                <div className="relative inline-flex items-center justify-center mx-auto mb-8">
+                  <div className="absolute inset-0 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full blur-lg opacity-0 group-hover:opacity-75 transition-opacity duration-300"></div>
+                  <div className="relative bg-gradient-to-br from-purple-500 to-purple-700 text-white w-20 h-20 rounded-full flex items-center justify-center font-black text-3xl group-hover:scale-110 transition-transform duration-300 shadow-xl group-hover:shadow-2xl group-hover:shadow-purple-500/40 border-4 border-white">
+                    <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m7 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
                 </div>
-                <h3 className="font-bold text-gray-900 mb-2 text-lg">Resolution</h3>
-                <p className="text-gray-600 flex-grow">
-                  Receive confirmation once your issue is addressed.
+
+                <h3 className="font-black text-gray-900 mb-3 text-xl tracking-tight">Get Resolution</h3>
+                <p className="text-gray-600 flex-grow text-base leading-relaxed font-medium">
+                  Receive confirmation and closure notification once your issue is properly addressed.
                 </p>
+                <div className="mt-6">
+                  <span className="inline-block px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-bold">Step 4</span>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Additional Info */}
-          <div className="mt-16 bg-blue-50 rounded-2xl p-8 md:p-10 border border-blue-200 animate-slide-up">
-            <div className="grid md:grid-cols-3 gap-6">
-              <div className="text-center">
-                <h4 className="font-bold text-gray-900 mb-2">Fast Processing</h4>
-                <p className="text-gray-600 text-sm">Average response time: 24-48 hours</p>
+          {/* Features Grid */}
+          <div className="mt-20 md:mt-28 grid md:grid-cols-3 gap-6">
+            {/* Feature 1 */}
+            <div className="group relative bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8 border border-blue-200 hover:border-blue-400 transition-all duration-300 hover:shadow-xl hover:shadow-blue-100 animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-400/0 to-indigo-400/0 group-hover:from-blue-400/5 group-hover:to-indigo-400/5 rounded-2xl transition-all duration-300"></div>
+              <div className="relative">
+                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+                <h4 className="font-black text-gray-900 mb-3 text-lg">Fast Processing</h4>
+                <p className="text-gray-600 font-medium text-sm leading-relaxed">Average response time: <span className="text-blue-600 font-bold">24-48 hours</span></p>
               </div>
-              <div className="text-center">
-                <h4 className="font-bold text-gray-900 mb-2">Secure & Confidential</h4>
-                <p className="text-gray-600 text-sm">Your information is protected and secure</p>
+            </div>
+
+            {/* Feature 2 */}
+            <div className="group relative bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-8 border border-green-200 hover:border-green-400 transition-all duration-300 hover:shadow-xl hover:shadow-green-100 animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
+              <div className="absolute inset-0 bg-gradient-to-br from-green-400/0 to-emerald-400/0 group-hover:from-green-400/5 group-hover:to-emerald-400/5 rounded-2xl transition-all duration-300"></div>
+              <div className="relative">
+                <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                  </svg>
+                </div>
+                <h4 className="font-black text-gray-900 mb-3 text-lg">Secure & Confidential</h4>
+                <p className="text-gray-600 font-medium text-sm leading-relaxed">Your information is <span className="text-green-600 font-bold">protected and secure</span></p>
               </div>
-              <div className="text-center">
-                <h4 className="font-bold text-gray-900 mb-2">24/7 Access</h4>
-                <p className="text-gray-600 text-sm">File complaints anytime, anywhere</p>
+            </div>
+
+            {/* Feature 3 */}
+            <div className="group relative bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-8 border border-purple-200 hover:border-purple-400 transition-all duration-300 hover:shadow-xl hover:shadow-purple-100 animate-fade-in-up" style={{ animationDelay: '0.7s' }}>
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-400/0 to-pink-400/0 group-hover:from-purple-400/5 group-hover:to-pink-400/5 rounded-2xl transition-all duration-300"></div>
+              <div className="relative">
+                <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <h4 className="font-black text-gray-900 mb-3 text-lg">24/7 Access</h4>
+                <p className="text-gray-600 font-medium text-sm leading-relaxed">File complaints <span className="text-purple-600 font-bold">anytime, anywhere</span></p>
               </div>
             </div>
           </div>
