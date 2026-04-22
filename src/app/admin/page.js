@@ -101,18 +101,18 @@ export default function AdminDashboard() {
     <div className="min-h-screen bg-gray-50">
       {/* <Navigation /> */}
 
-      <main className="flex-grow pt-8 pb-12 px-4 sm:px-6 lg:px-8">
+      <main className="flex-grow pt-6 sm:pt-8 pb-8 sm:pb-12 px-3 sm:px-4 md:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           {/* Header Section */}
-          <div className="mb-12">
-            <div className="flex justify-between items-start mb-8">
+          <div className="mb-8 sm:mb-12">
+            <div className="flex flex-col sm:flex-row justify-between items-start gap-4 sm:gap-0 mb-6 sm:mb-8">
               <div>
-                <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight mb-2">Admin Dashboard</h1>
-                <p className="text-gray-500 text-sm font-medium">Welcome back, {adminUser?.username || 'Admin'}!</p>
+                <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-900 tracking-tight mb-2">Admin Dashboard</h1>
+                <p className="text-gray-500 text-xs sm:text-sm font-medium">Welcome back, {adminUser?.username || 'Admin'}!</p>
               </div>
               <button
                 onClick={handleLogout}
-                className="px-6 py-2.5 bg-red-600 hover:bg-gray-200 text-gray-700 font-semibold rounded-lg transition-all text-sm border border-gray-300 hover:border-gray-400"
+                className="px-4 sm:px-6 py-2 sm:py-2.5 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-all text-xs sm:text-sm w-full sm:w-auto"
               >
                 Logout
               </button>
@@ -125,7 +125,7 @@ export default function AdminDashboard() {
             )}
 
             {/* Stats Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
               {/* Total Complaints */}
               <div className="bg-white rounded-xl border border-gray-200 p-6 hover:border-gray-300 transition-all">
                 <div className="flex items-center justify-between mb-4">
@@ -185,22 +185,22 @@ export default function AdminDashboard() {
           </div>
 
           {/* Admin Cards Section */}
-          <div>
-            <h2 className="text-lg font-bold text-gray-900 mb-6 uppercase tracking-wide text-gray-700">Quick Actions</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="mt-8 sm:mt-12">
+            <h2 className="text-base sm:text-lg font-bold text-gray-900 mb-4 sm:mb-6 uppercase tracking-wide text-gray-700">Quick Actions</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               
               {/* Admin Profile Card */}
               <Link href="/admin/profile">
-                <div className="group bg-white rounded-xl border border-gray-200 hover:border-gray-300 p-6 cursor-pointer transition-all hover:shadow-md h-full">
+                <div className="group bg-white rounded-xl border border-gray-200 hover:border-gray-300 p-5 sm:p-6 cursor-pointer transition-all hover:shadow-md h-full">
                   <div className="flex flex-col h-full">
-                    <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                    <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
                       <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                       </svg>
                     </div>
-                    <h3 className="text-lg font-bold text-gray-900 mb-2">Admin Profile</h3>
-                    <p className="text-gray-600 text-sm mb-6 flex-grow">Manage your account settings</p>
-                    <button className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors text-sm">
+                    <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-2">Admin Profile</h3>
+                    <p className="text-gray-600 text-xs sm:text-sm mb-4 sm:mb-6 flex-grow">Manage your account settings</p>
+                    <button className="px-3 sm:px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors text-xs sm:text-sm w-full">
                       View Profile
                     </button>
                   </div>
@@ -209,18 +209,18 @@ export default function AdminDashboard() {
 
               {/* Manage Complaints Card */}
               <Link href="/admin/complaint">
-                <div className="group bg-white rounded-xl border border-gray-200 hover:border-gray-300 p-6 cursor-pointer transition-all hover:shadow-md h-full">
+                <div className="group bg-white rounded-xl border border-gray-200 hover:border-gray-300 p-5 sm:p-6 cursor-pointer transition-all hover:shadow-md h-full">
                   <div className="flex flex-col h-full">
-                    <div className="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center mb-4">
+                    <div className="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
                       <svg className="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                       </svg>
                     </div>
-                    <h3 className="text-lg font-bold text-gray-900 mb-2">Manage Complaints</h3>
-                    <p className="text-gray-600 text-sm mb-6 flex-grow">
+                    <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-2">Manage Complaints</h3>
+                    <p className="text-gray-600 text-xs sm:text-sm mb-4 sm:mb-6 flex-grow">
                       Review all <span className="font-bold">{stats.total}</span> complaints
                     </p>
-                    <button className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-lg transition-colors text-sm">
+                    <button className="px-3 sm:px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-lg transition-colors text-xs sm:text-sm w-full">
                       Manage
                     </button>
                   </div>
@@ -229,16 +229,16 @@ export default function AdminDashboard() {
 
               {/* Manage Users Card */}
               <Link href="/admin/users">
-                <div className="group bg-white rounded-xl border border-gray-200 hover:border-gray-300 p-6 cursor-pointer transition-all hover:shadow-md h-full">
+                <div className="group bg-white rounded-xl border border-gray-200 hover:border-gray-300 p-5 sm:p-6 cursor-pointer transition-all hover:shadow-md h-full">
                   <div className="flex flex-col h-full">
-                    <div className="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center mb-4">
+                    <div className="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
                       <svg className="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 12H9m4 0a7 7 0 11-14 0 7 7 0 0114 0z" />
                       </svg>
                     </div>
-                    <h3 className="text-lg font-bold text-gray-900 mb-2">Registered Users</h3>
-                    <p className="text-gray-600 text-sm mb-6 flex-grow">View all citizens</p>
-                    <button className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg transition-colors text-sm">
+                    <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-2">Registered Users</h3>
+                    <p className="text-gray-600 text-xs sm:text-sm mb-4 sm:mb-6 flex-grow">View all citizens</p>
+                    <button className="px-3 sm:px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg transition-colors text-xs sm:text-sm w-full">
                       View Users
                     </button>
                   </div>
@@ -249,9 +249,9 @@ export default function AdminDashboard() {
           </div>
 
           {/* Recent Statistics Info */}
-          <div className="mt-12 bg-white rounded-xl border border-gray-200 p-8">
-            <h3 className="text-lg font-bold text-gray-900 mb-6 uppercase tracking-wide text-gray-700">Dashboard Summary</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="mt-8 sm:mt-12 bg-white rounded-xl border border-gray-200 p-6 sm:p-8">
+            <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-4 sm:mb-6 uppercase tracking-wide text-gray-700">Dashboard Summary</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
               <div className="bg-gradient-to-br from-blue-50 to-blue-100/50 rounded-lg p-6 border border-blue-100">
                 <p className="text-gray-600 text-xs font-semibold uppercase tracking-wide mb-2">Approval Rate</p>
                 <p className="text-3xl font-bold text-blue-600">

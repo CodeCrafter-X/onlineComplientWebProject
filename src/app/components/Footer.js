@@ -18,38 +18,38 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-black text-gray-300 py-12 md:py-16 px-4 md:px-6">
+    <footer className="bg-black text-gray-300 py-8 sm:py-12 md:py-16 px-3 sm:px-4 md:px-6">
       <div className="max-w-7xl mx-auto">
         {/* Footer Content */}
-        <div className="grid md:grid-cols-4 gap-8 mb-8 md:mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 mb-8 sm:mb-12">
           {/* Brand Section */}
-          <div className="col-span-full md:col-span-1">
-            <div className="flex items-center gap-3 mb-4">
+          <div className="col-span-1 sm:col-span-2 md:col-span-1 flex flex-col items-center justify-center text-center">
+            <div className="flex flex-col items-center justify-center gap-2 sm:gap-3 mb-3 sm:mb-4">
               <Image
                 src="/images/logo.jpeg"
                 alt="Pradesha Shaba Logo"
-                width={40}
-                height={40}
-                className="rounded-lg"
+                width={36}
+                height={36}
+                className="rounded-lg w-10 h-10 sm:w-12 sm:h-12"
               />
               <div>
-                <h4 className="font-bold text-white">Pradesha Shaba</h4>
-                <p className="text-xs text-gray-500">Addalachenai</p>
+                <h4 className="font-bold text-white text-base sm:text-lg md:text-xl">Pradesha Shaba</h4>
+                <p className="text-sm sm:text-base text-gray-400">Addalachenai</p>
               </div>
             </div>
-            <p className="text-sm text-gray-400 leading-relaxed">
+            <p className="text-sm sm:text-base md:text-base text-gray-300 leading-relaxed">
               Serving the community with transparency, efficiency, and dedication to progress.
             </p>
           </div>
 
           {/* Quick Links */}
-          <div>
-            <h4 className="font-bold text-white mb-4 text-lg">Quick Links</h4>
+          <div className="flex flex-col items-center justify-center text-center">
+            <h4 className="font-bold text-white mb-3 sm:mb-4 text-base sm:text-lg md:text-lg">Quick Links</h4>
             <ul className="space-y-2">
               <li>
                 <button
                   onClick={() => scrollToSection('home')}
-                  className="text-sm text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-200 cursor-pointer"
+                  className="text-sm sm:text-base text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-200 cursor-pointer"
                 >
                   Home
                 </button>
@@ -57,7 +57,7 @@ export default function Footer() {
               <li>
                 <button
                   onClick={() => scrollToSection('about')}
-                  className="text-sm text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-200 cursor-pointer"
+                  className="text-sm sm:text-base text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-200 cursor-pointer"
                 >
                   About Us
                 </button>
@@ -65,7 +65,7 @@ export default function Footer() {
               <li>
                 <button
                   onClick={() => scrollToSection('services')}
-                  className="text-sm text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-200 cursor-pointer"
+                  className="text-sm sm:text-base text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-200 cursor-pointer"
                 >
                   Services
                 </button>
@@ -73,7 +73,7 @@ export default function Footer() {
               <li>
                 <button
                   onClick={() => scrollToSection('complaint')}
-                  className="text-sm text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-200 cursor-pointer"
+                  className="text-sm sm:text-base text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-200 cursor-pointer"
                 >
                   Complaints
                 </button>
@@ -81,7 +81,7 @@ export default function Footer() {
               <li>
                 <button
                   onClick={() => scrollToSection('contact')}
-                  className="text-sm text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-200 cursor-pointer"
+                  className="text-sm sm:text-base text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-200 cursor-pointer"
                 >
                   Contact
                 </button>
@@ -90,26 +90,26 @@ export default function Footer() {
           </div>
 
           {/* Services */}
-          <div>
-            <h4 className="font-bold text-white mb-4 text-lg">Services</h4>
+          <div className="flex flex-col items-center justify-center text-center">
+            <h4 className="font-bold text-white mb-3 sm:mb-4 text-sm sm:text-lg">Services</h4>
             <ul className="space-y-2">
               <li>
-                <Link href="/complaint/create" className="text-sm text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-200 inline-block">
+                <Link href="/complaint/create" className="text-xs sm:text-sm text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-200 inline-block">
                   File Complaint
                 </Link>
               </li>
               <li>
-                <Link href="/complaint" className="text-sm text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-200 inline-block">
+                <Link href="/complaint" className="text-xs sm:text-sm text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-200 inline-block">
                   Track Status
                 </Link>
               </li>
               <li>
-                <Link href="/auth/register" className="text-sm text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-200 inline-block">
+                <Link href="/auth/register" className="text-xs sm:text-sm text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-200 inline-block">
                   Register
                 </Link>
               </li>
               <li>
-                <Link href="/auth/login" className="text-sm text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-200 inline-block">
+                <Link href="/auth/login" className="text-xs sm:text-sm text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-200 inline-block">
                   Login
                 </Link>
               </li>
@@ -117,20 +117,20 @@ export default function Footer() {
           </div>
 
           {/* Contact & Support */}
-          <div>
-            <h4 className="font-bold text-white mb-4 text-lg">Support</h4>
-            <ul className="space-y-3">
-              <li className="text-sm">
-                <p className="text-gray-400">📞 Phone</p>
-                <p className="text-white font-medium">+94 XXX XXX XXXX</p>
+          <div className="flex flex-col items-center justify-center text-center">
+            <h4 className="font-bold text-white mb-3 sm:mb-4 text-sm sm:text-lg">Support</h4>
+            <ul className="space-y-2 sm:space-y-3">
+              <li className="text-xs sm:text-sm">
+                <p className="text-gray-400 text-xs sm:text-sm">📞 Phone</p>
+                <p className="text-white font-medium text-xs sm:text-sm">+94 XXX XXX XXXX</p>
               </li>
-              <li className="text-sm">
-                <p className="text-gray-400">📧 Email</p>
-                <p className="text-white font-medium break-all">info@pradeshyasabha.lk</p>
+              <li className="text-xs sm:text-sm">
+                <p className="text-gray-400 text-xs sm:text-sm">📧 Email</p>
+                <p className="text-white font-medium break-all text-xs sm:text-sm">info@pradeshyasabha.lk</p>
               </li>
-              <li className="text-sm">
-                <p className="text-gray-400">⏰ Available</p>
-                <p className="text-white font-medium">24/7 Support</p>
+              <li className="text-xs sm:text-sm">
+                <p className="text-gray-400 text-xs sm:text-sm">⏰ Available</p>
+                <p className="text-white font-medium text-xs sm:text-sm">24/7 Support</p>
               </li>
             </ul>
           </div>

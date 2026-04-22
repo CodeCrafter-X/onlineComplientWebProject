@@ -115,28 +115,28 @@ export default function ComplaintView() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
       {/* Header */}
       <header className="bg-white shadow-md sticky top-0 z-50">
-        <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
-          <h1 className="text-2xl font-bold text-gray-900">Complaint Details</h1>
+        <div className="max-w-4xl mx-auto px-3 sm:px-4 md:px-6 py-3 sm:py-4 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Complaint Details</h1>
           <Link
             href="/complaint"
-            className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+            className="w-full sm:w-auto px-4 sm:px-6 py-2 sm:py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors text-sm sm:text-base text-center"
           >
             ← Back to Complaints
           </Link>
         </div>
       </header>
 
-      <div className="max-w-4xl mx-auto px-4 py-8 space-y-6">
+      <div className="max-w-4xl mx-auto px-3 sm:px-4 md:px-6 py-6 sm:py-8 space-y-4 sm:space-y-6">
         {/* Main Info Card */}
-        <div className="bg-white rounded-2xl shadow-lg p-8">
-          <div className="mb-6">
-            <div className="flex items-center justify-between mb-6">
+        <div className="bg-white rounded-2xl shadow-lg p-5 sm:p-8">
+          <div className="mb-4 sm:mb-6">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 sm:mb-6 gap-3">
               <div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-2">{complaint.title}</h2>
-                <p className="text-gray-500">ID: {complaint._id.toString()}</p>
+                <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-1 sm:mb-2">{complaint.title}</h2>
+                <p className="text-xs sm:text-sm text-gray-500">ID: {complaint._id.toString()}</p>
               </div>
               <span
-                className={`inline-block px-4 py-2 rounded-full font-bold text-lg border ${getStatusColor(
+                className={`inline-block px-3 sm:px-4 py-2 rounded-full font-bold text-sm sm:text-base border ${getStatusColor(
                   complaint.status
                 )}`}
               >
@@ -144,26 +144,26 @@ export default function ComplaintView() {
               </span>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 pt-6 border-t border-gray-200">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 pt-4 sm:pt-6 border-t border-gray-200">
               <div>
-                <p className="text-gray-500 text-sm mb-1">CATEGORY</p>
-                <p className="text-gray-900 font-semibold">{complaint.category}</p>
+                <p className="text-xs sm:text-sm text-gray-500 mb-1">CATEGORY</p>
+                <p className="text-sm sm:text-base text-gray-900 font-semibold">{complaint.category}</p>
               </div>
               <div>
-                <p className="text-gray-500 text-sm mb-1">FILED ON</p>
-                <p className="text-gray-900 font-semibold">
+                <p className="text-xs sm:text-sm text-gray-500 mb-1">FILED ON</p>
+                <p className="text-sm sm:text-base text-gray-900 font-semibold">
                   {new Date(complaint.createdAt).toLocaleDateString()}
                 </p>
               </div>
               <div>
-                <p className="text-gray-500 text-sm mb-1">LAST UPDATED</p>
-                <p className="text-gray-900 font-semibold">
+                <p className="text-xs sm:text-sm text-gray-500 mb-1">LAST UPDATED</p>
+                <p className="text-sm sm:text-base text-gray-900 font-semibold">
                   {new Date(complaint.updatedAt).toLocaleDateString()}
                 </p>
               </div>
               <div>
-                <p className="text-gray-500 text-sm mb-1">TIME</p>
-                <p className="text-gray-900 font-semibold">
+                <p className="text-xs sm:text-sm text-gray-500 mb-1">TIME</p>
+                <p className="text-sm sm:text-base text-gray-900 font-semibold">
                   {new Date(complaint.createdAt).toLocaleTimeString([], {
                     hour: '2-digit',
                     minute: '2-digit',
@@ -175,28 +175,28 @@ export default function ComplaintView() {
         </div>
 
         {/* Description Card */}
-        <div className="bg-white rounded-2xl shadow-lg p-8">
-          <h3 className="text-xl font-bold text-gray-900 mb-4">Description</h3>
-          <p className="text-gray-700 leading-relaxed text-lg">{complaint.description}</p>
+        <div className="bg-white rounded-2xl shadow-lg p-5 sm:p-8">
+          <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4">Description</h3>
+          <p className="text-sm sm:text-base text-gray-700 leading-relaxed">{complaint.description}</p>
         </div>
 
         {/* Location Card */}
-        <div className="bg-white rounded-2xl shadow-lg p-8">
-          <h3 className="text-xl font-bold text-gray-900 mb-4">Location</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div className="bg-white rounded-2xl shadow-lg p-5 sm:p-8">
+          <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4">Location</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-6">
             <div>
-              <p className="text-gray-500 text-sm mb-2">ADDRESS</p>
-              <p className="text-gray-900 font-semibold text-lg">
+              <p className="text-xs sm:text-sm text-gray-500 mb-2">ADDRESS</p>
+              <p className="text-sm sm:text-lg text-gray-900 font-semibold">
                 {complaint.address || 'Not provided'}
               </p>
             </div>
             <div>
-              <p className="text-gray-500 text-sm mb-2">COORDINATES</p>
-              <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
-                <p className="text-gray-700 font-mono">
+              <p className="text-xs sm:text-sm text-gray-500 mb-2">COORDINATES</p>
+              <div className="bg-gray-50 rounded-lg p-3 sm:p-4 border border-gray-200">
+                <p className="text-xs sm:text-sm text-gray-700 font-mono">
                   Lat: <span className="text-blue-600">{complaint.location.lat}</span>
                 </p>
-                <p className="text-gray-700 font-mono">
+                <p className="text-xs sm:text-sm text-gray-700 font-mono">
                   Lng: <span className="text-blue-600">{complaint.location.lng}</span>
                 </p>
               </div>

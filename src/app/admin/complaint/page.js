@@ -136,63 +136,63 @@ export default function ManageComplaintsPage() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
     
 
-      <main className="flex-grow py-12 px-4 sm:px-6 lg:px-8">
+      <main className="flex-grow py-8 sm:py-12 px-3 sm:px-4 md:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
-          <div className="mb-8">
-            <Link href="/admin" className="text-blue-600 hover:text-blue-700 font-semibold mb-4 inline-flex items-center gap-2">
+          <div className="mb-6 sm:mb-8">
+            <Link href="/admin" className="text-blue-600 hover:text-blue-700 font-semibold mb-3 sm:mb-4 inline-flex items-center gap-2 text-xs sm:text-sm">
               ← Back to Dashboard
             </Link>
-            <h1 className="text-5xl font-bold text-gray-900 mb-2">Manage Complaints</h1>
-            <p className="text-lg text-gray-600">Review and manage all citizen complaints</p>
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-2">Manage Complaints</h1>
+            <p className="text-xs sm:text-base text-gray-600">Review and manage all citizen complaints</p>
           </div>
 
           {error && (
-            <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-6 rounded-lg mb-8">
+            <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 sm:p-6 rounded-lg mb-6 sm:mb-8 text-xs sm:text-sm">
               <p className="font-semibold">{error}</p>
             </div>
           )}
 
           {/* Statistics */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-            <div className="bg-white rounded-2xl shadow-lg p-8 border-t-4 border-blue-600">
-              <p className="text-gray-600 text-sm font-semibold uppercase mb-2">Total</p>
-              <p className="text-4xl font-bold text-blue-600">{totalComplaints}</p>
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 mb-6 sm:mb-8">
+            <div className="bg-white rounded-2xl shadow-lg p-4 sm:p-6 md:p-8 border-t-4 border-blue-600">
+              <p className="text-gray-600 text-xs sm:text-sm font-semibold uppercase mb-2">Total</p>
+              <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-600">{totalComplaints}</p>
             </div>
-            <div className="bg-white rounded-2xl shadow-lg p-8 border-t-4 border-yellow-500">
-              <p className="text-gray-600 text-sm font-semibold uppercase mb-2">Pending</p>
-              <p className="text-4xl font-bold text-yellow-600">{complaints.filter((c) => c.status === 'pending').length}</p>
+            <div className="bg-white rounded-2xl shadow-lg p-4 sm:p-6 md:p-8 border-t-4 border-yellow-500">
+              <p className="text-gray-600 text-xs sm:text-sm font-semibold uppercase mb-2">Pending</p>
+              <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-yellow-600">{complaints.filter((c) => c.status === 'pending').length}</p>
             </div>
-            <div className="bg-white rounded-2xl shadow-lg p-8 border-t-4 border-green-600">
-              <p className="text-gray-600 text-sm font-semibold uppercase mb-2">Approved</p>
-              <p className="text-4xl font-bold text-green-600">{complaints.filter((c) => c.status === 'approved').length}</p>
+            <div className="bg-white rounded-2xl shadow-lg p-4 sm:p-6 md:p-8 border-t-4 border-green-600">
+              <p className="text-gray-600 text-xs sm:text-sm font-semibold uppercase mb-2">Approved</p>
+              <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-green-600">{complaints.filter((c) => c.status === 'approved').length}</p>
             </div>
-            <div className="bg-white rounded-2xl shadow-lg p-8 border-t-4 border-red-600">
-              <p className="text-gray-600 text-sm font-semibold uppercase mb-2">Rejected</p>
-              <p className="text-4xl font-bold text-red-600">{complaints.filter((c) => c.status === 'rejected').length}</p>
+            <div className="bg-white rounded-2xl shadow-lg p-4 sm:p-6 md:p-8 border-t-4 border-red-600">
+              <p className="text-gray-600 text-xs sm:text-sm font-semibold uppercase mb-2">Rejected</p>
+              <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-red-600">{complaints.filter((c) => c.status === 'rejected').length}</p>
             </div>
           </div>
 
           {/* Filters */}
-          <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
-            <h3 className="text-lg font-bold text-gray-900 mb-6">Filters & Search</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="bg-white rounded-2xl shadow-lg p-5 sm:p-6 md:p-8 mb-6 sm:mb-8">
+            <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-4 sm:mb-6">Filters & Search</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-3">Search by Title, Category, or Address</label>
+                <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-2 sm:mb-3">Search by Title, Category, or Address</label>
                 <input
                   type="text"
                   placeholder="Search complaints..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 transition-colors"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 transition-colors text-xs sm:text-sm"
                 />
               </div>
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-3">Filter by Status</label>
+                <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-2 sm:mb-3">Filter by Status</label>
                 <select
                   value={filterStatus}
                   onChange={(e) => setFilterStatus(e.target.value)}
-                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 transition-colors"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 transition-colors text-xs sm:text-sm"
                 >
                   <option value="all">All Statuses</option>
                   <option value="pending">Pending</option>

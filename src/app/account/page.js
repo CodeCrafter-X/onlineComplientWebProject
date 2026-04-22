@@ -117,26 +117,26 @@ export default function UserDashboard() {
   // Home Section
   const HomeSection = () => (
     <div>
-      <div className="mb-8">
-        <Link href="/" className="text-blue-600 hover:text-blue-700 font-medium text-sm inline-flex items-center gap-2 transition-colors">
+      <div className="mb-6 sm:mb-8">
+        <Link href="/" className="text-blue-600 hover:text-blue-700 font-medium text-xs sm:text-sm inline-flex items-center gap-2 transition-colors">
           ← Back to Home
         </Link>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         {/* View Profile Card */}
         <button
           onClick={() => setActiveSection('profile')}
-          className="group bg-white rounded-xl border border-gray-200 hover:border-gray-300 p-6 cursor-pointer transition-all duration-300 hover:shadow-md text-left"
+          className="group bg-white rounded-xl border border-gray-200 hover:border-gray-300 p-5 sm:p-6 cursor-pointer transition-all duration-300 hover:shadow-md text-left"
         >
           <div className="flex flex-col h-full">
-            <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+            <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
               <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
               </svg>
             </div>
-            <h3 className="text-lg font-bold text-gray-900 mb-2">My Profile</h3>
-            <p className="text-gray-600 text-sm mb-6 flex-grow">View and manage your account settings</p>
-            <span className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors text-sm inline-block">
+            <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-2">My Profile</h3>
+            <p className="text-gray-600 text-xs sm:text-sm mb-4 sm:mb-6 flex-grow">View and manage your account settings</p>
+            <span className="px-3 sm:px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors text-xs sm:text-sm inline-block w-full text-center">
               View Profile
             </span>
           </div>
@@ -301,9 +301,9 @@ export default function UserDashboard() {
       </div>
 
       {/* Statistics */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <div className="bg-white rounded-xl border border-gray-200 p-6 hover:border-gray-300 transition-all">
-          <div className="flex items-center justify-between mb-2">
+      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
+        <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 hover:border-gray-300 transition-all">
+          <div className="flex items-center justify-between mb-2 sm:mb-3">
             <p className="text-gray-500 text-xs font-semibold uppercase tracking-wide">Total</p>
             <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
               <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -311,10 +311,10 @@ export default function UserDashboard() {
               </svg>
             </div>
           </div>
-          <p className="text-3xl font-bold text-gray-900">{stats.total}</p>
+          <p className="text-xl sm:text-3xl font-bold text-gray-900">{stats.total}</p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-6 hover:border-gray-300 transition-all">
-          <div className="flex items-center justify-between mb-2">
+        <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 hover:border-gray-300 transition-all">
+          <div className="flex items-center justify-between mb-2 sm:mb-3">
             <p className="text-gray-500 text-xs font-semibold uppercase tracking-wide">Pending</p>
             <div className="w-8 h-8 bg-amber-100 rounded-lg flex items-center justify-center">
               <svg className="w-4 h-4 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -322,10 +322,10 @@ export default function UserDashboard() {
               </svg>
             </div>
           </div>
-          <p className="text-3xl font-bold text-amber-600">{stats.pending}</p>
+          <p className="text-xl sm:text-3xl font-bold text-amber-600">{stats.pending}</p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-6 hover:border-gray-300 transition-all">
-          <div className="flex items-center justify-between mb-2">
+        <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 hover:border-gray-300 transition-all">
+          <div className="flex items-center justify-between mb-2 sm:mb-3">
             <p className="text-gray-500 text-xs font-semibold uppercase tracking-wide">Approved</p>
             <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
               <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -333,10 +333,10 @@ export default function UserDashboard() {
               </svg>
             </div>
           </div>
-          <p className="text-3xl font-bold text-green-600">{stats.approved}</p>
+          <p className="text-xl sm:text-3xl font-bold text-green-600">{stats.approved}</p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-6 hover:border-gray-300 transition-all">
-          <div className="flex items-center justify-between mb-2">
+        <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 hover:border-gray-300 transition-all">
+          <div className="flex items-center justify-between mb-2 sm:mb-3">
             <p className="text-gray-500 text-xs font-semibold uppercase tracking-wide">Rejected</p>
             <div className="w-8 h-8 bg-red-100 rounded-lg flex items-center justify-center">
               <svg className="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -344,7 +344,7 @@ export default function UserDashboard() {
               </svg>
             </div>
           </div>
-          <p className="text-3xl font-bold text-red-600">{stats.rejected}</p>
+          <p className="text-xl sm:text-3xl font-bold text-red-600">{stats.rejected}</p>
         </div>
       </div>
 
@@ -428,11 +428,11 @@ export default function UserDashboard() {
 
       {/* Header */}
       <header className="bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="flex justify-between items-center">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-6 sm:py-8">
+          <div className="flex flex-col sm:flex-row justify-between items-start gap-4 sm:gap-0">
             <div>
-              <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">Dashboard</h1>
-              <p className="text-gray-500 text-sm mt-1 font-medium">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-900 tracking-tight">Dashboard</h1>
+              <p className="text-gray-500 text-xs sm:text-sm mt-1 font-medium">
                 {activeSection === 'home'
                   ? 'Welcome back, ' + (user?.username || 'User') + '!'
                   : activeSection === 'profile'
@@ -442,7 +442,7 @@ export default function UserDashboard() {
             </div>
             <button
               onClick={handleLogout}
-              className="px-6 py-2.5 bg-red-600 hover:bg-gray-200 text-gray-10 rounded-lg transition-all font-semibold text-sm border border-gray-300 hover:border-gray-400"
+              className="px-4 sm:px-6 py-2 sm:py-2.5 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-all font-semibold text-xs sm:text-sm w-full sm:w-auto"
             >
               Logout
             </button>
@@ -450,7 +450,7 @@ export default function UserDashboard() {
         </div>
       </header>
 
-      <main className="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
+      <main className="flex-grow max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-8 sm:py-12 w-full">
         {error && (
           <div className="mb-6 bg-red-100 border-l-4 border-red-500 text-red-700 p-6 rounded-lg font-semibold">
             {error}
