@@ -261,11 +261,6 @@ export default function ComplaintView() {
 
         {/* Action Buttons */}
         <div className="flex gap-4 justify-center pb-8">
-          <Link href="/complaint" className="w-full sm:w-auto">
-            <button className="w-full px-6 py-3 bg-gray-600 hover:bg-gray-700 text-white font-semibold rounded-lg transition-colors">
-              Back to My Complaints
-            </button>
-          </Link>
           <Link href="/complaint/create" className="w-full sm:w-auto">
             <button className="w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors">
               File Another Complaint
