@@ -448,9 +448,14 @@ export default function CreateComplaintContent() {
               </div>
 
               {/* Back to Home Link */}
-              <Link href="/" className="mt-10 inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-semibold mb-6 transition-colors">
-                ← Back to Home
-              </Link>
+          <Link href="/">
+          <button className="group inline-flex items-center mt-10 gap-2 px-5 py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-300 text-xs sm:text-sm ">
+            <svg className="w-4 h-4 sm:w-5 sm:h-5 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Back to Home
+          </button>
+        </Link>
             </>
           )}
         </div>

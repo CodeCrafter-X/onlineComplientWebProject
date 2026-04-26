@@ -133,19 +133,15 @@ export default function MyComplaints() {
               <h1 className="text-3xl font-bold text-gray-900">My Complaints</h1>
               <p className="text-gray-600 text-sm mt-1">Track and manage your filed complaints</p>
             </div>
-            <div className="flex gap-4">
-              <Link
-                href="/complaint/create"
-                className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-colors"
-              >
-                + New Complaint
+            <div className="flex gap-3">
+              <Link href="/account">
+                <button className="group px-6 py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center gap-2 text-sm sm:text-base">
+                  <svg className="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                  </svg>
+                  Back to Dashboard
+                </button>
               </Link>
-              <button
-                onClick={() => router.push('/')}
-                className="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-900 rounded-lg transition-colors"
-              >
-                Home
-              </button>
             </div>
           </div>
         </div>
@@ -239,14 +235,6 @@ export default function MyComplaints() {
             <p className="text-gray-600 text-lg mb-6">
               {complaints.length === 0 ? "You haven't filed any complaints yet." : 'No complaints match your filters'}
             </p>
-            {complaints.length === 0 && (
-              <Link
-                href="/complaint/create"
-                className="inline-block px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-colors"
-              >
-                File Your First Complaint
-              </Link>
-            )}
           </div>
         ) : (
           <div className="space-y-3 sm:space-y-4">
@@ -322,10 +310,17 @@ export default function MyComplaints() {
         )}
       </div>
 
-        {/* Back to Home Link */}
-        <Link href="/" className="mt-10 mb-8g inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-semibold mb-6 transition-colors">
-          ← Back to Home
-        </Link>
+        {/* Back to Home Button */}
+        <div className="mt-12 mb-8 flex justify-center px-4 sm:px-6 lg:px-8">
+          <Link href="/">
+            <button className="group px-8 py-3 sm:px-10 sm:py-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center gap-2 text-sm sm:text-base">
+              <svg className="w-5 h-5 sm:w-6 sm:h-6 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              </svg>
+              Back to Home
+            </button>
+          </Link>
+        </div>
 
         <Footer />
 
