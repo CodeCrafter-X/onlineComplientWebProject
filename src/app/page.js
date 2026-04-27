@@ -296,34 +296,32 @@ export default function Home() {
           </div>
 
           {/* Services Grid */}
-          <div className="w-full flex justify-center">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-5 md:gap-6 lg:gap-8 place-items-center justify-center">
-              {SERVICES.map((service, index) => (
-                <button
-                  key={service.id}
-                  onClick={() => setSelectedService(service)}
-                  className="group relative bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200 animate-slide-up hover:border-blue-400 text-center w-full max-w-sm h-full flex flex-col"
-                  style={{ animationDelay: `${(index + 1) * 0.1}s` }}
-                >
-                <div className="relative h-32 sm:h-36 md:h-40 bg-gradient-to-br overflow-hidden" style={{ backgroundImage: `linear-gradient(135deg, var(--tw-gradient-stops))` }}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
+            {SERVICES.map((service, index) => (
+              <button
+                key={service.id}
+                onClick={() => setSelectedService(service)}
+                className="group relative bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200 animate-slide-up hover:border-blue-400 text-center flex flex-col h-full"
+                style={{ animationDelay: `${(index + 1) * 0.1}s` }}
+              >
+                <div className="relative h-40 bg-gradient-to-br overflow-hidden">
                   <img 
                     src={service.image} 
                     alt={service.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <span className="text-white font-bold text-xs sm:text-sm text-center">Click to See Details →</span>
+                    <span className="text-white font-bold text-sm text-center">Click to See Details →</span>
                   </div>
                 </div>
-                <div className="p-4 sm:p-5 md:p-6 flex-1 flex flex-col justify-center items-center text-center">
-                  <h3 className="text-sm sm:text-base md:text-lg font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors line-clamp-2">{service.title}</h3>
-                  <p className="text-gray-600 text-xs sm:text-sm leading-relaxed line-clamp-3">
+                <div className="p-5 md:p-6 flex-1 flex flex-col justify-center items-center text-center">
+                  <h3 className="text-base md:text-lg font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors line-clamp-2">{service.title}</h3>
+                  <p className="text-gray-600 text-sm leading-relaxed line-clamp-3">
                     {service.description}
                   </p>
                 </div>
               </button>
-              ))}
-            </div>
+            ))}
           </div>
         </div>
       </section>
