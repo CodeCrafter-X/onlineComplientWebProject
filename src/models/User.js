@@ -19,6 +19,10 @@ const userSchema = new mongoose.Schema(
         nic:{
             type:String,
         },
+        profileImage:{
+            type:String,
+            default:null
+        },
         role:{
             type:String,
             enum:["citizen","admin"],

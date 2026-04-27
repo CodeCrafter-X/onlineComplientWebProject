@@ -190,7 +190,7 @@ export default function AdminDashboard() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               
               {/* Admin Profile Card */}
-              <Link href="/admin/profile">
+              <Link href="/admin/view-profile">
                 <div className="group bg-white rounded-xl border border-gray-200 hover:border-gray-300 p-5 sm:p-6 cursor-pointer transition-all hover:shadow-md h-full">
                   <div className="flex flex-col h-full">
                     <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mb-3 sm:mb-4">

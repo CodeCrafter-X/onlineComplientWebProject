@@ -129,23 +129,22 @@ export default function UserDashboard() {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         {/* View Profile Card */}
-        <button
-          onClick={() => setActiveSection('profile')}
-          className="group bg-white rounded-xl border border-gray-200 hover:border-gray-300 p-5 sm:p-6 cursor-pointer transition-all duration-300 hover:shadow-md text-left"
-        >
-          <div className="flex flex-col h-full">
-            <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
-              <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-              </svg>
+        <Link href="/account/view-profile">
+          <div className="group bg-white rounded-xl border border-gray-200 hover:border-gray-300 p-5 sm:p-6 cursor-pointer transition-all duration-300 hover:shadow-md text-left h-full">
+            <div className="flex flex-col h-full">
+              <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
+                <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+              </div>
+              <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-2">My Profile</h3>
+              <p className="text-gray-600 text-xs sm:text-sm mb-4 sm:mb-6 flex-grow">View and manage your account settings</p>
+              <span className="px-3 sm:px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors text-xs sm:text-sm inline-block w-full text-center">
+                View Profile
+              </span>
             </div>
-            <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-2">My Profile</h3>
-            <p className="text-gray-600 text-xs sm:text-sm mb-4 sm:mb-6 flex-grow">View and manage your account settings</p>
-            <span className="px-3 sm:px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors text-xs sm:text-sm inline-block w-full text-center">
-              View Profile
-            </span>
           </div>
-        </button>
+        </Link>
 
         {/* My Complaints Card */}
         <Link href="/complaint">
