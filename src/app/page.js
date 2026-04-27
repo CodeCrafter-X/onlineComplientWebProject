@@ -296,27 +296,27 @@ export default function Home() {
           </div>
 
           {/* Services Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
             {SERVICES.map((service, index) => (
               <button
                 key={service.id}
                 onClick={() => setSelectedService(service)}
-                className="group relative bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200 animate-slide-up hover:border-blue-400 text-center flex flex-col h-full"
+                className="group relative bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200 animate-slide-up hover:border-blue-400 text-center flex flex-col h-full w-full"
                 style={{ animationDelay: `${(index + 1) * 0.1}s` }}
               >
-              <div className="relative w-full aspect-video bg-gray-200 overflow-hidden sm:aspect-square md:aspect-video">
+              <div className="relative w-full h-48 sm:h-40 md:h-44 bg-gray-200 overflow-hidden flex-shrink-0">
                   <img 
                     src={service.image} 
                     alt={service.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                    className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-300"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <span className="text-white font-bold text-sm text-center">Click to See Details →</span>
+                    <span className="text-white font-bold text-xs sm:text-sm text-center px-2">Click to See Details →</span>
                   </div>
                 </div>
-                <div className="p-5 md:p-6 flex-1 flex flex-col justify-center items-center text-center">
-                  <h3 className="text-base md:text-lg font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors line-clamp-2">{service.title}</h3>
-                  <p className="text-gray-600 text-sm leading-relaxed line-clamp-3">
+                <div className="p-4 sm:p-5 md:p-6 flex-1 flex flex-col justify-center items-center text-center">
+                  <h3 className="text-base sm:text-lg md:text-lg font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors line-clamp-2">{service.title}</h3>
+                  <p className="text-gray-600 text-xs sm:text-sm leading-relaxed line-clamp-3">
                     {service.description}
                   </p>
                 </div>
@@ -343,11 +343,11 @@ export default function Home() {
 
             <div className="p-6 md:p-8">
               {/* Service Image */}
-              <div className="relative h-64 md:h-80 rounded-2xl overflow-hidden mb-8 shadow-lg">
+              <div className="relative w-full h-56 sm:h-64 md:h-80 rounded-2xl overflow-hidden mb-8 shadow-lg bg-gray-200">
                 <img 
                   src={selectedService.image}
                   alt={selectedService.title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-center"
                 />
               </div>
 
