@@ -304,7 +304,7 @@ export default function Home() {
                 className="group relative bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200 animate-slide-up hover:border-blue-400 text-center flex flex-col h-full"
                 style={{ animationDelay: `${(index + 1) * 0.1}s` }}
               >
-                <div className="relative h-40 bg-gradient-to-br overflow-hidden">
+              <div className="relative w-full aspect-video bg-gray-200 overflow-hidden sm:aspect-square md:aspect-video">
                   <img 
                     src={service.image} 
                     alt={service.title}
