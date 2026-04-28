@@ -223,7 +223,7 @@ export default function MyComplaints() {
 
         {/* Complaints List */}
         {loading ? (
-          <div className="text-center py-12">
+          <div className="text-center py-12 ">
             <p className="text-gray-600 text-lg">Loading your complaints...</p>
           </div>
         ) : error ? (
@@ -237,14 +237,14 @@ export default function MyComplaints() {
             </p>
           </div>
         ) : (
-          <div className="space-y-3 sm:space-y-4">
+          <div className="space-y-4 sm:space-y-4 mt-20">
             {filteredComplaints.map((complaint) => (
               <div
                 key={complaint._id}
-                className="bg-white rounded-xl shadow-md hover:shadow-lg hover:scale-[1.01] transition-all cursor-pointer overflow-hidden my-2 sm:my-0"
+                className=" bg-white rounded-xl shadow-md hover:shadow-lg hover:scale-[1.01] transition-all cursor-pointer  overflow-hidden sm:my-10 mt-20 "
                 onClick={() => router.push(`/complaint/${complaint._id}`)}
               >
-                <div className="p-4 sm:p-6">
+                <div className="p-4 sm:p-6 ">
                   <div className="grid grid-cols-1 md:grid-cols-5 gap-4 items-center">
                     {/* Title */}
                     <div className="md:col-span-2">

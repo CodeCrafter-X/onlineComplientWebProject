@@ -215,7 +215,7 @@ export default function ManageComplaintsPage() {
           </div>
 
           {/* Complaints List */}
-          <div className="space-y-4 mb-8">
+          <div className="space-y-4 mb-8 mt-10 ">
             {filteredComplaints.length === 0 ? (
               <div className="bg-white rounded-2xl shadow-lg p-12 text-center">
                 <p className="text-gray-600 text-xl mb-2">No complaints found</p>
@@ -224,7 +224,7 @@ export default function ManageComplaintsPage() {
             ) : (
               filteredComplaints.map((complaint) => (
                 <Link key={complaint._id} href={`/admin/complaint/${complaint._id}`}>
-                  <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 p-8 cursor-pointer border-l-4 border-blue-600 hover:scale-[1.02] transform">
+                  <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 p-8 cursor-pointer border-l-4 border-blue-600 hover:scale-[1.02] transform mt-10">
                     <div className="grid grid-cols-1 md:grid-cols-5 gap-4 md:gap-6 items-center">
                       {/* Title & ID */}
                       <div className="md:col-span-2">

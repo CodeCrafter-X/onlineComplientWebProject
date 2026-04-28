@@ -78,8 +78,9 @@ export default function ManageUsersPage() {
     if (searchTerm) {
       filtered = filtered.filter(
         (u) =>
-          u.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          u.email.toLowerCase().includes(searchTerm.toLowerCase())
+          (u.username && u.username.toLowerCase().includes(searchTerm.toLowerCase())) ||
+          (u.email && u.email.toLowerCase().includes(searchTerm.toLowerCase())) ||
+          (u.address && u.address.toLowerCase().includes(searchTerm.toLowerCase()))
       );
     }
 
@@ -142,7 +143,7 @@ export default function ManageUsersPage() {
             <h3 className="text-lg font-bold text-gray-900 mb-6">Search Users</h3>
             <input
               type="text"
-              placeholder="Search by username or email..."
+              placeholder="Search by username, email, or address..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 transition-colors"
@@ -161,17 +162,17 @@ export default function ManageUsersPage() {
                 <table className="w-full">
                   <thead className="bg-gradient-to-r from-blue-50 to-purple-50 border-b-2 border-gray-200">
                     <tr>
-                      <th className="px-8 py-6 text-left text-sm font-bold text-gray-900">Username</th>
-                      <th className="px-8 py-6 text-left text-sm font-bold text-gray-900">Email</th>
-                      <th className="px-8 py-6 text-left text-sm font-bold text-gray-900">NIC</th>
-                      <th className="px-8 py-6 text-left text-sm font-bold text-gray-900">Member Since</th>
-                      <th className="px-8 py-6 text-left text-sm font-bold text-gray-900">Status</th>
+                      <th className="px-6 py-6 text-left text-sm font-bold text-gray-900">Username</th>
+                      <th className="px-6 py-6 text-left text-sm font-bold text-gray-900">Email</th>
+                      <th className="px-6 py-6 text-left text-sm font-bold text-gray-900">Address</th>
+                      <th className="px-6 py-6 text-left text-sm font-bold text-gray-900">Member Since</th>
+                      <th className="px-6 py-6 text-left text-sm font-bold text-gray-900">Complaints Filed</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200">
                     {filteredUsers.map((user, index) => (
                       <tr key={user._id} className="hover:bg-gray-50 transition-colors">
-                        <td className="px-8 py-6">
+                        <td className="px-6 py-6">
                           <div className="flex items-center gap-3">
                             <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-full flex items-center justify-center text-white font-bold text-sm">
                               {user.username.charAt(0).toUpperCase()}
@@ -179,20 +180,20 @@ export default function ManageUsersPage() {
                             <p className="text-gray-900 font-semibold">{user.username}</p>
                           </div>
                         </td>
-                        <td className="px-8 py-6">
+                        <td className="px-6 py-6">
                           <p className="text-gray-600 font-medium">{user.email}</p>
                         </td>
-                        <td className="px-8 py-6">
-                          <p className="text-gray-600 font-medium">{user.nic || 'N/A'}</p>
+                        <td className="px-6 py-6">
+                          <p className="text-gray-600 font-medium">{user.address || 'N/A'}</p>
                         </td>
-                        <td className="px-8 py-6">
+                        <td className="px-6 py-6">
                           <p className="text-gray-600 font-medium">
                             {user.createdAt ? new Date(user.createdAt).toLocaleDateString() : 'N/A'}
                           </p>
                         </td>
-                        <td className="px-8 py-6">
-                          <span className="inline-block px-4 py-2 bg-green-100 text-green-800 rounded-full text-sm font-bold">
-                            ✓ Active
+                        <td className="px-6 py-6">
+                          <span className="inline-block px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm font-bold">
+                            {user.complaintCount || 0}
                           </span>
                         </td>
                       </tr>

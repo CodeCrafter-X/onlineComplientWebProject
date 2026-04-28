@@ -122,10 +122,10 @@ export default function Home() {
             <div className="inline-block mb-3 sm:mb-4 px-3 sm:px-4 py-2 bg-blue-100 rounded-full">
               <span className="text-blue-600 font-semibold text-xs sm:text-sm">WHO WE ARE</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black text-gray-900 mb-4 sm:mb-6 animate-fade-in-down leading-tight" style={{ animationDelay: '0.1s' }}>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black text-gray-900 mb-4 sm:mb-6 leading-tight">
               Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Vision & Mission</span>
             </h2>
-            <p className="text-gray-600 text-sm sm:text-base md:text-lg lg:text-xl max-w-3xl mx-auto animate-fade-in-down font-medium" style={{ animationDelay: '0.2s' }}>
+            <p className="text-gray-600 text-sm sm:text-base md:text-lg lg:text-xl max-w-3xl mx-auto font-medium">
               Committed to transforming our community through transparent governance and active citizen engagement for sustainable development.
             </p>
           </div>
@@ -280,49 +280,48 @@ export default function Home() {
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-12 sm:py-16 md:py-24 lg:py-32 px-3 sm:px-4 md:px-6 bg-gray-50">
+      <section id="services" className="py-12 px-3 sm:px-4 md:px-6 bg-gray-50">
         <div className="max-w-7xl mx-auto">
           {/* Section Header */}
           <div className="text-center mb-10 sm:mb-12 md:mb-16 lg:mb-20 animate-fade-in-down">
             <div className="inline-block mb-3 sm:mb-4 px-3 sm:px-4 py-2 bg-blue-100 rounded-full">
               <span className="text-blue-600 font-semibold text-xs sm:text-sm">OUR SERVICES</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black text-gray-900 mb-4 sm:mb-6 animate-fade-in-down leading-tight" style={{ animationDelay: '0.1s' }}>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black text-gray-900 mb-4 sm:mb-6 leading-tight">
               Services We <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Provide</span>
             </h2>
-            <p className="text-gray-600 text-sm sm:text-base md:text-lg lg:text-xl max-w-3xl mx-auto animate-fade-in-down font-medium" style={{ animationDelay: '0.2s' }}>
+            <p className="text-gray-600 text-sm sm:text-base md:text-lg lg:text-xl max-w-3xl mx-auto font-medium">
               Dedicated to maintaining the highest standards of civic management and infrastructure.
             </p>
           </div>
 
           {/* Services Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
-            {SERVICES.map((service, index) => (
-              <button
-                key={service.id}
-                onClick={() => setSelectedService(service)}
-                className="group relative bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200 animate-slide-up hover:border-blue-400 text-center flex flex-col h-full w-full"
-                style={{ animationDelay: `${(index + 1) * 0.1}s` }}
-              >
-              <div className="relative w-full h-48 sm:h-40 md:h-44 bg-gray-200 overflow-hidden flex-shrink-0">
-                  <img 
-                    src={service.image} 
-                    alt={service.title}
-                    className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <span className="text-white font-bold text-xs sm:text-sm text-center px-2">Click to See Details →</span>
-                  </div>
-                </div>
-                <div className="p-4 sm:p-5 md:p-6 flex-1 flex flex-col justify-center items-center text-center">
-                  <h3 className="text-base sm:text-lg md:text-lg font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors line-clamp-2">{service.title}</h3>
-                  <p className="text-gray-600 text-xs sm:text-sm leading-relaxed line-clamp-3">
-                    {service.description}
-                  </p>
-                </div>
-              </button>
-            ))}
-          </div>
+         <div className="flex flex-wrap justify-center gap-6 md:gap-8">
+  {SERVICES.map((service, index) => (
+    <button
+      key={service.id}
+      onClick={() => setSelectedService(service)}
+      className="group relative bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200 animate-slide-up hover:border-blue-400 text-center flex flex-col h-auto w-full sm:w-[calc(50%-1.5rem)] md:w-[calc(33.333%-2rem)] max-w-[350px]"
+      style={{ animationDelay: `${(index + 1) * 0.1}s` }}
+    >
+      {/* ... rest of your card content remains the same ... */}
+      <div className="relative w-full h-48 sm:h-40 md:h-44 bg-gray-200 overflow-hidden flex-shrink-0">
+          <img 
+            src={service.image} 
+            alt={service.title}
+            className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-300"
+          />
+          {/* Inner card content */}
+      </div>
+      <div className="p-4 sm:p-5 md:p-6 flex-1 flex flex-col justify-center items-center text-center">
+          <h3 className="text-base sm:text-lg md:text-lg font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors line-clamp-2">{service.title}</h3>
+          <p className="text-gray-600 text-xs sm:text-sm leading-relaxed line-clamp-3">
+            {service.description}
+          </p>
+      </div>
+    </button>
+  ))}
+</div>
         </div>
       </section>
 
@@ -402,10 +401,10 @@ export default function Home() {
             <div className="inline-block mb-3 sm:mb-4 px-3 sm:px-4 py-2 bg-blue-100 rounded-full">
               <span className="text-blue-600 font-semibold text-xs sm:text-sm">SIMPLE PROCESS</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black text-gray-900 mb-4 sm:mb-6 animate-fade-in-down leading-tight" style={{ animationDelay: '0.1s' }}>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black text-gray-900 mb-4 sm:mb-6 leading-tight">
               How to File a <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Complaint</span>
             </h2>
-            <p className="text-gray-600 text-sm sm:text-base md:text-lg lg:text-xl max-w-3xl mx-auto animate-fade-in-down font-medium" style={{ animationDelay: '0.2s' }}>
+            <p className="text-gray-600 text-sm sm:text-base md:text-lg lg:text-xl max-w-3xl mx-auto font-medium">
               Just 4 simple steps to report issues and track their resolution in real-time. Quick, secure, and transparent.
             </p>
           </div>
