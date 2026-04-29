@@ -72,7 +72,9 @@ export function useAuthCheck() {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await fetch(API_ENDPOINTS.TOKEN_CHECK);
+        const response = await fetch(API_ENDPOINTS.TOKEN_CHECK, {
+          credentials: 'include',
+        });
         if (response.ok) {
           setIsAuthenticated(true);
         } else {

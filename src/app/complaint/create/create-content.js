@@ -180,6 +180,7 @@ export default function CreateComplaintContent() {
       const response = await fetch(API_ENDPOINTS.COMPLAINT_CREATE, {
         method: 'POST',
         body: data,
+        credentials: 'include',
       });
 
       const result = await response.json();
