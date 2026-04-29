@@ -5,18 +5,20 @@ import * as cookie from "cookie";
 
 export async function POST(){
     try {
-        const headers = new Headers();
-        headers.append(
-            "set-cookie",
-            cookie.serialize("token", "",{
-                path:"/",
-                maxAge: -1
-            })
-        )
-
-        return NextResponse.json(
+        const response = NextResponse.json(
             {message: "Logout successful"},
-            {status: 200, headers}  );
+            {status: 200}
+        );
+
+        response.cookies.set("token", "", {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: process.env.NODE_ENV === 'production' ? 'strict' : 'lax',
+            path: "/",
+            maxAge: -1,
+        });
+
+        return response;
 
 
 
