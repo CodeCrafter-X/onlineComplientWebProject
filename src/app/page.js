@@ -22,7 +22,8 @@ export default function Home() {
 
       const redirectPath = `${ROUTES.COMPLAINT_CREATE}?category=${encodeURIComponent(categoryName)}`;
       
-      if (response.ok && isAuthenticated) {
+      // Trust the fresh API response, don't rely on potentially stale isAuthenticated state
+      if (response.ok) {
         router.push(redirectPath);
       } else {
         setSelectedService(null);

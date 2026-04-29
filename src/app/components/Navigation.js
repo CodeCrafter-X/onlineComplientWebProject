@@ -13,7 +13,7 @@ export default function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
 
-  // Check authentication status
+  // Check authentication status on mount and when page becomes visible
   useEffect(() => {
     const checkAuth = async () => {
       try {
@@ -24,12 +24,28 @@ export default function Navigation() {
           const data = await response.json();
           setIsUser(true);
           setUserRole(data.user.role);
+        } else {
+          setIsUser(false);
+          setUserRole(null);
         }
       } catch (error) {
         setIsUser(false);
+        setUserRole(null);
       }
     };
+
+    // Initial auth check
     checkAuth();
+
+    // Re-check auth when page becomes visible (after redirects from login)
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        checkAuth();
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
   }, []);
 
   const scrollToSection = (id) => {
