@@ -48,23 +48,24 @@ export default function LoginContent() {
       const redirectParam = searchParams.get('redirect');
       console.log('📍 Redirect param:', redirectParam);
 
-      // Small delay to ensure browser registers the cookie
-      await new Promise(resolve => setTimeout(resolve, 300));
-      console.log('⏱️ Waited 300ms, redirecting now...');
+      // Wait for cookie to be fully registered
+      await new Promise(resolve => setTimeout(resolve, 500));
+      console.log('⏱️ Waited 500ms for cookie registration');
 
-      // LOGIN SUCCESSFUL - The backend has set the cookie
-      // Trust the authentication and redirect immediately
-      // Middleware will validate token on protected routes
-      
+      // Determine the redirect URL
+      let redirectUrl = '/';
       if (redirectParam) {
-        console.log('🎯 Redirecting to:', decodeURIComponent(redirectParam));
-        router.push(decodeURIComponent(redirectParam));
+        redirectUrl = decodeURIComponent(redirectParam);
+        console.log('🎯 Redirecting to:', redirectUrl);
       } else {
         console.log('🏠 Redirecting to home');
-        router.push('/');
       }
+
+      // Use hard page reload to ensure cookie is sent with the request
+      // This forces the browser to include the cookie in the next HTTP request
+      console.log('🔄 Performing hard page reload...');
+      window.location.href = redirectUrl;
       
-      setLoading(false);
     } catch (err) {
       console.error('❌ Login error:', err);
       setError('Connection error. Please try again.');
