@@ -27,12 +27,14 @@ export default function Home() {
         router.push(redirectPath);
       } else {
         setSelectedService(null);
-        router.push(`${ROUTES.LOGIN}?redirect=${redirectPath}`);
+        // Properly encode the redirect parameter
+        router.push(`${ROUTES.LOGIN}?redirect=${encodeURIComponent(redirectPath)}`);
       }
     } catch (error) {
       console.error('Auth check failed:', error);
       setSelectedService(null);
-      router.push(`${ROUTES.LOGIN}?redirect=/complaint/create?category=${encodeURIComponent(categoryName)}`);
+      const redirectPath = `/complaint/create?category=${encodeURIComponent(categoryName)}`;
+      router.push(`${ROUTES.LOGIN}?redirect=${encodeURIComponent(redirectPath)}`);
     }
   };
 

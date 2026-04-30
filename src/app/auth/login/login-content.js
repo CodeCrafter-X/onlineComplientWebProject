@@ -40,13 +40,24 @@ export default function LoginContent() {
         return;
       }
 
-      // Add small delay to ensure cookie is set before checking
-      await new Promise(resolve => setTimeout(resolve, 300));
+      // Add longer delay to ensure cookie is set before checking (especially for Vercel/incognito)
+      await new Promise(resolve => setTimeout(resolve, 1000));
 
       // Check user role
       const checkResponse = await fetch('/api/token-check', {
         credentials: 'include',
       });
+
+      if (!checkResponse.ok) {
+        // Token verification failed, but login succeeded - still redirect
+        const redirectParam = searchParams.get('redirect');
+        if (redirectParam) {
+          router.push(redirectParam);
+        } else {
+          router.push('/');
+        }
+        return;
+      }
 
       const userData = await checkResponse.json();
 
@@ -56,7 +67,7 @@ export default function LoginContent() {
       if (userData.user?.role === 'admin') {
         router.push('/admin');
       } else if (redirectParam) {
-        router.push(redirectParam);
+        router.push(decodeURIComponent(redirectParam));
       } else {
         router.push('/');
       }
