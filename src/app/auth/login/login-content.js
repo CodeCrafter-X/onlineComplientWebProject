@@ -25,6 +25,7 @@ export default function LoginContent() {
     setError('');
 
     try {
+      console.log('🔐 Starting login...');
       const response = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -35,45 +36,71 @@ export default function LoginContent() {
       const data = await response.json();
 
       if (!response.ok) {
+        console.error('❌ Login failed:', data.message || data.massage);
         setError(data.message || data.massage || 'Login failed');
         setLoading(false);
         return;
       }
 
-      // Add longer delay to ensure cookie is set before checking (especially for Vercel/incognito)
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      console.log('✅ Login successful! Cookie should be set.');
 
-      // Check user role
-      const checkResponse = await fetch('/api/token-check', {
-        credentials: 'include',
-      });
+      // Get redirect parameter BEFORE any delays
+      const redirectParam = searchParams.get('redirect');
+      console.log('📍 Redirect param:', redirectParam);
 
-      if (!checkResponse.ok) {
-        // Token verification failed, but login succeeded - still redirect
-        const redirectParam = searchParams.get('redirect');
-        if (redirectParam) {
-          router.push(redirectParam);
+      // Login successful - cookie is already set by the backend
+      // Wait for browser to process the cookie before redirecting
+      await new Promise(resolve => setTimeout(resolve, 500));
+      console.log('⏱️ Waited 500ms for cookie processing...');
+
+      // Redirect based on role or redirect param
+      // Check role quickly with token-check
+      try {
+        console.log('🔍 Checking token...');
+        const checkResponse = await fetch('/api/token-check', {
+          credentials: 'include',
+        });
+
+        if (checkResponse.ok) {
+          const userData = await checkResponse.json();
+          console.log('✅ Token valid, user role:', userData.user?.role);
+          if (userData.user?.role === 'admin') {
+            console.log('👤 Redirecting to /admin');
+            router.push('/admin');
+          } else if (redirectParam) {
+            console.log('🎯 Redirecting to:', decodeURIComponent(redirectParam));
+            router.push(decodeURIComponent(redirectParam));
+          } else {
+            console.log('🏠 Redirecting to home');
+            router.push('/');
+          }
         } else {
+          console.warn('⚠️ Token check failed, but login succeeded. Redirecting anyway...');
+          // If token-check fails but login succeeded, still redirect
+          if (redirectParam) {
+            console.log('🎯 Redirecting to:', decodeURIComponent(redirectParam));
+            router.push(decodeURIComponent(redirectParam));
+          } else {
+            console.log('🏠 Redirecting to home');
+            router.push('/');
+          }
+        }
+      } catch (checkErr) {
+        // If token-check errors, still redirect
+        console.error('❌ Token check error:', checkErr);
+        if (redirectParam) {
+          console.log('🎯 Redirecting to:', decodeURIComponent(redirectParam));
+          router.push(decodeURIComponent(redirectParam));
+        } else {
+          console.log('🏠 Redirecting to home');
           router.push('/');
         }
-        return;
       }
-
-      const userData = await checkResponse.json();
-
-      // Check for redirect parameter
-      const redirectParam = searchParams.get('redirect');
-
-      if (userData.user?.role === 'admin') {
-        router.push('/admin');
-      } else if (redirectParam) {
-        router.push(decodeURIComponent(redirectParam));
-      } else {
-        router.push('/');
-      }
+      
+      setLoading(false);
     } catch (err) {
+      console.error('❌ Login error:', err);
       setError('Connection error. Please try again.');
-      console.error('Login error:', err);
       setLoading(false);
     }
   };
