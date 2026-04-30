@@ -42,59 +42,26 @@ export default function LoginContent() {
         return;
       }
 
-      console.log('✅ Login successful! Cookie should be set.');
+      console.log('✅ Login successful! Cookie is set by backend.');
 
-      // Get redirect parameter BEFORE any delays
+      // Get redirect parameter
       const redirectParam = searchParams.get('redirect');
       console.log('📍 Redirect param:', redirectParam);
 
-      // Login successful - cookie is already set by the backend
-      // Wait for browser to process the cookie before redirecting
-      await new Promise(resolve => setTimeout(resolve, 500));
-      console.log('⏱️ Waited 500ms for cookie processing...');
+      // Small delay to ensure browser registers the cookie
+      await new Promise(resolve => setTimeout(resolve, 300));
+      console.log('⏱️ Waited 300ms, redirecting now...');
 
-      // Redirect based on role or redirect param
-      // Check role quickly with token-check
-      try {
-        console.log('🔍 Checking token...');
-        const checkResponse = await fetch('/api/token-check', {
-          credentials: 'include',
-        });
-
-        if (checkResponse.ok) {
-          const userData = await checkResponse.json();
-          console.log('✅ Token valid, user role:', userData.user?.role);
-          if (userData.user?.role === 'admin') {
-            console.log('👤 Redirecting to /admin');
-            router.push('/admin');
-          } else if (redirectParam) {
-            console.log('🎯 Redirecting to:', decodeURIComponent(redirectParam));
-            router.push(decodeURIComponent(redirectParam));
-          } else {
-            console.log('🏠 Redirecting to home');
-            router.push('/');
-          }
-        } else {
-          console.warn('⚠️ Token check failed, but login succeeded. Redirecting anyway...');
-          // If token-check fails but login succeeded, still redirect
-          if (redirectParam) {
-            console.log('🎯 Redirecting to:', decodeURIComponent(redirectParam));
-            router.push(decodeURIComponent(redirectParam));
-          } else {
-            console.log('🏠 Redirecting to home');
-            router.push('/');
-          }
-        }
-      } catch (checkErr) {
-        // If token-check errors, still redirect
-        console.error('❌ Token check error:', checkErr);
-        if (redirectParam) {
-          console.log('🎯 Redirecting to:', decodeURIComponent(redirectParam));
-          router.push(decodeURIComponent(redirectParam));
-        } else {
-          console.log('🏠 Redirecting to home');
-          router.push('/');
-        }
+      // LOGIN SUCCESSFUL - The backend has set the cookie
+      // Trust the authentication and redirect immediately
+      // Middleware will validate token on protected routes
+      
+      if (redirectParam) {
+        console.log('🎯 Redirecting to:', decodeURIComponent(redirectParam));
+        router.push(decodeURIComponent(redirectParam));
+      } else {
+        console.log('🏠 Redirecting to home');
+        router.push('/');
       }
       
       setLoading(false);
