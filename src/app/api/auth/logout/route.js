@@ -13,7 +13,7 @@ export async function POST(){
         response.cookies.set("token", "", {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
-            sameSite: process.env.NODE_ENV === 'production' ? 'strict' : 'lax',
+            sameSite: 'lax', // Use lax for consistency
             path: "/",
             maxAge: -1,
         });

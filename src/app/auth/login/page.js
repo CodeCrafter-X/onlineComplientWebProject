@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 // import Navigation from '../../components/Navigation';
@@ -13,6 +13,7 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -41,6 +42,9 @@ export default function LoginPage() {
         return;
       }
 
+      // Add small delay to ensure cookie is set before checking
+      await new Promise(resolve => setTimeout(resolve, 300));
+
       // Check user role
       const checkResponse = await fetch('/api/token-check', {
         credentials: 'include',
@@ -48,8 +52,13 @@ export default function LoginPage() {
 
       const userData = await checkResponse.json();
 
+      // Check for redirect parameter
+      const redirectParam = searchParams.get('redirect');
+
       if (userData.user?.role === 'admin') {
         router.push('/admin');
+      } else if (redirectParam) {
+        router.push(redirectParam);
       } else {
         router.push('/');
       }
